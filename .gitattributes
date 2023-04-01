@@ -1,0 +1,3 @@
+*.sln text eol=crlf diff
+*.rc text eol=crlf diff
+*.log text !diff
