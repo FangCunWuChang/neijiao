@@ -1,0 +1,600 @@
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkSN_StationNumber"
+Content-Length: 490
+Connection: close
+SOAPAction: "http://tempuri.org/checkSN_StationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkSN_StationNumber><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkSN_StationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkSN_StationNumber"
+Content-Length: 490
+Connection: close
+SOAPAction: "http://tempuri.org/checkSN_StationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkSN_StationNumber><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkSN_StationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>T19060600100003</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00005</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00005</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00005</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00005</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 594
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00005</ns1:SN><ns1:Station_Number>A¿Í»§ORTNoise1</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 510
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>A¿Í»§ ORTNoise1</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 511
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>A¿Í»§ ORT Noise1</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 511
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>A¿Í»§ ORT Noise1</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 500
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>A¿Í»§</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00013</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00013</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00014</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00014</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00015</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00015</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/checkEmpForStationNumber"
+Content-Length: 497
+Connection: close
+SOAPAction: "http://tempuri.org/checkEmpForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:checkEmpForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:Station_Number>600039</ns1:Station_Number></ns1:checkEmpForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00016</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00016</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00019</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00019</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendDataForStationNumber"
+Content-Length: 582
+Connection: close
+SOAPAction: "http://tempuri.org/sendDataForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendDataForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00021</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestData>RESULT:PASS; ORTNoise1:1</ns1:TestData></ns1:sendDataForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>
+POST /IPubliceMesService.asmx HTTP/1.1
+Host: wms.coolermaster.com.cn:500
+User-Agent: gSOAP/2.8
+Content-Type: application/soap+xml; charset=utf-8; action="http://tempuri.org/sendResultForStationNumber"
+Content-Length: 568
+Connection: close
+SOAPAction: "http://tempuri.org/sendResultForStationNumber"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://tempuri.org/"><SOAP-ENV:Body><ns1:sendResultForStationNumber><ns1:Emp_No>22160037</ns1:Emp_No><ns1:SN>1930M0124G00021</ns1:SN><ns1:Station_Number>600039</ns1:Station_Number><ns1:TestResult>OK</ns1:TestResult></ns1:sendResultForStationNumber></SOAP-ENV:Body></SOAP-ENV:Envelope>

@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\XML">
+      <UniqueIdentifier>{fc369fb6-7a14-4d81-99c8-0efa2594f349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\XML">
+      <UniqueIdentifier>{3e55a4b4-7d5a-4843-8b51-b6f4011e6202}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMod.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IHpDllWin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HSCommPort.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ListCtrlCl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tinyxml\tinystr.cpp">
+      <Filter>源文件\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tinyxml\tinyxml.cpp">
+      <Filter>源文件\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tinyxml\tinyxmlerror.cpp">
+      <Filter>源文件\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tinyxml\tinyxmlparser.cpp">
+      <Filter>源文件\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgCom.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IDlgJob.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IDlgInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgItem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IDlgCamCfg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgTmp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ADODB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DllMod.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IHpDllWin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HS_def.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HSCommPort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ListCtrlCl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tinyxml\tinyxml.h">
+      <Filter>头文件\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tinyxml\tinystr.h">
+      <Filter>头文件\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgCom.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IDlgJob.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IDlgInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgItem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IDlgCamCfg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgTmp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ADODB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DllMod.def">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="res\DllMod.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DllMod.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

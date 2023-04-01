@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="17.12">
+<procedure name="main">
+<interface/>
+<body>
+<l>*draw_ellipse(200000, Row, Column, Phi, Radius1, Radius2)</l>
+<c></c>
+<l>read_image(Image,'D:/111.jpg')</l>
+<l>gen_rectangle1(Rectangle, 166, 227, 658, 830)</l>
+<l>reduce_domain(Image, Rectangle, ImagePart)</l>
+<l>threshold(ImagePart, Region,150,255)</l>
+<l>fill_up(Region, RegionFillUp)</l>
+<l>dev_set_draw('margin')</l>
+<c></c>
+<l>opening_circle(RegionFillUp, Open, 55)</l>
+<l>count_obj(Open,WNum)</l>
+<l>if(WNum # 1)</l>
+<l>    return()</l>
+<l>endif</l>
+<l>smallest_circle(Open, Row, Column, Radius)</l>
+<l>disp_circle(200000, Row, Column, Radius)</l>
+<l>gen_circle(Cir, Row, Column, Radius)</l>
+<l>reduce_domain(Image, Cir, ImageReduced)</l>
+<l>threshold(ImageReduced, Region2, 0, 120)</l>
+<l>opening_rectangle1(Region2, RegionOpening, 9,3)</l>
+<l>connection(RegionOpening, ConnectedRegions)</l>
+<l>count_obj(ConnectedRegions,CNum)</l>
+<l>if(CNum &lt; 1)</l>
+<l>    return()</l>
+<l>endif</l>
+<l>select_shape(ConnectedRegions, SelectedRegions, 'area', 'and', 3550, 99999)</l>
+<l>count_obj(SelectedRegions,SNum)</l>
+<l>if(SNum # 1)</l>
+<l>    return()</l>
+<l>endif</l>
+<l>area_center(SelectedRegions, S, Y, X)</l>
+<l>angle_lx(Row, Column, Y, X, Phi)</l>
+<l>gen_rectangle2(RC, Y, X, Phi, 60, 25)</l>
+<l>reduce_domain(Image,RC, ImageSub)</l>
+<l>threshold(ImageSub, Region3, 0, 55)</l>
+<l>opening_rectangle1(Region3, RegionOpening1, 11, 11)</l>
+<l>gen_contour_region_xld(RegionOpening1, Contours, 'border')</l>
+<l>dev_display(Image)</l>
+<l>gen_contour_polygon_xld(PtCon, Row, Column)</l>
+<l>distance_cc_min_points(PtCon,Contours, 'fast_point_to_segment', DistanceMin, Row1, Column1, Row2, Column2)</l>
+<l>disp_line(200000,  Row1, Column1, Row2, Column2)</l>
+<l>angle_lx(Row1, Column1, Row2, Column2, Angle)</l>
+<l>return()</l>
+<c></c>
+<l>n:=30</l>
+<l>d:=6.28/n</l>
+<l>Xs:=[]</l>
+<l>Ys:=[]</l>
+<l>for I := 0 to 11 by 1</l>
+<l>    X:=100*cos(-I*d)</l>
+<l>    Y:=100*sin(-I*d)</l>
+<l>    disp_cross(200000, 320 + Y, 320 + X, 6, 0)</l>
+<l>    Xs[I]:= X + 400</l>
+<l>    Ys[I]:= Y + 400</l>
+<l>endfor</l>
+<l>gen_contour_polygon_xld(C1, Ys, Xs)</l>
+<l>Xs:=[]</l>
+<l>Ys:=[]</l>
+<l>for I := 11 to n - 1 by 1</l>
+<l>    X:=100*cos(-I*d)</l>
+<l>    Y:=100*sin(-I*d)</l>
+<l>    disp_cross(200000, 320 + Y, 320 + X, 6, 0)</l>
+<l>    Xs[I - 11]:= X + 400</l>
+<l>    Ys[I - 11]:= Y + 400</l>
+<l>endfor</l>
+<l>    Xs[n - 11]:= 100*cos(0) + 400</l>
+<l>    Ys[n - 11]:= 100*sin(0) + 400</l>
+<l>gen_contour_polygon_xld(C2, Ys, Xs)</l>
+<l>concat_obj(C1, C2, ObjectsConcat)</l>
+<l>union_adjacent_contours_xld(ObjectsConcat, UnionContours, 10, 1, 'attr_keep')</l>
+<l>stop()</l>
+<l>gen_region_contour_xld(UnionContours, Region, 'filled')</l>
+<l>count_obj(Region, Number)</l>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

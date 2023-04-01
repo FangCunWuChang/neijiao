@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EE3FAE3B-9423-41C9-A15D-7395F3487080}</ProjectGuid>
+    <RootNamespace>TestDll</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\IncludeJson;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(HALCONROOT)\include;$(HALCONROOT)\include\halconcpp;$(MVCAM_COMMON_RUNENV)\Includes</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(HALCONROOT)\lib\x86sse2-win32;$(MVCAM_COMMON_RUNENV)\Libraries\win32;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>MvCameraControl.lib;halconCpp.lib;winmm.lib;lib_json2013.lib</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(HALCONROOT)\include;$(HALCONROOT)\include\halconcpp;$(MVCAM_COMMON_RUNENV)\Includes</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(HALCONROOT)\lib\x86sse2-win32;$(MVCAM_COMMON_RUNENV)\Libraries\win32;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>MvCameraControl.lib;halconCpp.lib;winmm.lib</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\DllMod\ADODB.h" />
+    <ClInclude Include="..\DllMod\IHpDllWin.h" />
+    <ClInclude Include="..\DllMod\Label.h" />
+    <ClInclude Include="..\DllMod\Singleton.h" />
+    <ClInclude Include="DlgBK.h" />
+    <ClInclude Include="DlgCam4.h" />
+    <ClInclude Include="DlgMes.h" />
+    <ClInclude Include="DlgOffset.h" />
+    <ClInclude Include="Hc_Modbus_Api.h" />
+    <ClInclude Include="HSCommPort.h" />
+    <ClInclude Include="HS_def.h" />
+    <ClInclude Include="ImgDLL.h" />
+    <ClInclude Include="ListCtrlCl.h" />
+    <ClInclude Include="Log.h" />
+    <ClInclude Include="MESKEY.h" />
+    <ClInclude Include="MESSZ.h" />
+    <ClInclude Include="mscomm1.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TCPSocket.h" />
+    <ClInclude Include="TestDll.h" />
+    <ClInclude Include="VAL.h" />
+    <ClInclude Include="WininetHttp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\DllMod\ADODB.cpp" />
+    <ClCompile Include="..\DllMod\Label.cpp" />
+    <ClCompile Include="..\DllMod\Singleton.cpp" />
+    <ClCompile Include="DlgBK.cpp" />
+    <ClCompile Include="DlgCam4.cpp" />
+    <ClCompile Include="DlgMes.cpp" />
+    <ClCompile Include="DlgOffset.cpp" />
+    <ClCompile Include="HSCommPort.cpp" />
+    <ClCompile Include="ImgDLL.cpp" />
+    <ClCompile Include="ListCtrlCl.cpp" />
+    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="MESKEY.cpp" />
+    <ClCompile Include="MESSZ.cpp" />
+    <ClCompile Include="mscomm1.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TCPSocket.cpp" />
+    <ClCompile Include="TestDll.cpp" />
+    <ClCompile Include="VAL.cpp" />
+    <ClCompile Include="WininetHttp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TestDll.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\TestDll.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\TestDll.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties _x007B_648A5600-2C6E-101B-82B6-000000000014_x007D_="CMscomm1" RESOURCE_FILE="TestDll.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

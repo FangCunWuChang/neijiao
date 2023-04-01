@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DllMod", "DllMod\DllMod.vcxproj", "{64370D15-2ECC-4699-95BA-F3D17B870876}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestDll", "TestDll\TestDll.vcxproj", "{EE3FAE3B-9423-41C9-A15D-7395F3487080}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Qzd", "Qzd\Qzd.vcxproj", "{98ACA2C2-1549-4557-A8C6-95CF1C2DF70B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TwoCam", "TwoCam\TwoCam.vcxproj", "{93653091-E6E7-4359-B2DC-EB9972364D59}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64370D15-2ECC-4699-95BA-F3D17B870876}.Debug|Win32.ActiveCfg = Debug|Win32
+		{64370D15-2ECC-4699-95BA-F3D17B870876}.Debug|Win32.Build.0 = Debug|Win32
+		{64370D15-2ECC-4699-95BA-F3D17B870876}.Release|Win32.ActiveCfg = Release|Win32
+		{64370D15-2ECC-4699-95BA-F3D17B870876}.Release|Win32.Build.0 = Release|Win32
+		{EE3FAE3B-9423-41C9-A15D-7395F3487080}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EE3FAE3B-9423-41C9-A15D-7395F3487080}.Debug|Win32.Build.0 = Debug|Win32
+		{EE3FAE3B-9423-41C9-A15D-7395F3487080}.Release|Win32.ActiveCfg = Release|Win32
+		{98ACA2C2-1549-4557-A8C6-95CF1C2DF70B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{98ACA2C2-1549-4557-A8C6-95CF1C2DF70B}.Release|Win32.ActiveCfg = Release|Win32
+		{98ACA2C2-1549-4557-A8C6-95CF1C2DF70B}.Release|Win32.Build.0 = Release|Win32
+		{93653091-E6E7-4359-B2DC-EB9972364D59}.Debug|Win32.ActiveCfg = Debug|Win32
+		{93653091-E6E7-4359-B2DC-EB9972364D59}.Release|Win32.ActiveCfg = Release|Win32
+		{93653091-E6E7-4359-B2DC-EB9972364D59}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

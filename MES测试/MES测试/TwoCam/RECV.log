@@ -1,0 +1,601 @@
+HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 05:16:18 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 05:16:23 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 05:16:26 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 05:17:51 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 05:57:37 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 05:57:42 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 05:58:46 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 06:03:12 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 06:14:40 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 06:14:45 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:08:38 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:08:46 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:08:49 GMT
+Connection: close
+Content-Length: 469
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:A客户测温90度</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:11:31 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:11:35 GMT
+Connection: close
+Content-Length: 432
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkSN_StationNumberResponse xmlns="http://tempuri.org/"><checkSN_StationNumberResult>NG;[EC999] Route NG:A客户测温90度</checkSN_StationNumberResult></checkSN_StationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:11:44 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:11:48 GMT
+Connection: close
+Content-Length: 469
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:A客户测温90度</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:14:27 GMT
+Connection: close
+Content-Length: 432
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkSN_StationNumberResponse xmlns="http://tempuri.org/"><checkSN_StationNumberResult>NG;[EC999] Route NG:A客户测温90度</checkSN_StationNumberResult></checkSN_StationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:14:41 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:14:44 GMT
+Connection: close
+Content-Length: 469
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:A客户测温90度</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:15:48 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:15:52 GMT
+Connection: close
+Content-Length: 476
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:热管条码水量称重1</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:17:51 GMT
+Connection: close
+Content-Length: 476
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:热管条码水量称重1</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:17:56 GMT
+Connection: close
+Content-Length: 476
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:热管条码水量称重1</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:19:52 GMT
+Connection: close
+Content-Length: 476
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:热管条码水量称重1</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:21:12 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:21:19 GMT
+Connection: close
+Content-Length: 435
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;ORA-01722: 无效的数字</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:23:04 GMT
+Connection: close
+Content-Length: 435
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>NG;ORA-01722: 无效的数字</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:24:33 GMT
+Connection: close
+Content-Length: 435
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>NG;ORA-01722: 无效的数字</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:38:42 GMT
+Connection: close
+Content-Length: 435
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>NG;ORA-01722: 无效的数字</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 07:39:28 GMT
+Connection: close
+Content-Length: 435
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>NG;ORA-01722: 无效的数字</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:01:33 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:03:41 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:05:40 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:08:00 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:11:50 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:16:42 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:19:53 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:22:43 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:22:51 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:23:00 GMT
+Connection: close
+Content-Length: 518
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:322012580-GP3 应在821053921-GP3站别 模组组装-批次 投入.</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:24:29 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:24:43 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:24:44 GMT
+Connection: close
+Content-Length: 475
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:热管条码性能测试</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:43:25 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:47:36 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:48:26 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:48:26 GMT
+Connection: close
+Content-Length: 518
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:322012580-GP3 应在821053921-GP3站别 模组组装-批次 投入.</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:54:27 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 08:59:37 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:02:16 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:14:39 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:15:31 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:18:16 GMT
+Connection: close
+Content-Length: 409
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><checkEmpForStationNumberResponse xmlns="http://tempuri.org/"><checkEmpForStationNumberResult>OK;</checkEmpForStationNumberResult></checkEmpForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:18:22 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:18:22 GMT
+Connection: close
+Content-Length: 475
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:热管条码性能测试</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:21:00 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:21:00 GMT
+Connection: close
+Content-Length: 475
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:热管条码性能测试</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:21:35 GMT
+Connection: close
+Content-Length: 495
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendDataForStationNumberResponse xmlns="http://tempuri.org/"><sendDataForStationNumberResult>NG;[EC101] CALL DBA:并未将物件参考设定为物件的执行个体。;TABLE NOT FIND</sendDataForStationNumberResult></sendDataForStationNumberResponse></soap:Body></soap:Envelope>HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: application/soap+xml; charset=utf-8
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 22 Aug 2022 09:21:36 GMT
+Connection: close
+Content-Length: 518
+
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><sendResultForStationNumberResponse xmlns="http://tempuri.org/"><sendResultForStationNumberResult>NG;[EC202] SN NG:NG;[EC999] Route NG:322012580-GP3 应在821053921-GP3站别 模组组装-批次 投入.</sendResultForStationNumberResult></sendResultForStationNumberResponse></soap:Body></soap:Envelope>
