@@ -12,14 +12,15 @@
 #include "ImgDLL.h"
 #include "MESKEY.h"
 #include "VAL.h"
+#include "MESSZ.h"
 
 
-//#include "WininetHttp.h"
-//#include <json/json.h>
+#include "WininetHttp.h"
+#include <json/json.h>
 
-//#include <fstream>
-//#pragma comment(lib, "Wininet.lib")
-//#include <tchar.h>
+#include <fstream>
+#pragma comment(lib, "Wininet.lib")
+#include <tchar.h>
 #include "Hc_Modbus_Api.h"
 #pragma comment(lib, "StandardModbusApi.lib")
 using namespace std;
@@ -77,6 +78,7 @@ ON_BN_CLICKED(IDOK, &CDlgMes::OnBnClickedOk)
 ON_BN_CLICKED(IDC_BTN_JZ1, &CDlgMes::OnBnClickedBtnJz1)
 ON_BN_CLICKED(IDC_BTN_JZ2, &CDlgMes::OnBnClickedBtnJz2)
 ON_BN_CLICKED(IDC_BTN_JZ3, &CDlgMes::OnBnClickedBtnJz3)
+ON_BN_CLICKED(IDC_BTN_MES, &CDlgMes::OnBnClickedBtnMes)
 END_MESSAGE_MAP()
 
 
@@ -272,8 +274,163 @@ BEGIN_EVENTSINK_MAP(CDlgMes, CDialogEx)
 	ON_EVENT(CDlgMes, IDC_MSCOMM3, 1, CDlgMes::OnCommMscomm3, VTS_NONE)
 END_EVENTSINK_MAP()
 
+bool CDlgMes::Check_Json(std::string& str)
+{
+	CSingleton* pSng = CSingleton::GetInstance();
+	Json::Reader reader;
+	Json::Value root;
+	CString cstr;
+	cstr.Format("TRACE 反馈 异常");
+	if (reader.parse(str, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
+	{
+		//std::string upload_id = root["uploadid"].asString();  // 访问节点，upload_id = "UP000000"  
+		string strtoken = root["Token:"].asString();                              //  访问节点，code = 100
+		string strContact = root["}"].asString();
+		string strError = root["error"].asString();
+		if (strtoken != "")
+		{
+			cstr.Format("TRACE 反馈 成功");
+			CImgDLL::WriteLog(cstr + "\nid = " + pSng->Str2Cstr(strtoken));
+			strMEStoken = pSng->Str2Cstr(strtoken);
+			return true;
+		}
+		else
+		{
+			CImgDLL::WriteLog(cstr +
+				"\ncontact = " + pSng->Str2Cstr(strContact) +
+				"\nerror = " + pSng->Str2Cstr(strError));
+			MessageBox(cstr +
+				"\ncontact = " + pSng->Str2Cstr(strContact) +
+				"\nerror = " + pSng->Str2Cstr(strError));
+			return false;
+		}
+	}
+	CImgDLL::WriteLog(cstr + "\nMES数据格式错误，无法解析" + "\n" + pSng->Str2Cstr(str));
+	MessageBox(cstr + "\nMES数据格式错误，无法解析" + "\n" + pSng->Str2Cstr(str));
+	return false;
+}
 
+string CDlgMes::GetTimeMillisecondsStr()
+{
 
+	SYSTEMTIME st;
+	CString strDate;
+	GetLocalTime(&st);
+
+	//得到日期的字符串
+
+	CString strTime;
+	strTime.Format("%d-%02d-%02d %02d:%02d:%02d", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
+
+	//string strDateTime = ValueToStr(st.wYear) + "-" +
+	//	ValueToStr(st.wMonth) + "-" +
+	//	ValueToStr(st.wDay) + " " +
+	//	ValueToStr(st.wHour) + ":" +
+	//	ValueToStr(st.wMinute) + ":" +
+	//	ValueToStr(st.wSecond) /*+ "." +
+	//	ValueToStr(st.wMilliseconds)*/;
+	string str = strTime.GetBuffer();
+	strTime.ReleaseBuffer();
+	return str;
+}
+
+bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString strtestStation)
+{
+	CSingleton* pSng = CSingleton::GetInstance();
+	CWininetHttp whttp = CWininetHttp();
+	string url = "http://192.168.180.131:8091/JavaInterfaces/UniServices.asmx";
+	CString strMXL;
+	strMXL.Format("<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:tem=\"http://tempuri.org/\">\
+<soap:Header/>\
+<soap:Body>\
+<tem:UniRequest>\
+<tem:rb>\
+<tem:account>user</tem:account>\
+<tem:company>avcwh</tem:company>\
+<tem:ip>192.168.180.131</tem:ip>\
+<tem:optype>0</tem:optype>\
+<tem:param> { \"moid\":\"%s\", \"partID\" : \"%s\", \"ppid\" : \"%s\", \"testStation\" : \"%s\"}</tem:param>\
+<tem:password>123456</tem:password>\
+<tem:sericeName>GET_PROCESS_STATUS</tem:sericeName>\
+<tem:sysType>\"\"</tem:sysType>\
+</tem:rb>\
+</tem:UniRequest>\
+</soap:Body>\
+</soap:Envelope>", strmoid, strpartID, strppid, strtestStation);
+	string xml_string;
+	xml_string = strMXL.GetBuffer();
+	strMXL.ReleaseBuffer();
+	std::ofstream ofs;
+	CString strData;
+	strData.Format("D:\\DATA\\1\\");
+	pSng->CreateDir("D:\\DATA");                          //创建一个目录
+	pSng->CreateDir("D:\\DATA\\1");                          //创建一个目录
+	CTime StartTime = CTime::GetCurrentTime();
+	CString strStartTime = StartTime.Format("%Y-%m-%d %H_%M_%S");
+	CString strWrite = strData + strStartTime + "write.xml";
+	ofs.open(strWrite);
+	ofs << xml_string;
+	ofs.close();
+	std::string xml_header = "Content-Type:text/xml";
+	string strxmlRtn = whttp.RequestJsonInfo(url, Hr_Post, xml_header, xml_string);
+	CString strName = strData + strStartTime + ".xml";
+	ofs.open(strName);
+	ofs << strxmlRtn;
+	ofs.close();
+	bool bRet = Check_Json(strxmlRtn);
+	return bRet;
+}
+
+bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CString strppid, CString strmoid,
+	CString strlineID, CString strtestStation, CString strtestResult, CString strmachineSN,
+	CString strtestchannelID, CString strempty, CString strfilling, CString strdegassing, CString strfill_empty,
+	CString strill_degass, CString strdegass_empty, CString strempty_p1, CString strempty_l1)
+{
+	CSingleton* pSng = CSingleton::GetInstance();
+	CString strTime = pSng->Str2Cstr(GetTimeMillisecondsStr());
+	CWininetHttp whttp = CWininetHttp();
+	string url = "http://192.168.180.131:8091/JavaInterfaces/UniServices.asmx";
+	CString strMXL;
+	strMXL.Format("<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:tem=\"http://tempuri.org/\">\
+<soap:Header/>\
+<soap:Body>\
+<tem:UniRequest>\
+<tem:rb>\
+<tem:account>user</tem:account>\
+<tem:company>avcwh</tem:company>\
+<tem:ip>192.168.180.131</tem:ip>\
+<tem:optype>0</tem:optype>\
+<tem:param> { \"token\":\"%s\", \"deptID\" : \"%s\", \"partID\" : \"%s\", \"ppid\" : \"%s\",\"mo_id\" : \"%s\",\"lineID\" : \"%s\",\"test_Station\" : \"%s\",\"testTime\" : \"%s\",\"testResult\" : \"%s\",\"machineSN\" : \"%s\",\"testchannelID\" : \"%s\",\"measurementData\" : {\"empty\" : \"%s\",\"filling\" : \"%s\",\"degassing\" : \"%s\",\"fill_empty\" : \"%s\",\"fill_degass\" : \"%s\",\"degass_empty\" : \"%s\",\"degass_empty_p1\" : \"%s\",\"degass_empty_l1\" : \"%s\"}</tem:param>\
+<tem:password>123456</tem:password>\
+<tem:sericeName>GET_PROCESS_STATUS</tem:sericeName>\
+<tem:sysType>\"\"</tem:sysType>\
+</tem:rb>\
+</tem:UniRequest>\
+</soap:Body>\
+</soap:Envelope>", strtoken, strdeptID, strpartID, strppid, strmoid, strlineID, strtestStation, strTime, strtestResult, strmachineSN, strtestchannelID, strempty, strfilling, strdegassing, strfill_empty, strill_degass, strdegass_empty, strempty_p1, strempty_l1);
+	string xml_string;
+	xml_string = strMXL.GetBuffer();
+	strMXL.ReleaseBuffer();
+	std::ofstream ofs;
+	CString strData;
+	strData.Format("D:\\DATA\\2\\");
+	pSng->CreateDir("D:\\DATA");                          //创建一个目录
+	pSng->CreateDir("D:\\DATA\\2");                          //创建一个目录
+	CTime StartTime = CTime::GetCurrentTime();
+	CString strStartTime = StartTime.Format("%Y-%m-%d %H_%M_%S");
+	CString strWrite = strData + strStartTime + "write.xml";
+	ofs.open(strWrite);
+	ofs << xml_string;
+	ofs.close();
+	std::string xml_header = "Content-Type:text/xml";
+	string strxmlRtn = whttp.RequestJsonInfo(url, Hr_Post, xml_header, xml_string);
+	CString strName = strData + strStartTime + ".xml";
+	ofs.open(strName);
+	ofs << strxmlRtn;
+	ofs.close();
+	bool bRet = Check_Json(strxmlRtn);
+	return bRet;
+}
 
 void CDlgMes::OnBnClickedBtnRun()
 {
@@ -287,7 +444,7 @@ void CDlgMes::OnBnClickedBtnRun()
 		TV2.clear();
 		SetDlgItemText(IDC_BTN_RUN, "停止");
 		pSng->_nRun = RUN_WORK;
-		CImgDLL::WriteLog("条码清空，复位！！！！");
+		//CImgDLL::WriteLog("条码清空，复位！！！！");
 
 	}
 	else
@@ -316,28 +473,32 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			CString strData;
 			strData.Format("LOF");
 			int nLen = strData.GetLength();
-			pSng->_csClient[0].Lock();
+			//pSng->_csClient[0].Lock();
 			m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();	
-			pSng->_csClient[0].Unlock();
+			//pSng->_csClient[0].Unlock();
 			CImgDLL::WriteLog("空管扫码超时！！！！");
 		}
 		else
 		{
 			if (pSng->_strCliRobot[0].GetLength() > 3)
 			{
-				nOK += 1;
+				//nOK += 1;
 				CImgDLL::WriteLog("工站1扫码成功：" + pSng->_strCliRobot[0]);
-				CString strData;
+				/*CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
 				pSng->_csClient[0].Lock();
 				m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
 				strData.ReleaseBuffer();
 				pSng->_csClient[0].Unlock();
-				m_nIP[0] = 1;
+				m_nIP[0] = 1;*/
+				CString strmoid = pSng->GetCfgString("MES", "mo_id", "111");
+				CString strpartID = pSng->GetCfgString("MES", "partID", "111");
+				CString strppid = pSng->_strCliRobot[0];
+				CString strtestStation = pSng->GetCfgString("MES", "testStation", "111");
 				KillTimer(TIME_IP1);
-				SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
+				/*SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
 				CZ a;
 				a.strCode.Format("%s",pSng->_strCliRobot[0]);
 				pSng->_csTV.Lock();
@@ -349,19 +510,55 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
 				pSng->_DB.ExecuteQueryValue(sql, strNum);
 				pSng->_csInfo.Unlock();
-				if (atoi(strNum) > 0)
+				if (atoi(strNum) > 0)*/
+				bool bMESOK = MES1(strmoid, strpartID, strppid, strtestStation);
+				if (bMESOK == false)
 				{
-					CImgDLL::WriteLog("已有数据！！！！！");
+					nNG += 1;
+					m_nIP[0] = 2;
+				}
+				else
+				{
+					//CImgDLL::WriteLog("已有数据！！！！！");
+					nOK += 1;
+					CString strData;
+					strData.Format("LOF");
+					int nLen = strData.GetLength();
+					m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
+					strData.ReleaseBuffer();
+					m_nIP[0] = 1;
+					SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
+					CZ a;
+					a.strCode.Format("%s", pSng->_strCliRobot[0]);
+					pSng->_csTV.Lock();
+					TV.push_back(a);
+					pSng->_csTV.Unlock();
+					CString sql, strNum;
 					pSng->_csInfo.Lock();
-					sql.Format("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
+					sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
+					pSng->_DB.ExecuteQueryValue(sql, strNum);
+					pSng->_csInfo.Unlock();
+					if (atoi(strNum) > 0)
+					{
+						CImgDLL::WriteLog("已有数据！！！！！");
+						pSng->_csInfo.Lock();
+						sql.Format("Delete WH where IP = '%s' ", pSng->_strCliRobot[0]);
+						pSng->_DB.Execute(sql);
+						pSng->_csInfo.Unlock();
+					}
+					pSng->_csInfo.Lock();
+					//sql.Format("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
+					sql.Format("insert into WH values ('%s','0.00','0.00','0.00','%s')", pSng->_strCliRobot[0], strMEStoken);
+					strMEStoken = "";
 					pSng->_DB.Execute(sql);
 					pSng->_csInfo.Unlock();
+					pSng->_strCliRobot[0].Empty();
 				}
-				pSng->_csInfo.Lock();
+				/*pSng->_csInfo.Lock();
 				sql.Format("insert into WH values ('%s','0.00','0.00','0.00')", pSng->_strCliRobot[0]);
 				pSng->_DB.Execute(sql);
 				pSng->_csInfo.Unlock();
-				pSng->_strCliRobot[0].Empty();
+				pSng->_strCliRobot[0].Empty();*/
 			}
 		}
 		float fOK = float(nOK * 100) / float((nOK + nNG));
@@ -387,10 +584,10 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			CString strData;
 			strData.Format("LOF");
 			int nLen = strData.GetLength();
-			pSng->_csClient[1].Lock();
+			//pSng->_csClient[1].Lock();
 			m_pServer[1]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
-			pSng->_csClient[1].Unlock();
+			//pSng->_csClient[1].Unlock();
 			CImgDLL::WriteLog("注水扫码超时！！！！");
 		}
 		else
@@ -402,10 +599,10 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
-				pSng->_csClient[1].Lock();
+				//pSng->_csClient[1].Lock();
 				m_pServer[1]->SendClient(strData.GetBuffer(0), nLen);
 				strData.ReleaseBuffer();
-				pSng->_csClient[1].Unlock();
+				//pSng->_csClient[1].Unlock();
 				m_nIP[1] = 1;
 				KillTimer(TIME_IP2);
 				SetDlgItemText(IDC_STATIC_IN2, pSng->_strCliRobot[1]);
@@ -451,10 +648,10 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			CString strData;
 			strData.Format("LOF");
 			int nLen = strData.GetLength();
-			pSng->_csClient[2].Lock();
+			//pSng->_csClient[2].Lock();
 			m_pServer[2]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
-			pSng->_csClient[2].Unlock();
+			//pSng->_csClient[2].Unlock();
 			CImgDLL::WriteLog("除气扫码超时！！！！");
 		}
 		else
@@ -466,10 +663,10 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
-				pSng->_csClient[2].Lock();
+				//pSng->_csClient[2].Lock();
 				m_pServer[2]->SendClient(strData.GetBuffer(0), nLen);
 				strData.ReleaseBuffer();
-				pSng->_csClient[2].Unlock();
+				//pSng->_csClient[2].Unlock();
 				m_nIP[2] = 1;
 				KillTimer(TIME_IP3);
 				SetDlgItemText(IDC_STATIC_IN3, pSng->_strCliRobot[2]);
@@ -528,6 +725,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 		int iLen = strs.size();
 		if (iLen==0)
 		{
+			CImgDLL::WriteLog("无效条码！！！！");
 		}
 		else
 		{
@@ -535,7 +733,41 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			CString strVal1 = strs.at(0).at(1);
 			CString strVal2 = strs.at(0).at(2);
 			CString strVal3 = strs.at(0).at(3);
+			CString strtoken = strs.at(0).at(4);
 			pSng->Write2CSV(strIP, strVal1, strVal2, strVal3);
+			double fVal[3], fCha[3];
+			fVal[0] = atof(strVal1);
+			fVal[1] = atof(strVal2);
+			fVal[2] = atof(strVal3);
+			fCha[0] = fVal[1] - fVal[0];
+			fCha[1] = fVal[1] - fVal[2];
+			fCha[2] = fVal[2] - fVal[0];
+			CString strdeptID = pSng->GetCfgString("MES", "deptID", "111");
+			CString strpartID = pSng->GetCfgString("MES", "partID", "111");
+			CString strmo_id = pSng->GetCfgString("MES", "mo_id", "111");
+			CString strlineID = pSng->GetCfgString("MES", "lineID", "111");
+			CString strtest_Station = pSng->GetCfgString("MES", "test_Station", "111");
+			CString strtestResult = pSng->GetCfgString("MES", "testResult", "111");
+			CString strmachineSN = pSng->GetCfgString("MES", "machineSN", "111");
+			CString strtestchannelID = pSng->GetCfgString("MES", "testchannelID", "111");
+			CString strfill_empty;
+			strfill_empty.Format("%.3f", fCha[0]);
+			CString strfill_degass;
+			strfill_degass.Format("%.3f", fCha[1]);
+			CString strdegass_empty;
+			strdegass_empty.Format("%.3f", fCha[2]);
+			CString strdegass_empty_p1 = pSng->GetCfgString(pSng->strLiaohao, "封存量上限", "2.000");
+			CString strdegass_empty_l1 = pSng->GetCfgString(pSng->strLiaohao, "封存量下限", "-1.000");
+			bool bMESOK = MES2(strtoken, strdeptID, strpartID, strIP, strmo_id, strlineID, strtest_Station, strtestResult, strmachineSN,
+				strtestchannelID, strVal1, strVal2, strVal3, strfill_empty, strfill_degass, strdegass_empty, strdegass_empty_p1, strdegass_empty_l1);
+			if (bMESOK == true)
+			{
+				CImgDLL::WriteLog("上传成功！！！");
+			}
+			else
+			{
+				CImgDLL::WriteLog("上传失败！！！");
+			}
 		}
 	}
 	if (nIDEvent == TIME_ZERO1)
@@ -1512,10 +1744,10 @@ UINT ThreadIP(LPVOID p)
 			CString strData;
 			strData.Format("LON");
 			int nLen = strData.GetLength();
-			pSng->_csClient[i].Lock();
+			//pSng->_csClient[i].Lock();
 			pDlg->m_pServer[i]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
-			pSng->_csClient[i].Unlock();
+			//pSng->_csClient[i].Unlock();
 			if (i == 0)
 			{
 				CImgDLL::WriteLog("开始扫码1！！！");
@@ -1919,3 +2151,10 @@ void CDlgMes::OnBnClickedBtnJz3()
 
 }
 
+void CDlgMes::OnBnClickedBtnMes()
+{
+	MESSZ dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+	}
+}

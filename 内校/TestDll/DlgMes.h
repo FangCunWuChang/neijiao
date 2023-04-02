@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "mscomm1.h"
 #include "..\DllMod\Singleton.h"
 struct CZ
@@ -12,22 +12,22 @@ struct CZ
 	float fVal;
 };
 
-// CDlgMes ¶Ô»°¿ò
+// CDlgMes å¯¹è¯æ¡†
 
 class CDlgMes : public CDialogEx
 {
 	DECLARE_DYNAMIC(CDlgMes)
 
 public:
-	CDlgMes(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
+	CDlgMes(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
 	virtual ~CDlgMes();
 
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_DIALOG_MES };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -48,6 +48,7 @@ public:
 	}
 	CMscomm1 m_val[3];
 	CString m_strT[4], m_strCode[3], m_strEX;
+	CString strMEStoken;
 	bool CDlgMes::InitialCom(CMscomm1 &Com, int iNO, int nBaud, int nLen);
 	virtual BOOL OnInitDialog();
 	DECLARE_EVENTSINK_MAP()
@@ -56,6 +57,11 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	void OnCommMscomm2();
 	void OnCommMscomm3();
+	bool MES1(CString strmoid, CString strpartID, CString strppid, CString strtestStation);
+	bool MES2(CString strtoken, CString strdeptID, CString strpartID, CString strppid, CString strmoid,
+		CString strlineID, CString strtestStation, CString strtestResult, CString strmachineSN,
+		CString strtestchannelID, CString strempty, CString strfilling, CString strdegassing, CString strfill_empty,
+		CString strill_degass, CString strdegass_empty, CString strempty_p1, CString strempty_l1);
 	void SendResult(CMscomm1& Com);
 	void SendZero(CMscomm1& Com);
 	void SendJz(CMscomm1& Com);
@@ -73,5 +79,6 @@ public:
 	afx_msg void OnBnClickedBtnJz2();
 	afx_msg void OnBnClickedBtnJz3();
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	afx_msg void OnBnClickedBtnMes();
 };
 
