@@ -138,6 +138,7 @@
     <ClInclude Include="ListCtrlCl.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MESKEY.h" />
+    <ClInclude Include="MESSZ.h" />
     <ClInclude Include="mscomm1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -145,6 +146,7 @@
     <ClInclude Include="TCPSocket.h" />
     <ClInclude Include="TestDll.h" />
     <ClInclude Include="VAL.h" />
+    <ClInclude Include="WininetHttp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\DllMod\ADODB.cpp" />
@@ -168,6 +170,7 @@
     <ClCompile Include="ListCtrlCl.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MESKEY.cpp" />
+    <ClCompile Include="MESSZ.cpp" />
     <ClCompile Include="mscomm1.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -176,6 +179,7 @@
     <ClCompile Include="TCPSocket.cpp" />
     <ClCompile Include="TestDll.cpp" />
     <ClCompile Include="VAL.cpp" />
+    <ClCompile Include="WininetHttp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TestDll.rc" />

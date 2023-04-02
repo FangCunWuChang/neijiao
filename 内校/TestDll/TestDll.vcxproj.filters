@@ -129,6 +129,12 @@
     <ClInclude Include="..\includejson\json\writer.h">
       <Filter>头文件\json</Filter>
     </ClInclude>
+    <ClInclude Include="MESSZ.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WininetHttp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestDll.cpp">
@@ -190,6 +196,12 @@
     </ClCompile>
     <ClCompile Include="..\includejson\lib_json\json_writer.cpp">
       <Filter>源文件\json</Filter>
+    </ClCompile>
+    <ClCompile Include="MESSZ.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WininetHttp.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
