@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\json">
+      <UniqueIdentifier>{a83287f8-b515-4cab-9339-050aacceb122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\json">
+      <UniqueIdentifier>{3a282d77-74f4-4947-a9e0-00ed17474191}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -84,6 +90,45 @@
     <ClInclude Include="TCPSocket.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\includejson\lib_json\json_tool.h">
+      <Filter>源文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\allocator.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\assertions.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\autolink.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\config.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\features.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\forwards.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\json.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\json_features.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\reader.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\version.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\value.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\includejson\json\writer.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestDll.cpp">
@@ -137,6 +182,15 @@
     <ClCompile Include="TCPSocket.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\includejson\lib_json\json_reader.cpp">
+      <Filter>源文件\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\includejson\lib_json\json_value.cpp">
+      <Filter>源文件\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\includejson\lib_json\json_writer.cpp">
+      <Filter>源文件\json</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TestDll.rc">
@@ -146,6 +200,9 @@
   <ItemGroup>
     <None Include="res\TestDll.rc2">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\includejson\lib_json\json_valueiterator.inl">
+      <Filter>源文件\json</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
