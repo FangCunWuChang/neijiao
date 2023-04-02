@@ -287,6 +287,8 @@ void CDlgMes::OnBnClickedBtnRun()
 		TV2.clear();
 		SetDlgItemText(IDC_BTN_RUN, "停止");
 		pSng->_nRun = RUN_WORK;
+		CImgDLL::WriteLog("条码清空，复位！！！！");
+
 	}
 	else
 	{
