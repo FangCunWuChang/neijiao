@@ -1,5 +1,5 @@
 **/Debug/**
-.vs/**
+**/.vs/**
 *.suo
 
 *.ipch
