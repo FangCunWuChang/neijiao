@@ -1,4 +1,14 @@
 **/Debug/**
+.vs/**
+*.suo
 
 *.ipch
 *.sdf
+*.log
+*.exe
+*.dll
+*.pdb
+*.ipdb
+*.ilk
+*.exp
+*.lib
