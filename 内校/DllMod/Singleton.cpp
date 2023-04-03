@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "..\DllMod\Log.h"
 #include "..\DllMod\Singleton.h"
 #include "..\DllMod\IHpDllWin.h"
@@ -9,12 +9,12 @@
 extern int g_nExt;
 extern void DoEvent();
 
-CSingleton* CSingleton::m_pInstance = NULL; // Õâ¾ä±ØĞëÓĞ.
+CSingleton* CSingleton::m_pInstance = NULL; // è¿™å¥å¿…é¡»æœ‰.
 
 void LogFile(CString log)
 {
 	Log mainLog;
-	mainLog.CommonLogInit();//Éú³ÉÎÄ¼ş
+	mainLog.CommonLogInit();//ç”Ÿæˆæ–‡ä»¶
 	mainLog << mainLog.GetTimeStr() << log.GetBuffer(0) << endl;
 	log.ReleaseBuffer();
 	CSingleton* pSng = CSingleton::GetInstance();
@@ -38,7 +38,7 @@ void LogFile(const char *fmt, ...)
 	va_end(args);
 
 	Log mainLog;
-	mainLog.CommonLogInit();//³õÊ¼»¯
+	mainLog.CommonLogInit();//åˆå§‹åŒ–
 	mainLog << mainLog.GetTimeStr() << rt_log_buf << endl;
 	CSingleton* pSng = CSingleton::GetInstance();
 	CString strS, str(mainLog.GetTimeStr().c_str());
@@ -55,12 +55,12 @@ CSingleton::CSingleton(void)
 {
 	_nIPs = 0;
 	_strINI = "D:\\INI\\FUNC.ini";
-	_iSvrPort = GetCfgInt("²ÎÊı","·şÎñÆ÷¶Ë¿Ú",2000);
-   _strIP.Format("192.168.59.210");   //ÈıÁâPLC IPµØÖ·
+	_iSvrPort = GetCfgInt("å‚æ•°","æœåŠ¡å™¨ç«¯å£",2000);
+   _strIP.Format("192.168.59.210");   //ä¸‰è±PLC IPåœ°å€
    _strPro.Empty();
    _nRun = RUN_NULL;
    _nWnd = 0;
-   _fZoom = atof(GetCfgString("²ÎÊı", "ZOOM", "0.25"));
+   _fZoom = atof(GetCfgString("å‚æ•°", "ZOOM", "0.25"));
    _nCamThread = 0;
    for (int i = 0; i < CAM_NUM;i++)
    {
@@ -68,10 +68,10 @@ CSingleton::CSingleton(void)
    }
    _bINICam = false;
    _pSvr = NULL;
-   for (int i = 0; i < 2; i++)   //ÄâºÏÁ½¸öµ×°åµÄÔ²ĞÄ
+   for (int i = 0; i < 2; i++)   //æ‹Ÿåˆä¸¤ä¸ªåº•æ¿çš„åœ†å¿ƒ
    {
 	   CString strRot;
-	   strRot.Format("CAM%d×ªÖá",i + 2);
+	   strRot.Format("CAM%dè½¬è½´",i + 2);
 	   CStringArray ss;
 	   GetSecKeys(strRot, ss);
 	   if (ss.GetCount() < 3)
@@ -95,25 +95,25 @@ CSingleton::CSingleton(void)
 	   if (IsFitCircle(hvRs,hvCs,fXYR) == false)
 		   continue;
 	   _RotAxs[i + 1].x = fXYR[0];
-	   _RotAxs[i + 1].y = fXYR[1];                            //Ë÷ÒıºÍÏà»ú±àºÅ×ß£¬×ªÖáÖĞĞÄÈ·¶¨ºÃÁË
-	   _RotAxs[i + 1].iPrNO = 1;                               //×ªÖáÒÑ¾­¼ÆËã³É¹¦
+	   _RotAxs[i + 1].y = fXYR[1];                            //ç´¢å¼•å’Œç›¸æœºç¼–å·èµ°ï¼Œè½¬è½´ä¸­å¿ƒç¡®å®šå¥½äº†
+	   _RotAxs[i + 1].iPrNO = 1;                               //è½¬è½´å·²ç»è®¡ç®—æˆåŠŸ
 	   //////////////////////////////////
 	    CString strCam;
-	    strCam.Format("CAM%d±ê×¼Î»",i + 1);
-	    CString strST = GetCfgString("±ê×¼Î»ÖÃ", strCam, "");
+	    strCam.Format("CAM%dæ ‡å‡†ä½",i + 1);
+	    CString strST = GetCfgString("æ ‡å‡†ä½ç½®", strCam, "");
 		CStrs sP;
 		SplitString(strST, ",", sP);
 		if (sP.size() < 3)
 		  continue;
 		 _PosBZ[i + 1].fPos[0] = atof(sP[0]);
 		 _PosBZ[i + 1].fPos[1] = atof(sP[1]);
-		 _PosBZ[i + 1].fPos[2] = atof(sP[2]);                    //±ê×¼Î»ÖÃµÄX£¬Y£¬R±£´æÆğÀ´
+		 _PosBZ[i + 1].fPos[2] = atof(sP[2]);                    //æ ‡å‡†ä½ç½®çš„Xï¼ŒYï¼ŒRä¿å­˜èµ·æ¥
 		 _PosBZ[i + 1].iPrNO = 1;
    }
    for (int i = 0; i < 2; i++)
    {
 	   CString strCam, strP;
-	   strCam.Format("CAM%d±ê¶¨", i + 2);		
+	   strCam.Format("CAM%dæ ‡å®š", i + 2);		
 	   CStringArray ssSec;
 	   GetSecKeys(strCam, ssSec);
 	   for (int j = 0; j < ssSec.GetCount(); j++)
@@ -145,7 +145,7 @@ CSingleton::CSingleton(void)
 	  // //CPos ptOne;
 	  // //ptOne.x = _psCali[nCam].fImg[j].x;
 	  // //ptOne.y = _psCali[nCam].fImg[j].y;
-	  // ///////////////////Ğı×ªÃ¿¸öÍ¼ÏñµãµÃµ½ĞÂµÄÍ¼Ïñµã/////////////////////	
+	  // ///////////////////æ—‹è½¬æ¯ä¸ªå›¾åƒç‚¹å¾—åˆ°æ–°çš„å›¾åƒç‚¹/////////////////////	
 	  // //AffineTransPoint2d(HomMat2DRot, ptOne.y, ptOne.x, &hvTransY, &hvTransX);
 	  // ImgPts[j].x = _psCali[nCam].fImg[j].x;
 	  // ImgPts[j].y = _psCali[nCam].fImg[j].y;
@@ -171,11 +171,11 @@ CSingleton::CSingleton(void)
    //fPosCL[0] = hvTransX.D();
    //fPosCL[1] = hvTransY.D();
 
-   //µÃµ½Ã¿¸ö¿×¾¶¶ÔÓ¦µÄÏà»úºÅ
-   //GetSecKeys(_T("¿×¾¶"), _strsDia);    //¿×¾¶·¶Î§
+   //å¾—åˆ°æ¯ä¸ªå­”å¾„å¯¹åº”çš„ç›¸æœºå·
+   //GetSecKeys(_T("å­”å¾„"), _strsDia);    //å­”å¾„èŒƒå›´
    //_strsDia.Sort();
    //CString s = _strsDia.GetAt(0);
-   //_strsDia.Add(s);                                  //Èç¹ûÅäÖÃÎÄ¼şÃ»ÓĞ¿×¾¶»á±¨´í
+   //_strsDia.Add(s);                                  //å¦‚æœé…ç½®æ–‡ä»¶æ²¡æœ‰å­”å¾„ä¼šæŠ¥é”™
    //_strsDia.RemoveAt(0);
 
    //bool bOK = false;
@@ -193,11 +193,11 @@ CSingleton::CSingleton(void)
    //strTime = tm.Format("%H:%M:%S");
    //Vals.push_back(strCam);
    //Vals.push_back(strTime);
-   //if (nCam == 0 || nCam == 1 || nCam == 2)       //Êä³öÖ±¾¶
+   //if (nCam == 0 || nCam == 1 || nCam == 2)       //è¾“å‡ºç›´å¾„
    //{
-	  // if (psVal.size() == 2 && nCam == 0)              //Ö±¾¶
-		 //  Vals.push_back(psVal[1].sgOut[0].sVal);  //Êä³öpsVal[0]ÊÇ--»Ò¶È£¬psVal[1] ²ÅÊÇÖ±¾¶
-	  // if (psVal.size() == 1 && nCam > 0)                //»Ò¶È»òÕßPIN¼ä¾à
+	  // if (psVal.size() == 2 && nCam == 0)              //ç›´å¾„
+		 //  Vals.push_back(psVal[1].sgOut[0].sVal);  //è¾“å‡ºpsVal[0]æ˜¯--ç°åº¦ï¼ŒpsVal[1] æ‰æ˜¯ç›´å¾„
+	  // if (psVal.size() == 1 && nCam > 0)                //ç°åº¦æˆ–è€…PINé—´è·
 		 //  Vals.push_back(psVal[0].sgOut[0].sVal);
 	  // else
 		 //  Vals.push_back("0.00");
@@ -211,7 +211,7 @@ CSingleton::CSingleton(void)
 			//   Vals.push_back("0.00");
 			//   continue;
 		 //  }
-		 //  Vals.push_back(psVal[i].sgOut[0].sVal);  //×óÓÒ²¦Æ¬µ½ÖĞĞÄµÄ¾àÀë
+		 //  Vals.push_back(psVal[i].sgOut[0].sVal);  //å·¦å³æ‹¨ç‰‡åˆ°ä¸­å¿ƒçš„è·ç¦»
 	  // }
    //}
    //if (bOK)
@@ -245,10 +245,10 @@ CSingleton::~CSingleton(void)
 
 void CSingleton::DeleteInstance()
 {
-	if (NULL != _pLog)
+	if (NULL != m_pInstance && NULL != m_pInstance->_pLog)
 	{
-		delete _pLog;
-		_pLog = NULL;
+		delete m_pInstance->_pLog;
+		m_pInstance->_pLog = NULL;
 	}
 	if (NULL != m_pInstance)
 	{
@@ -338,8 +338,8 @@ int CSingleton::SplitString(const CString &csInput, const CString &csDelimiter,C
 	int nDelimiterSize = csDelimiter.GetLength();
 	int nNumFound = 0;
 	CString csDstString = _T("");
-	CArray<int, int> aPositions;  // int ĞÍÊı×é
-	nNewPos = csInput.Find(csDelimiter, 0);  // ²éÕÒ·Ö½ç·ûµÄÎ»ÖÃ
+	CArray<int, int> aPositions;  // int å‹æ•°ç»„
+	nNewPos = csInput.Find(csDelimiter, 0);  // æŸ¥æ‰¾åˆ†ç•Œç¬¦çš„ä½ç½®
 	if ( nNewPos < 0 ) 
 	{
 		aResults.Add(csInput);  
@@ -348,7 +348,7 @@ int CSingleton::SplitString(const CString &csInput, const CString &csDelimiter,C
 	while ( nNewPos > nPos )
 	{
 		nNumFound++;
-		aPositions.Add( nNewPos );  // ½«ÕÒµ½µÄ·Ö½ç·ûµÄÎ»ÖÃ´æÈëÊı×é
+		aPositions.Add( nNewPos );  // å°†æ‰¾åˆ°çš„åˆ†ç•Œç¬¦çš„ä½ç½®å­˜å…¥æ•°ç»„
 		nPos = nNewPos;
 		nNewPos = csInput.Find( csDelimiter, nPos+nDelimiterSize );
 	}
@@ -357,7 +357,7 @@ int CSingleton::SplitString(const CString &csInput, const CString &csDelimiter,C
 
 		if ( i == 0 )
 		{
-			csDstString = csInput.Mid( i, aPositions[i] );  // »ñÈ¡Ä¿±ê×Ö·û´®
+			csDstString = csInput.Mid( i, aPositions[i] );  // è·å–ç›®æ ‡å­—ç¬¦ä¸²
 		}
 		else
 		{
@@ -374,13 +374,13 @@ int CSingleton::SplitString(const CString &csInput, const CString &csDelimiter,C
 				}
 				else
 				{
-					// ÕâÀï£¬²»ĞèÒª×öÈÎºÎÊÂÇé.
+					// è¿™é‡Œï¼Œä¸éœ€è¦åšä»»ä½•äº‹æƒ….
 				}    
 			}
 		}
 		if ( csDstString.GetLength() >= 0 )
 		{
-			aResults.Add(csDstString);  // ½«·Ö¸îºóµÄ×Ó×Ö·û´®Ìí¼Óµ½½á¹ûÊı×é
+			aResults.Add(csDstString);  // å°†åˆ†å‰²åçš„å­å­—ç¬¦ä¸²æ·»åŠ åˆ°ç»“æœæ•°ç»„
 		}
 	}
 	return nNumFound;
@@ -395,8 +395,8 @@ int CSingleton::SplitString(const CString &csInput, const CString &csDelimiter, 
 	int nDelimiterSize = csDelimiter.GetLength();
 	int nNumFound = 0;
 	CString csDstString = _T("");
-	CArray<int, int> aPositions;  // int ĞÍÊı×é
-	nNewPos = csInput.Find(csDelimiter, 0);  // ²éÕÒ·Ö½ç·ûµÄÎ»ÖÃ
+	CArray<int, int> aPositions;  // int å‹æ•°ç»„
+	nNewPos = csInput.Find(csDelimiter, 0);  // æŸ¥æ‰¾åˆ†ç•Œç¬¦çš„ä½ç½®
 	if (nNewPos < 0)
 	{
 		aResults.push_back(csInput);
@@ -405,7 +405,7 @@ int CSingleton::SplitString(const CString &csInput, const CString &csDelimiter, 
 	while (nNewPos > nPos)
 	{
 		nNumFound++;
-		aPositions.Add(nNewPos);  // ½«ÕÒµ½µÄ·Ö½ç·ûµÄÎ»ÖÃ´æÈëÊı×é
+		aPositions.Add(nNewPos);  // å°†æ‰¾åˆ°çš„åˆ†ç•Œç¬¦çš„ä½ç½®å­˜å…¥æ•°ç»„
 		nPos = nNewPos;
 		nNewPos = csInput.Find(csDelimiter, nPos + nDelimiterSize);
 	}
@@ -413,7 +413,7 @@ int CSingleton::SplitString(const CString &csInput, const CString &csDelimiter, 
 	{
 		if (i == 0)
 		{
-			csDstString = csInput.Mid(i, aPositions[i]);  // »ñÈ¡Ä¿±ê×Ö·û´®
+			csDstString = csInput.Mid(i, aPositions[i]);  // è·å–ç›®æ ‡å­—ç¬¦ä¸²
 		}
 		else
 		{
@@ -430,13 +430,13 @@ int CSingleton::SplitString(const CString &csInput, const CString &csDelimiter, 
 				}
 				else
 				{
-					// ÕâÀï£¬²»ĞèÒª×öÈÎºÎÊÂÇé.
+					// è¿™é‡Œï¼Œä¸éœ€è¦åšä»»ä½•äº‹æƒ….
 				}
 			}
 		}
 		if (csDstString.GetLength() >= 0)
 		{
-			aResults.push_back(csDstString);  // ½«·Ö¸îºóµÄ×Ó×Ö·û´®Ìí¼Óµ½½á¹ûÊı×é
+			aResults.push_back(csDstString);  // å°†åˆ†å‰²åçš„å­å­—ç¬¦ä¸²æ·»åŠ åˆ°ç»“æœæ•°ç»„
 		}
 	}
 	return nNumFound;
@@ -448,16 +448,16 @@ void CSingleton::Write2CSV(CString strIP, CString strVAL1, CString strVAL2, CStr
 	CTime tm = CTime::GetCurrentTime();
 	strT1 = tm.Format("%y-%m-%d");
 	strT2 = tm.Format("%H:%M:%S");
-	CreateDir("D:\\DATA");                          //´´½¨Ò»¸öÄ¿Â¼
+	CreateDir("D:\\DATA");                          //åˆ›å»ºä¸€ä¸ªç›®å½•
 	CString strPath;
 	strPath.Format("D:\\DATA\\%s.csv", strT1);
 	CFileFind finder;
 	BOOL bWorking = finder.FindFile(strPath);
-	if (!bWorking)  //Ã»ÓĞ¼ì²âµ½CSVÎÄ¼ş
+	if (!bWorking)  //æ²¡æœ‰æ£€æµ‹åˆ°CSVæ–‡ä»¶
 	{
 		CString str1;
 		//[Code], [Time], [D1], [N1], [D2], [N2], [D3], N3,[D4],D4, [D5], [N5]
-		str1.Format("IP,¿Õ¹ÜÖØÁ¿,×¢Ë®ºó¹ÜÖØÁ¿,³ıÆøºó¹ÜÖØÁ¿,×¢Ë®Á¿,³é³öÁ¿,·â´æÁ¿,Ê±¼ä,½á¹û");
+		str1.Format("IP,ç©ºç®¡é‡é‡,æ³¨æ°´åç®¡é‡é‡,é™¤æ°”åç®¡é‡é‡,æ³¨æ°´é‡,æŠ½å‡ºé‡,å°å­˜é‡,æ—¶é—´,ç»“æœ");
 		CFile file(strPath, CFile::modeCreate | CFile::modeWrite);
 		file.Write(str1, str1.GetLength());
 		file.Flush();
@@ -468,7 +468,7 @@ void CSingleton::Write2CSV(CString strIP, CString strVAL1, CString strVAL2, CStr
 	{
 		if (fp.Open(strPath, CFile::shareDenyWrite | CFile::shareDenyRead) == FALSE)
 		{
-			AfxMessageBox(_T("Çë¹Ø±Õµ±Ç°EXECL±í¸ñ£¡"), 0, MB_ICONWARNING);
+			AfxMessageBox(_T("è¯·å…³é—­å½“å‰EXECLè¡¨æ ¼ï¼"), 0, MB_ICONWARNING);
 			continue;
 		}
 		break;
@@ -486,12 +486,12 @@ void CSingleton::Write2CSV(CString strIP, CString strVAL1, CString strVAL2, CStr
 	fCha[2] = fVal[2] - fVal[0];
 	double fx[6];
 	strbOK.Format("OK");
-	fx[0] = atof(GetCfgString(strLiaohao, "×¢Ë®Á¿ÏÂÏŞ", "-1.000"));
-	fx[1] = atof(GetCfgString(strLiaohao, "×¢Ë®Á¿ÉÏÏŞ", "2.000"));
-	fx[2] = atof(GetCfgString(strLiaohao, "³é³öÁ¿ÏÂÏŞ", "-1.000"));
-	fx[3] = atof(GetCfgString(strLiaohao, "³é³öÁ¿ÉÏÏŞ", "2.000"));
-	fx[4] = atof(GetCfgString(strLiaohao, "·â´æÁ¿ÏÂÏŞ", "-1.000"));
-	fx[5] = atof(GetCfgString(strLiaohao, "·â´æÁ¿ÉÏÏŞ", "2.000"));
+	fx[0] = atof(GetCfgString(strLiaohao, "æ³¨æ°´é‡ä¸‹é™", "-1.000"));
+	fx[1] = atof(GetCfgString(strLiaohao, "æ³¨æ°´é‡ä¸Šé™", "2.000"));
+	fx[2] = atof(GetCfgString(strLiaohao, "æŠ½å‡ºé‡ä¸‹é™", "-1.000"));
+	fx[3] = atof(GetCfgString(strLiaohao, "æŠ½å‡ºé‡ä¸Šé™", "2.000"));
+	fx[4] = atof(GetCfgString(strLiaohao, "å°å­˜é‡ä¸‹é™", "-1.000"));
+	fx[5] = atof(GetCfgString(strLiaohao, "å°å­˜é‡ä¸Šé™", "2.000"));
 	if (fCha[0]<fx[0] || fCha[0]>fx[1] || fCha[1]<fx[2] || fCha[1]>fx[3] || fCha[2]<fx[4] || fCha[2]>fx[5])
 	{
 		strbOK.Format("NG");
@@ -510,28 +510,28 @@ void CSingleton::Write2CSV(int nCam,CStrs Vals)
 	CTime tm = CTime::GetCurrentTime();
 	strT1 = tm.Format("%y-%m-%d");
 	strT2 = tm.Format("%H:%M:%S");
-	CreateDir("D:\\DATA");                          //´´½¨Ò»¸öÄ¿Â¼
+	CreateDir("D:\\DATA");                          //åˆ›å»ºä¸€ä¸ªç›®å½•
 	CString strPath;
 	strPath.Format("D:\\DATA\\CAM%d %s.csv", nCam + 1,strT1);
 	BOOL bFind = PathFileExists(strPath);
-	if (bFind == FALSE)                                         //Ã»ÓĞ¼ì²âµ½CSVÎÄ¼ş
+	if (bFind == FALSE)                                         //æ²¡æœ‰æ£€æµ‹åˆ°CSVæ–‡ä»¶
 	{
 		CString strHead;
 		if (nCam == 0)
 		{
-			strHead.Format("Ïà»ú,¼ì²âÊ±¼ä,ÄÚ¾¶,½á¹û");
+			strHead.Format("ç›¸æœº,æ£€æµ‹æ—¶é—´,å†…å¾„,ç»“æœ");
 		}
 		else if (nCam == 1)
 		{
-			strHead.Format("Ïà»ú,¼ì²âÊ±¼ä,»Ò¶È,½á¹û");
+			strHead.Format("ç›¸æœº,æ£€æµ‹æ—¶é—´,ç°åº¦,ç»“æœ");
 		}
 		else if (nCam == 2)
 		{
-			strHead.Format("Ïà»ú,¼ì²âÊ±¼ä,PIN¼ä¾à,½á¹û");
+			strHead.Format("ç›¸æœº,æ£€æµ‹æ—¶é—´,PINé—´è·,ç»“æœ");
 		}
 		else
 		{
-			strHead.Format("Ïà»ú,¼ì²âÊ±¼ä,×ó¿ª¿Ú¾àÀë,ÓÒ¿ª¿Ú¾àÀë,½á¹û");
+			strHead.Format("ç›¸æœº,æ£€æµ‹æ—¶é—´,å·¦å¼€å£è·ç¦»,å³å¼€å£è·ç¦»,ç»“æœ");
 		}
 		CFile file(strPath, CFile::modeCreate | CFile::modeWrite);
 		file.Write(strHead, strHead.GetLength());
@@ -543,7 +543,7 @@ void CSingleton::Write2CSV(int nCam,CStrs Vals)
 	{
 		if (fp.Open(strPath, CFile::shareDenyWrite | CFile::shareDenyRead) == FALSE)
 		{
-			AfxMessageBox(_T("Çë¹Ø±Õµ±Ç°EXECL±í¸ñ£¡"), 0, MB_ICONWARNING);
+			AfxMessageBox(_T("è¯·å…³é—­å½“å‰EXECLè¡¨æ ¼ï¼"), 0, MB_ICONWARNING);
 			continue;
 		}
 		break;
@@ -571,16 +571,16 @@ void CSingleton::Write2CSV(CDStrs& DVs)
 	CTime tm = CTime::GetCurrentTime();
 	strT1 = tm.Format("%y-%m-%d");
 	strT2 = tm.Format("%H:%M:%S");
-	CreateDir("D:\\DATA");                          //´´½¨Ò»¸öÄ¿Â¼
+	CreateDir("D:\\DATA");                          //åˆ›å»ºä¸€ä¸ªç›®å½•
 	CString strPath;
 	strPath.Format("D:\\DATA\\%s.csv",strT1);
 	CFileFind finder;
 	BOOL bWorking = finder.FindFile(strPath);
-	if(!bWorking)  //Ã»ÓĞ¼ì²âµ½CSVÎÄ¼ş
+	if(!bWorking)  //æ²¡æœ‰æ£€æµ‹åˆ°CSVæ–‡ä»¶
 	{
 		CString str1;
 		//[Code], [Time], [D1], [N1], [D2], [N2], [D3], N3,[D4],D4, [D5], [N5]
-		str1.Format("ÌõÂë,¼ì²âÊ±¼ä,D1,N1,D2,N2,D3,N3,D4,N4,D5,N5,½á¹û");
+		str1.Format("æ¡ç ,æ£€æµ‹æ—¶é—´,D1,N1,D2,N2,D3,N3,D4,N4,D5,N5,ç»“æœ");
 		CFile file(strPath,CFile::modeCreate|CFile::modeWrite);
 		file.Write(str1,str1.GetLength());
 		file.Flush();
@@ -591,7 +591,7 @@ void CSingleton::Write2CSV(CDStrs& DVs)
 	{
 		if(fp.Open(strPath,CFile::shareDenyWrite|CFile::shareDenyRead) == FALSE)
 		{
-			AfxMessageBox(_T("Çë¹Ø±Õµ±Ç°EXECL±í¸ñ£¡"),0,MB_ICONWARNING);
+			AfxMessageBox(_T("è¯·å…³é—­å½“å‰EXECLè¡¨æ ¼ï¼"),0,MB_ICONWARNING);
 			continue;
 		}
 		break;
@@ -617,7 +617,7 @@ double CSingleton::GetAngle(double fAxisPt[2],double fVecPt[2],bool bImage /* = 
 	double fPhi,fDeg;
 	fPhi = hvAng.D();
 	fDeg = fPhi*180/PI;
-	if (bImage == false)   //ÉÏÃæµÄº¯ÊıÊÔÓÃÍ¼Ïñ×ø±êÏµ
+	if (bImage == false)   //ä¸Šé¢çš„å‡½æ•°è¯•ç”¨å›¾åƒåæ ‡ç³»
 	{
 		fPhi *= -1;
 		fDeg *= -1;
@@ -669,7 +669,7 @@ bool CSingleton::GetFitLineAng(HTuple& WndID, HTuple& Ys, HTuple& Xs, double& fF
 			double fDist = hv_Dist.D();
 			Ds[i] = hv_Dist;
 		}
-		TupleSortIndex(Ds, &ASC);  //ÉıĞòÅÅĞòË÷Òı
+		TupleSortIndex(Ds, &ASC);  //å‡åºæ’åºç´¢å¼•
 		HTuple Rs, Cs;
 		Rs = HTuple();
 		Cs = HTuple();
@@ -678,7 +678,7 @@ bool CSingleton::GetFitLineAng(HTuple& WndID, HTuple& Ys, HTuple& Xs, double& fF
 		{
 			int II = ASC[i].I();
 			double fDist = Ds[II].D();
-			if (fMaxD < fDist) //ÒòÎªÔªËØÊÇÎŞĞòµÄ£¬ËùÒÔ²»ÄÜbreak
+			if (fMaxD < fDist) //å› ä¸ºå…ƒç´ æ˜¯æ— åºçš„ï¼Œæ‰€ä»¥ä¸èƒ½break
 				continue;
 			Rs[n] = Ys[II];
 			Cs[n] = Xs[II];
@@ -708,7 +708,7 @@ bool CSingleton::GetFitLineAng(HTuple& WndID, HTuple& Ys, HTuple& Xs, double& fF
 	{
 		CString str;
 		const char* pc = q.ErrorMessage().Text();
-		str.Format("Ö±ÏßÄâºÏ¹ıÂËÊ§°Ü£º%s", pc);
+		str.Format("ç›´çº¿æ‹Ÿåˆè¿‡æ»¤å¤±è´¥ï¼š%s", pc);
 		LogFile(str);
 		return false;
 	}
@@ -735,7 +735,7 @@ bool CSingleton::GetFitLine(HTuple& WndID,HTuple& Ys,HTuple& Xs,HTuple& hv_RowA,
 			double fDist = hv_Dist.D();
 			Ds[i] = hv_Dist;
 		}
-		TupleSortIndex(Ds,&ASC);  //ÉıĞòÅÅĞòË÷Òı
+		TupleSortIndex(Ds,&ASC);  //å‡åºæ’åºç´¢å¼•
 		HTuple Rs,Cs;
 		Rs = HTuple();
 		Cs = HTuple();
@@ -744,7 +744,7 @@ bool CSingleton::GetFitLine(HTuple& WndID,HTuple& Ys,HTuple& Xs,HTuple& hv_RowA,
 		{
 			int II = ASC[i].I();
 			double fDist = Ds[II].D();
-			if (fMaxD < fDist) //ÒòÎªÔªËØÊÇÎŞĞòµÄ£¬ËùÒÔ²»ÄÜbreak
+			if (fMaxD < fDist) //å› ä¸ºå…ƒç´ æ˜¯æ— åºçš„ï¼Œæ‰€ä»¥ä¸èƒ½break
 				continue;
 			Rs[n] = Ys[II];
 			Cs[n] = Xs[II];
@@ -771,7 +771,7 @@ bool CSingleton::GetFitLine(HTuple& WndID,HTuple& Ys,HTuple& Xs,HTuple& hv_RowA,
 	{
 		CString str;
 		const char* pc = q.ErrorMessage().Text();
-		str.Format("Ö±ÏßÄâºÏ¹ıÂËÊ§°Ü£º%s",pc);
+		str.Format("ç›´çº¿æ‹Ÿåˆè¿‡æ»¤å¤±è´¥ï¼š%s",pc);
 		LogFile(str);
 		return false;
 	}
@@ -800,7 +800,7 @@ bool CSingleton::GetFitLineVal(HTuple& WndID,HTuple& Ys,HTuple& Xs,
 			double fDist = hv_Dist.D();
 			Ds[i] = hv_Dist;
 		}
-		TupleSortIndex(Ds,&ASC);  //ÉıĞòÅÅĞòË÷Òı
+		TupleSortIndex(Ds,&ASC);  //å‡åºæ’åºç´¢å¼•
 		HTuple Rs,Cs;
 		Rs = HTuple();
 		Cs = HTuple();
@@ -809,7 +809,7 @@ bool CSingleton::GetFitLineVal(HTuple& WndID,HTuple& Ys,HTuple& Xs,
 		{
 			int II = ASC[i].I();
 			double fDist = Ds[II].D();
-			if (fDist > fMaxD) //ÒòÎªÔªËØÊÇÎŞĞòµÄ£¬ËùÒÔ²»ÄÜbreak
+			if (fDist > fMaxD) //å› ä¸ºå…ƒç´ æ˜¯æ— åºçš„ï¼Œæ‰€ä»¥ä¸èƒ½break
 				continue;
 			Rs[n] = Ys[II];
 			Cs[n] = Xs[II];
@@ -838,7 +838,7 @@ bool CSingleton::GetFitLineVal(HTuple& WndID,HTuple& Ys,HTuple& Xs,
 			//double fPt[2],fArm = 0;
 			//fPt[0] = Xs[i].D() + fDY*fArm;
 			//fPt[1] = Ys[i].D() - fDX*fArm;
-			double fTmp = abs(Ys[i].D()*fNr + Xs[i].D()*fNc - fDist);  //Æ½ÃæÖ±Ïß·½³Ì
+			double fTmp = abs(Ys[i].D()*fNr + Xs[i].D()*fNc - fDist);  //å¹³é¢ç›´çº¿æ–¹ç¨‹
 			fVal += abs(fTmp);
 			//TRACE("\nNO%d Dist:%.1f ",i + 1,fTmp);
 		}
@@ -865,14 +865,14 @@ bool CSingleton::GetFitLineVal(HTuple& WndID,HTuple& Ys,HTuple& Xs,
 	{
 		CString str;
 		const char* pc = q.ErrorMessage().Text();
-		str.Format("Ö±Ïß±Æ½ü¹ıÂËÊ§°Ü£º%s",pc);
+		str.Format("ç›´çº¿é€¼è¿‘è¿‡æ»¤å¤±è´¥ï¼š%s",pc);
 		LogFile(str);
 		return false;
 	}
 	return true;
 }
 
-//Ö»ÓÃÅĞ¶ÏĞÂÊäÈëµÄ×Ö·ûÊÇÊ²Ã´¼´¿É
+//åªç”¨åˆ¤æ–­æ–°è¾“å…¥çš„å­—ç¬¦æ˜¯ä»€ä¹ˆå³å¯
 void CSingleton::CheckNumber(CString& str)
 {
 	if (str.GetLength() == 0)
@@ -882,7 +882,7 @@ void CSingleton::CheckNumber(CString& str)
 		return;
 	if (e == '.')
 	{
-		for (int i = 0;i < str.GetLength() - 1;i++) //ÒÔÇ°×Ö·ûÊäÈëÊÇ·ñÓĞĞ¡Êıµã
+		for (int i = 0;i < str.GetLength() - 1;i++) //ä»¥å‰å­—ç¬¦è¾“å…¥æ˜¯å¦æœ‰å°æ•°ç‚¹
 		{
 			if (str.GetAt(i) == '.')
 			{
@@ -900,7 +900,7 @@ void CSingleton::CheckNumber(CString& str)
 			str.Format("%s",strTmp);
 		}
 	}
-	else //ÆäËû·ûºÅÖ±½Ó¹ıÂË
+	else //å…¶ä»–ç¬¦å·ç›´æ¥è¿‡æ»¤
 	{
 		CString strTmp = str.Left(str.GetLength() - 1);
 		str.Format("%s",strTmp);
@@ -914,7 +914,7 @@ bool CSingleton::GetRectCorner(HTuple& WndID,HObject& hoRect,double& fR,double& 
 		HTuple hvXs,hvYs,hvLen,hvL1,hvL2,hv_Row, hv_Col, hv_Phi,hv_IsOverlapping,hvDist;
 		hvXs = HTuple();
 		hvYs = HTuple();
-		SmallestRectangle2(hoRect, &hv_Row, &hv_Col, &hv_Phi, &hvL1, &hvL2); //µÄµ½ÂÖÀªµÄÍâ½Ó¾ØĞÎ
+		SmallestRectangle2(hoRect, &hv_Row, &hv_Col, &hv_Phi, &hvL1, &hvL2); //çš„åˆ°è½®å»“çš„å¤–æ¥çŸ©å½¢
 		for (int i = 0; i <= 3; i++)
 		{
 			hvLen = hvL1;
@@ -955,7 +955,7 @@ bool CSingleton::GetRectCorner(HTuple& WndID,HObject& hoRect,double& fR,double& 
 	{
 		CString str;
 		const char* pc = q.ErrorMessage().Text();
-		str.Format("×îĞ¡Íâ½Ó¾ØĞÎ½Çµã¼ì²âÊ§°Ü£º%s£¡",pc);
+		str.Format("æœ€å°å¤–æ¥çŸ©å½¢è§’ç‚¹æ£€æµ‹å¤±è´¥ï¼š%sï¼",pc);
 		LogFile(str);
 		return false;
 	}
@@ -972,7 +972,7 @@ bool CSingleton::GetCircleTmpXY(HTuple& WndID, HObject& hoPic, double fCen[2], d
 		HTuple hvN, hvW, hvH, hvX, hvY, hvS, hvDist, hvRowEdge, hvColEdge, hvAmp,hvXs,hvYs;
 		HObject hoImage, hoZoom, hoReg, hoConsReg, hoSel, hoFill, hoOpen, hoRegions, hoClose, hoRC, hoCrop,hoCons;
 		CopyImage(hoPic, &hoImage);
-		GenRectangle2(&hoRC, fCen[1], fCen[0], 0, 0.5*nW, 0.5*nH);   //·½·¨¶şÉú³ÉµÄ¾ØĞÎÇøÓò£¬³¤¿íÖ»ĞèÒªÒ»°ë
+		GenRectangle2(&hoRC, fCen[1], fCen[0], 0, 0.5*nW, 0.5*nH);   //æ–¹æ³•äºŒç”Ÿæˆçš„çŸ©å½¢åŒºåŸŸï¼Œé•¿å®½åªéœ€è¦ä¸€åŠ
 		ReduceDomain(hoImage, hoRC, &hoCrop);
 		GetImageSize(hoImage, &hvW, &hvH);
 		if (nThres > 0)
@@ -1003,15 +1003,15 @@ bool CSingleton::GetCircleTmpXY(HTuple& WndID, HObject& hoPic, double fCen[2], d
 			if (hvDist.D() < fMinDist)
 			{
 				fMinDist = hvDist.D();
-				m.iPrNO = i;                                            //×î½Ó½üµÄÂÖÀªË÷Òı
+				m.iPrNO = i;                                            //æœ€æ¥è¿‘çš„è½®å»“ç´¢å¼•
 				m.x = hvX.D();
 				m.y = hvY.D();
-				fRadius = sqrt(hvS.D() / PI);                 //ÂÖÀªµÄ´óÌå°ë¾¶
+				fRadius = sqrt(hvS.D() / PI);                 //è½®å»“çš„å¤§ä½“åŠå¾„
 			}
 		}
-		if (fRadius < 0)                                               //ÕÒµ½ÁË×î½Ó½üÉè¶¨Ô­µãµÄÔ²ĞÄ×ø±ê
+		if (fRadius < 0)                                               //æ‰¾åˆ°äº†æœ€æ¥è¿‘è®¾å®šåŸç‚¹çš„åœ†å¿ƒåæ ‡
 		{
-			LogFile("Ã»ÓĞÕÒµ½ºÏÊÊµÄÔ²ÂÖÀª£¡");
+			LogFile("æ²¡æœ‰æ‰¾åˆ°åˆé€‚çš„åœ†è½®å»“ï¼");
 			return false;
 		}			
 		//fCen[0] = m.x;
@@ -1080,7 +1080,7 @@ bool CSingleton::GetCircleTmpXY(HTuple& WndID, HObject& hoPic, double fCen[2], d
 		}
 		if (n < 4)
 		{
-			LogFile("Ô²¿×±ß½çµãÊıÌ«ÉÙ");
+			LogFile("åœ†å­”è¾¹ç•Œç‚¹æ•°å¤ªå°‘");
 			return false;
 		}
 		HTuple hv_Radius, hv_StartPhi, hv_EndPhi, hv_PointOrder, hv_Row, hv_Col;
@@ -1106,12 +1106,12 @@ bool CSingleton::GetCircleTmpXY(HTuple& WndID, HObject& hoPic, double fCen[2], d
 		}
 		if (n < 3)
 		{
-			//LogFile("ÕÒµ½µÄ²úÆ·Ô²¿×±ß½çµã²»ºÏ¸ñ£¡");
+			//LogFile("æ‰¾åˆ°çš„äº§å“åœ†å­”è¾¹ç•Œç‚¹ä¸åˆæ ¼ï¼");
 			return false;
 		}
 		GenContourPolygonXld(&hoCons, Rs, Cs);
 		FitCircleContourXld(hoCons, "algebraic", -1, 0, 0, 3, 2, &hv_Row, &hv_Col, &hv_Radius, &hv_StartPhi, &hv_EndPhi, &hv_PointOrder);
-		////////////////////////////////////////////////////////Ê£ÏÂµÄÇøÓòÄÚËÑË÷×î´óÔ²»¡ÂÖÀª/////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////å‰©ä¸‹çš„åŒºåŸŸå†…æœç´¢æœ€å¤§åœ†å¼§è½®å»“/////////////////////////////////////////////////////////
 		DispCircle(WndID, hv_Row, hv_Col, hv_Radius + 2);		
 		fCen[1] = hv_Row.D();
 		fCen[0] = hv_Col.D();
@@ -1122,7 +1122,7 @@ bool CSingleton::GetCircleTmpXY(HTuple& WndID, HObject& hoPic, double fCen[2], d
 	{
 		CString str;
 		const char* pc = q.ErrorMessage().Text();
-		str.Format("¾«¶¨Î»Ô²¿×ÂÖÀªµÄÖĞĞÄµãÒì³££º%s£¡", pc);
+		str.Format("ç²¾å®šä½åœ†å­”è½®å»“çš„ä¸­å¿ƒç‚¹å¼‚å¸¸ï¼š%sï¼", pc);
 		LogFile(str);
 	}
 	return false;
@@ -1137,13 +1137,13 @@ void CSingleton::GetMaxAmpPt(HTuple& hvAmplitude, HTuple& hvRowEdge, HTuple &hvC
 			return;
 		bool bGet = false;
 		double fMaxDev = _iDev;
-		for (int j = 0; j < nNum; j++)    //ÕÒµ½Âú×ã·½²îÌõ¼şµÄ±ßÔµµã
+		for (int j = 0; j < nNum; j++)    //æ‰¾åˆ°æ»¡è¶³æ–¹å·®æ¡ä»¶çš„è¾¹ç¼˜ç‚¹
 		{
 			HObject hoRC;
 			HTuple hvMean, hvDev;
 			GenRectangle2(&hoRC, hvRowEdge[j], hvColEdge[j], fDir, _iLen[0], _iLen[1]);
 			Intensity(hoRC, hoImage, &hvMean, &hvDev);
-			if (hvDev.D() < fMaxDev)    //·½²îÌ«Ğ¡²»ÓèÀí»á
+			if (hvDev.D() < fMaxDev)    //æ–¹å·®å¤ªå°ä¸äºˆç†ä¼š
 				continue;
 			fMaxDev = hvDev.D();
 			hvXs[n] = hvColEdge[j];
@@ -1157,7 +1157,7 @@ void CSingleton::GetMaxAmpPt(HTuple& hvAmplitude, HTuple& hvRowEdge, HTuple &hvC
 	{
 		CString str;
 		const char* pc = q.ErrorMessage().Text();
-		str.Format("±ßÔµµãËÑË÷Ê§°Ü£º%s£¡", pc);
+		str.Format("è¾¹ç¼˜ç‚¹æœç´¢å¤±è´¥ï¼š%sï¼", pc);
 		LogFile(str);
 	}
 }
@@ -1199,18 +1199,18 @@ bool CSingleton::GetJDWPos(HTuple& WndID, HObject& hoImage, HTuple& hvMat2D, dou
 			fCen[1] = hvRow.D() / ZOOM;
 			fPar[2] /=  ZOOM;
 			fPar[3] /= ZOOM;
-			bool bRet = GetCircleTmpXY(WndID,hoImage, fCen,fR,fPar,nJDW);         //¾«¶¨Î»½øÒ»²½Ìá¸ßÔ²ĞÄ¾«¶È
+			bool bRet = GetCircleTmpXY(WndID,hoImage, fCen,fR,fPar,nJDW);         //ç²¾å®šä½è¿›ä¸€æ­¥æé«˜åœ†å¿ƒç²¾åº¦
 			if (bRet)
 			{
 				fPar[0] = fCen[0];
 				fPar[1] = fCen[1];
-				fPar[9] = fR;         //µÃµ½¾«¶¨Î»µÄ°ë¾¶
+				fPar[9] = fR;         //å¾—åˆ°ç²¾å®šä½çš„åŠå¾„
 			}
 			return bRet;
 		}
 		else if (nJDW == JDW_TWO_LINE)
 		{
-			CPos rcCen[2];                                                                                                     //¾«¶¨Î»¼ì²â¿òµÄÖĞĞÄµã
+			CPos rcCen[2];                                                                                                     //ç²¾å®šä½æ£€æµ‹æ¡†çš„ä¸­å¿ƒç‚¹
 			for (int i = 0; i < 2; i++)
 			{
 				n = 0;
@@ -1233,7 +1233,7 @@ bool CSingleton::GetJDWPos(HTuple& WndID, HObject& hoImage, HTuple& hvMat2D, dou
 					GenMeasureRectangle2(rcCen[i].y + nStep*j*cos(fPhi), rcCen[i].x + nStep*j*sin(fPhi), fPhi, nH, nW, hvW, hvH, "nearest_neighbor", &hvMsr);
 					MeasurePos(hoImage, hvMsr, 1, 25, "all", "all", &hvRowEdge, &hvColEdge, &hvAmplitude, &hvDist);
 					CloseMeasure(hvMsr);
-					if (hvColEdge.TupleLength() > 0)  //µÚÒ»Ìõ±ß
+					if (hvColEdge.TupleLength() > 0)  //ç¬¬ä¸€æ¡è¾¹
 					{
 						hvXs[n] = hvColEdge[0];
 						hvYs[n] = hvRowEdge[0];
@@ -1244,11 +1244,11 @@ bool CSingleton::GetJDWPos(HTuple& WndID, HObject& hoImage, HTuple& hvMat2D, dou
 				if (n < 3)
 				{
 					SetColor(WndID, "green");
-					strLog.Format("¾«¶¨Î»Ïß¼ì²â¿ò%d ÖĞÃ»ÓĞ¼ìË÷µ½¶¨Î»", i + 1);
+					strLog.Format("ç²¾å®šä½çº¿æ£€æµ‹æ¡†%d ä¸­æ²¡æœ‰æ£€ç´¢åˆ°å®šä½", i + 1);
 					LogFile(strLog);
 					return false;
 				}
-				bool bRet = FilterPts(WndID, hoImage, hvYs, hvXs, fPhi, _iLen);             //¹ıÂË²»ºÏÊÊµÄµã
+				bool bRet = FilterPts(WndID, hoImage, hvYs, hvXs, fPhi, _iLen);             //è¿‡æ»¤ä¸åˆé€‚çš„ç‚¹
 				if (bRet == false)
 					return false;
 				DispCross(WndID, hvYs, hvXs, 20, 0.25*PI);
@@ -1286,9 +1286,9 @@ bool CSingleton::GetJDWPos(HTuple& WndID, HObject& hoImage, HTuple& hvMat2D, dou
 			else
 				return false;
 		}
-		else if (nJDW == JDW_CONS_C)  //ÂÖÀªÖĞĞÄµã
+		else if (nJDW == JDW_CONS_C)  //è½®å»“ä¸­å¿ƒç‚¹
 		{
-			//ËÑË÷Ä£°åÂÖÀª
+			//æœç´¢æ¨¡æ¿è½®å»“
 			//FindShapeModel(hoImage, tm.hvXLD,);
 		}
 		else
@@ -1301,7 +1301,7 @@ bool CSingleton::GetJDWPos(HTuple& WndID, HObject& hoImage, HTuple& hvMat2D, dou
 	{
 		CString str;
 		const char* pc = q.ErrorMessage().Text();
-		str.Format("¾«¶¨Î»Ê§°Ü£º%s", pc);
+		str.Format("ç²¾å®šä½å¤±è´¥ï¼š%s", pc);
 		LogFile(str);
 	}
 	return false;
@@ -1333,11 +1333,11 @@ bool CSingleton::FilterPts(HTuple& WndID, HObject& hoImage, HTuple& Ys, HTuple& 
 	}
 	if (n < 3)
 		return false;
-	fGray /= n;                                                                                          //µÃµ½Æ½¾ù»Ò¶È
+	fGray /= n;                                                                                          //å¾—åˆ°å¹³å‡ç°åº¦
 	int nDots = nCount;
 	for (int i = 0; i < nCount; i++)
 	{
-		if (Pts[i].r > fGray + _iGray || Pts[i].r < fGray - _iGray)                //»Ò¶È²îÌ«´ó»òÕßÌ«Ğ¡
+		if (Pts[i].r > fGray + _iGray || Pts[i].r < fGray - _iGray)                //ç°åº¦å·®å¤ªå¤§æˆ–è€…å¤ªå°
 		{
 			Pts[i].iPrNO = i;
 			nDots--;
@@ -1345,7 +1345,7 @@ bool CSingleton::FilterPts(HTuple& WndID, HObject& hoImage, HTuple& Ys, HTuple& 
 	}
 	if (nDots < 3)
 	{
-		//LogFile("ºÏ¸ñµã:%dÌ«ÉÙÁËÎŞ·¨¹ıÂË£¡ ",nDots);
+		//LogFile("åˆæ ¼ç‚¹:%då¤ªå°‘äº†æ— æ³•è¿‡æ»¤ï¼ ",nDots);
 		return false;
 	}
 	Xs.Clear();
@@ -1361,7 +1361,7 @@ bool CSingleton::FilterPts(HTuple& WndID, HObject& hoImage, HTuple& Ys, HTuple& 
 	}
 	if (nCount - nDots > 0)
 	{
-		//LogFile("¹ıÂËÁË%d¸ö²»ºÏ¸ñµã£¡", nCount - nDots);
+		//LogFile("è¿‡æ»¤äº†%dä¸ªä¸åˆæ ¼ç‚¹ï¼", nCount - nDots);
 	}
 	return true;
 }
@@ -1371,13 +1371,13 @@ void CSingleton::InitList(CListCtrlCl& m_list, vector<CListStyle>& Style)
 {
 	for (int i = 0; i < 13; i++)
 		m_list.DeleteColumn(0);
-	m_list.SetBkColor(RGB(255, 255, 255));        //ÉèÖÃ±³¾°É«
-	m_list.SetRowHeight(26);                                  //ÉèÖÃĞĞ¸ß¶È
-	m_list.SetHeaderHeight((float)1.1);                 //ÉèÖÃÍ·²¿¸ß¶È
-	m_list.SetHeaderFontHW(22, 0);                     //ÉèÖÃÍ·²¿×ÖÌå¸ß¶È,ºÍ¿í¶È,0±íÊ¾È±Ê¡£¬×ÔÊÊÓ¦ 
-	m_list.SetHeaderTextColor(RGB(255, 255, 255)); //ÉèÖÃÍ·²¿×ÖÌåÑÕÉ«
-	m_list.SetTextColor(RGB(0, 0, 0));                 //ÉèÖÃÎÄ±¾ÑÕÉ«
-	m_list.SetFontHW(20, 0);                              //ÉèÖÃ×ÖÌå¸ß¶È£¬ºÍ¿í¶È,0±íÊ¾È±Ê¡¿í¶È
+	m_list.SetBkColor(RGB(255, 255, 255));        //è®¾ç½®èƒŒæ™¯è‰²
+	m_list.SetRowHeight(26);                                  //è®¾ç½®è¡Œé«˜åº¦
+	m_list.SetHeaderHeight((float)1.1);                 //è®¾ç½®å¤´éƒ¨é«˜åº¦
+	m_list.SetHeaderFontHW(22, 0);                     //è®¾ç½®å¤´éƒ¨å­—ä½“é«˜åº¦,å’Œå®½åº¦,0è¡¨ç¤ºç¼ºçœï¼Œè‡ªé€‚åº” 
+	m_list.SetHeaderTextColor(RGB(255, 255, 255)); //è®¾ç½®å¤´éƒ¨å­—ä½“é¢œè‰²
+	m_list.SetTextColor(RGB(0, 0, 0));                 //è®¾ç½®æ–‡æœ¬é¢œè‰²
+	m_list.SetFontHW(20, 0);                              //è®¾ç½®å­—ä½“é«˜åº¦ï¼Œå’Œå®½åº¦,0è¡¨ç¤ºç¼ºçœå®½åº¦
 	for (int i = 0; i < (int)Style.size(); i++)
 	{
 		m_list.InsertColumn(i, (CString)Style[i].str, LVCFMT_CENTER, Style[i].nLen);
@@ -1399,7 +1399,7 @@ bool CSingleton::GetCircleCen(HTuple& WndID, HObject& hoImage, double fCen[2], d
 	int nNum = hvN.I();
 	if (nNum != 1)
 	{
-		//Ã»ÓĞÕÒµ½Î¨Ò»µÄ¶¨Î»Ô²
+		//æ²¡æœ‰æ‰¾åˆ°å”¯ä¸€çš„å®šä½åœ†
 		//AreaCenter(hoCons, &hvS, &hvR, &hvC);
 		//for (int i = 0;i < hvS.)
 		//{
@@ -1439,7 +1439,7 @@ bool CSingleton::NineDotCalib(CPos ImgPts[9], CPos AxisPts[9], HTuple& HomMat2D)
 	{
 		CString str;
 		const char* pc = q.ErrorMessage().Text();
-		str.Format("9µã±ê¶¨Ê§°Ü£º%s", pc);
+		str.Format("9ç‚¹æ ‡å®šå¤±è´¥ï¼š%s", pc);
 		LogFile(str);
 		return false;
 	}
@@ -1475,7 +1475,7 @@ bool CSingleton::GetDirPoint(HTuple& WndID, HObject& hoImage, double fY, double 
 		GenMeasureRectangle2(fY + nStep*j*cos(fPhi), fX + nStep*j*sin(fPhi), fPhi, nH, nW, hvW, hvH, "nearest_neighbor", &hvMsr);
 		MeasurePos(hoImage, hvMsr, 1, 25, "all", "all", &hvRowEdge, &hvColEdge, &hvAmplitude, &hvDist);
 		CloseMeasure(hvMsr);
-		if (hvColEdge.TupleLength() > 0)  //µÚÒ»Ìõ±ß
+		if (hvColEdge.TupleLength() > 0)  //ç¬¬ä¸€æ¡è¾¹
 		{
 			hvXs[n] = hvColEdge[0];
 			hvYs[n] = hvRowEdge[0];
@@ -1486,11 +1486,11 @@ bool CSingleton::GetDirPoint(HTuple& WndID, HObject& hoImage, double fY, double 
 	if (n < 3)
 	{
 		SetColor(WndID, "green");
-		strLog.Format("¾«¶¨Î»ÏßÃ»ÓĞ×ã¹»µã");
+		strLog.Format("ç²¾å®šä½çº¿æ²¡æœ‰è¶³å¤Ÿç‚¹");
 		LogFile(strLog);
 		return false;
 	}
-	bool bRet = FilterPts(WndID, hoImage, hvYs, hvXs, fPhi, _iLen);             //¹ıÂË²»ºÏÊÊµÄµã
+	bool bRet = FilterPts(WndID, hoImage, hvYs, hvXs, fPhi, _iLen);             //è¿‡æ»¤ä¸åˆé€‚çš„ç‚¹
 	if (bRet == false)
 		return false;
 	DispCross(WndID, hvYs, hvXs, 20, 0.25*PI);
@@ -1541,10 +1541,10 @@ bool CSingleton::GetDirPoint(HTuple& WndID, HObject& hoImage, double& fY, double
 		if (hvDist.D() < fMinDist)
 		{
 			fMinDist = hvDist.D();
-			m.iPrNO = i;                                            //×î½Ó½üµÄÂÖÀªË÷Òı
+			m.iPrNO = i;                                            //æœ€æ¥è¿‘çš„è½®å»“ç´¢å¼•
 			m.x = hvX.D();
 			m.y = hvY.D();
-			fRadius = sqrt(hvS.D() / PI);                 //ÂÖÀªµÄ´óÌå°ë¾¶
+			fRadius = sqrt(hvS.D() / PI);                 //è½®å»“çš„å¤§ä½“åŠå¾„
 		}
 	}
 	if (fRadius < 0)
@@ -1583,7 +1583,7 @@ bool CSingleton::GetDirPoint(HTuple& WndID, HObject& hoImage, double& fY, double
 			fPhi += PI;
 		//DispRectangle2(WndID, fMCen[1], fMCen[0], fPhi, 0.5*abs(fMaxR - fMinR), 25);
 		GenMeasureRectangle2(fMCen[1], fMCen[0], fPhi, 0.5*abs(fMaxR - fMinR), 25, hvW, hvH, "nearest_neighbor", &hvMsr);
-		/////////////////////////////////////////////////////////////////////¸ÃÏîÄ¿È«ÊÇ°×É«ÌúÆ¬ÏòÄÚËÑË÷ÂÖÀª±ßÔµ//////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////è¯¥é¡¹ç›®å…¨æ˜¯ç™½è‰²é“ç‰‡å‘å†…æœç´¢è½®å»“è¾¹ç¼˜//////////////////////////////////////////////////////////////////
 		MeasurePos(hoImage, hvMsr, 1, 35, "negative", "all", &hvRowEdge, &hvColEdge, &hvAmp, &hvDist);
 		CloseMeasure(hvMsr);
 		int nT = hvRowEdge.TupleLength().I();
@@ -1615,7 +1615,7 @@ bool CSingleton::GetDirPoint(HTuple& WndID, HObject& hoImage, double& fY, double
 	}
 	if (n < 4)
 	{
-		LogFile("Ô²¿×±ß½çµãÊıÌ«ÉÙ");
+		LogFile("åœ†å­”è¾¹ç•Œç‚¹æ•°å¤ªå°‘");
 		return true;
 	}
 	HTuple hv_Radius, hv_StartPhi, hv_EndPhi, hv_PointOrder, hv_Row, hv_Col;
@@ -1641,12 +1641,12 @@ bool CSingleton::GetDirPoint(HTuple& WndID, HObject& hoImage, double& fY, double
 	}
 	if (n < 3)
 	{
-		LogFile("ÕÒµ½µÄ²úÆ·Ô²¿×±ß½çµãºÏ¸ñµãÌ«ÉÙ£¡");
+		LogFile("æ‰¾åˆ°çš„äº§å“åœ†å­”è¾¹ç•Œç‚¹åˆæ ¼ç‚¹å¤ªå°‘ï¼");
 		return true;
 	}
 	GenContourPolygonXld(&hoCons, Rs, Cs);
 	FitCircleContourXld(hoCons, "algebraic", -1, 0, 0, 3, 2, &hv_Row, &hv_Col, &hv_Radius, &hv_StartPhi, &hv_EndPhi, &hv_PointOrder);
-	////////////////////////////////////////////////////////Ê£ÏÂµÄÇøÓòÄÚËÑË÷×î´óÔ²»¡ÂÖÀª/////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////å‰©ä¸‹çš„åŒºåŸŸå†…æœç´¢æœ€å¤§åœ†å¼§è½®å»“/////////////////////////////////////////////////////////
 	DispCircle(WndID, hv_Row, hv_Col, hv_Radius);
 	fY = hv_Row.D();
 	fX = hv_Col.D();
@@ -1662,7 +1662,7 @@ double CSingleton::GetHorzAngle(double fAxisPt[2], double fVecPt[2], bool bImage
 	double fPhi, fDeg;
 	fPhi = hvAng.D();
 	fDeg = fPhi * 180 / PI;
-	if (bImage == false)   //ÉÏÃæµÄº¯ÊıÊÔÓÃÍ¼Ïñ×ø±êÏµ
+	if (bImage == false)   //ä¸Šé¢çš„å‡½æ•°è¯•ç”¨å›¾åƒåæ ‡ç³»
 	{
 		fPhi *= -1;
 		fDeg *= -1;
@@ -1684,7 +1684,7 @@ bool CSingleton::LoadLeafs(int nID,int nStep,CString strFunc,int nSumLeaf, CTree
 	{
 		if (nSumLeaf != _XMLImg[nID][nStep].psLeaf.size())
 		{
-			LogFile("%s XMLÎÄ¼ş½ÚµãÊı²»Æ¥Åä£¡", strFunc);
+			LogFile("%s XMLæ–‡ä»¶èŠ‚ç‚¹æ•°ä¸åŒ¹é…ï¼", strFunc);
 			return false;
 		}
 		for (int i = 0; i < nSumLeaf; i++)
@@ -1715,7 +1715,7 @@ CString CSingleton::GetHTupleString(HTuple& hvRes)
 		}
 		strData.Append(str);
 	}
-	strData.TrimRight(";");  //²»ĞèÒª×îºóÒ»¸ö·ÖºÅ
+	strData.TrimRight(";");  //ä¸éœ€è¦æœ€åä¸€ä¸ªåˆ†å·
 	strData.TrimRight("*");
 	return strData;
 }
@@ -1726,12 +1726,12 @@ void CSingleton::GetAffineRect(double fRCVal[], CString strPosTYP, HTuple& hvRes
 	HTuple hvMat2D;
 	CStrs ssPosTYP;
 	SplitString(strPosTYP, ",", ssPosTYP);
-	if (strPosTYP == "¹Ì¶¨µã" || strPosTYP == "¹Ì¶¨Î»")
+	if (strPosTYP == "å›ºå®šç‚¹" || strPosTYP == "å›ºå®šä½")
 	{
 		hvTransX = fRCVal[0];
 		hvTransY = fRCVal[1];
 	}
-	else if (ssPosTYP[0] == "Ä£°å²î")
+	else if (ssPosTYP[0] == "æ¨¡æ¿å·®")
 	{
 		double fMT[3], fRes[2];
 		fMT[0] = hvRes[0].D();
@@ -1744,7 +1744,7 @@ void CSingleton::GetAffineRect(double fRCVal[], CString strPosTYP, HTuple& hvRes
 		hvTransX = fRes[0] ;
 		hvTransY = fRes[1] ;
 	}
-	else if (ssPosTYP[0] == "½á¹ûµã")
+	else if (ssPosTYP[0] == "ç»“æœç‚¹")
 	{
 		hvTransX = hvRes[0];
 		hvTransY = hvRes[1];
@@ -1759,13 +1759,13 @@ bool CSingleton::GetDrawCircle(CHWin& HW, CTreeCtrl& tree, double fXYR[], CStrin
 	HTuple hvR, hvC, hvRadius;
 	int nPosTxt[2] = { 0 };
 	HW.WinTexts.clear();
-	HW.ShowImage(nPosTxt,"»æÖÆÔ²ÇøÓò£º");
+	HW.ShowImage(nPosTxt,"ç»˜åˆ¶åœ†åŒºåŸŸï¼š");
 	DrawCircle(HW.WndID, &hvR, &hvC, &hvRadius);
 	fXYR[0] = hvC.D();
 	fXYR[1] = hvR.D();
 	fXYR[2] = hvRadius.D();
 	CStringArray ss;
-	if (strType == "¹Ì¶¨Î»" || strType == "¹Ì¶¨µã")                                  //¹Ì¶¨ÇøÓòµã
+	if (strType == "å›ºå®šä½" || strType == "å›ºå®šç‚¹")                                  //å›ºå®šåŒºåŸŸç‚¹
 	{
 		for (int j = 0; j < 3; j++)
 		{
@@ -1777,11 +1777,11 @@ bool CSingleton::GetDrawCircle(CHWin& HW, CTreeCtrl& tree, double fXYR[], CStrin
 			hChildItem = tree.GetNextSiblingItem(hChildItem);
 		}
 	}
-	////////////////////ÒÔÏÂÊÇÄ£°å²î///////////////
-	else if (strType.Left(6) == "Ä£°å²î")                                                    //¹Ì¶¨ÇøÓòµã
+	////////////////////ä»¥ä¸‹æ˜¯æ¨¡æ¿å·®///////////////
+	else if (strType.Left(6) == "æ¨¡æ¿å·®")                                                    //å›ºå®šåŒºåŸŸç‚¹
 	{
-		fXYR[0] = ZOOM*(hvC.D() - hvRes[0].D());                //Ïà¶ÔÓÚµÚÒ»¸öËÑË÷µ½µÄÄ£°å
-		fXYR[1] = ZOOM*(hvR.D() - hvRes[1].D());                //£¨¼ì²â¿òÖĞĞÄµã£©Ïà¶ÔÓÚÄ£°åµãµÄµÄÆ«²î
+		fXYR[0] = ZOOM*(hvC.D() - hvRes[0].D());                //ç›¸å¯¹äºç¬¬ä¸€ä¸ªæœç´¢åˆ°çš„æ¨¡æ¿
+		fXYR[1] = ZOOM*(hvR.D() - hvRes[1].D());                //ï¼ˆæ£€æµ‹æ¡†ä¸­å¿ƒç‚¹ï¼‰ç›¸å¯¹äºæ¨¡æ¿ç‚¹çš„çš„åå·®
 		for (int j = 0; j < 3; j++)
 		{
 			CString strKnot = tree.GetItemText(hChildItem);
@@ -1797,7 +1797,7 @@ bool CSingleton::GetDrawCircle(CHWin& HW, CTreeCtrl& tree, double fXYR[], CStrin
 			hChildItem = tree.GetNextSiblingItem(hChildItem);
 		}
 	}
-	else if (strType.Left(6) == "½á¹ûµã")
+	else if (strType.Left(6) == "ç»“æœç‚¹")
 	{
 		for (int j = 0; j < 3; j++)
 		{
@@ -1825,7 +1825,7 @@ void CSingleton::GetDrawRect2(CHWin& HW, CTreeCtrl& tree, double fRCVal[], CStri
 	HTuple hvR, hvC, hvPhi, hvLen1, hvLen2;
 	int nPosTxt[2] = { 2,2 };
 	HW.WinTexts.clear();
-	HW.ShowImage(nPosTxt,"»æÖÆÇøÓò£º");
+	HW.ShowImage(nPosTxt,"ç»˜åˆ¶åŒºåŸŸï¼š");
 	DrawRectangle2(HW.WndID, &hvR, &hvC, &hvPhi, &hvLen1, &hvLen2);
 	fRCVal[0] = hvC.D();
 	fRCVal[1] = hvR.D();
@@ -1833,7 +1833,7 @@ void CSingleton::GetDrawRect2(CHWin& HW, CTreeCtrl& tree, double fRCVal[], CStri
 	fRCVal[3] = hvLen1.D();
 	fRCVal[4] = hvLen2.D();
 	CStringArray ss;
-	if (strPosTYP == "¹Ì¶¨µã" || strPosTYP == "¹Ì¶¨Î»")                                       //¹Ì¶¨ÇøÓòµã
+	if (strPosTYP == "å›ºå®šç‚¹" || strPosTYP == "å›ºå®šä½")                                       //å›ºå®šåŒºåŸŸç‚¹
 	{
 		for (int j = 0; j < 5; j++)
 		{
@@ -1845,10 +1845,10 @@ void CSingleton::GetDrawRect2(CHWin& HW, CTreeCtrl& tree, double fRCVal[], CStri
 			hChildItem = tree.GetNextSiblingItem(hChildItem);
 		}
 	}
-	else //»æÍ¼Ç°ÌáÏÂÖ»ÓĞ¹Ì¶¨µãºÍÄ£°å²îÁ½ÖÖÀàĞÍ
+	else //ç»˜å›¾å‰æä¸‹åªæœ‰å›ºå®šç‚¹å’Œæ¨¡æ¿å·®ä¸¤ç§ç±»å‹
 	{
-		fRCVal[0] = ZOOM*(hvC.D() - hvRes[0].D());                                       //Ïà¶ÔÓÚµÚÒ»¸öËÑË÷µ½µÄÄ£°å
-		fRCVal[1] = ZOOM*(hvR.D() - hvRes[1].D());                                       //(¼ì²â¿òÖĞĞÄµã£©Ïà¶ÔÓÚÄ£°åµãµÄµÄÆ«²î
+		fRCVal[0] = ZOOM*(hvC.D() - hvRes[0].D());                                       //ç›¸å¯¹äºç¬¬ä¸€ä¸ªæœç´¢åˆ°çš„æ¨¡æ¿
+		fRCVal[1] = ZOOM*(hvR.D() - hvRes[1].D());                                       //(æ£€æµ‹æ¡†ä¸­å¿ƒç‚¹ï¼‰ç›¸å¯¹äºæ¨¡æ¿ç‚¹çš„çš„åå·®
 		for (int j = 0; j < 5; j++)
 		{
 			CString strKnot = tree.GetItemText(hChildItem);
@@ -1935,13 +1935,13 @@ bool CSingleton::GetDrawRing(CHWin& HW, CTreeCtrl& tree, double fRadiusVal[], CS
 	HTuple hvR, hvC, hvRadius;
 	int nPosTxt[2] = { 0 };
 	HW.WinTexts.clear();
-	HW.ShowImage(nPosTxt,"»æÖÆÍâÔ²ÇøÓò£º");
+	HW.ShowImage(nPosTxt,"ç»˜åˆ¶å¤–åœ†åŒºåŸŸï¼š");
 	DrawCircle(HW.WndID, &hvR, &hvC, &hvRadius);
 	fRadiusVal[0] = hvC.D();
 	fRadiusVal[1] = hvR.D();
 	fRadiusVal[2] = hvRadius.D();
 	HW.WinTexts.clear();
-	HW.ShowImage(nPosTxt,"»æÖÆÄÚÔ²ÇøÓò£º");
+	HW.ShowImage(nPosTxt,"ç»˜åˆ¶å†…åœ†åŒºåŸŸï¼š");
 	DrawCircle(HW.WndID, &hvR, &hvC, &hvRadius);
 	fRadiusVal[3] = hvRadius.D();
 	if (fRadiusVal[3] >= fRadiusVal[2])
@@ -1949,7 +1949,7 @@ bool CSingleton::GetDrawRing(CHWin& HW, CTreeCtrl& tree, double fRadiusVal[], CS
 		return false;
 	}
 	CStringArray ss;
-	if (strPosTYP == "¹Ì¶¨Î»" || strPosTYP == "¹Ì¶¨µã")                                                                  //¹Ì¶¨ÇøÓòµã
+	if (strPosTYP == "å›ºå®šä½" || strPosTYP == "å›ºå®šç‚¹")                                                                  //å›ºå®šåŒºåŸŸç‚¹
 	{
 		for (int j = 0; j < 4; j++)
 		{
@@ -1962,8 +1962,8 @@ bool CSingleton::GetDrawRing(CHWin& HW, CTreeCtrl& tree, double fRadiusVal[], CS
 		}
 		return true;
 	}
-	fRadiusVal[0] = ZOOM*(hvC.D() - hvRes[0].D());                //Ïà¶ÔÓÚµÚÒ»¸öËÑË÷µ½µÄÄ£°å
-	fRadiusVal[1] = ZOOM*(hvR.D() - hvRes[1].D());                //£¨¼ì²â¿òÖĞĞÄµã£©Ïà¶ÔÓÚÄ£°åµãµÄµÄÆ«²î
+	fRadiusVal[0] = ZOOM*(hvC.D() - hvRes[0].D());                //ç›¸å¯¹äºç¬¬ä¸€ä¸ªæœç´¢åˆ°çš„æ¨¡æ¿
+	fRadiusVal[1] = ZOOM*(hvR.D() - hvRes[1].D());                //ï¼ˆæ£€æµ‹æ¡†ä¸­å¿ƒç‚¹ï¼‰ç›¸å¯¹äºæ¨¡æ¿ç‚¹çš„çš„åå·®
 	for (int j = 0; j < 4; j++)
 	{
 		CString strKnot = tree.GetItemText(hChildItem);
@@ -2021,7 +2021,7 @@ int CSingleton::Write2TCP(CString cStart, long lVal)
 {
 	CSingleton* pSng = CSingleton::GetInstance();
 	CString str;
-	str.Format("Ğ´ÈëD%s : Start", cStart);
+	str.Format("å†™å…¥D%s : Start", cStart);
 	LogFile(str);
 	char cSend[50];
 	ZeroMemory(cSend, sizeof(cSend));
@@ -2053,14 +2053,14 @@ int CSingleton::Write2TCP(CString cStart, long lVal)
 		strRecv.AppendChar(RecvBuff[n]);
 	if (strRecv.Compare("OK") == 0)
 	{
-		str.Format("Ğ´ÈëD%s : %d", cStart, lVal);
+		str.Format("å†™å…¥D%s : %d", cStart, lVal);
 		LogFile(str);
 		return ret;
 	}
 	else
 	{
 		ret = -1;
-		str.Format("Ğ´ÈëD%s : Ê§°Ü", cStart);
+		str.Format("å†™å…¥D%s : å¤±è´¥", cStart);
 		LogFile(str);
 		return ret;
 	}

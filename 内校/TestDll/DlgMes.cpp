@@ -159,11 +159,11 @@ BOOL CDlgMes::OnInitDialog()
 		}
 	}
 	int bComOK = 0;
-	bComOK=InitialCom(m_val[0], 10, 19200, 1);
+	bComOK=InitialCom(m_val[0], 2, 9600, 1);
 	CImgDLL::WriteLog("串口1结果%d", bComOK);
-	bComOK=InitialCom(m_val[1], 11, 19200, 1);
+	bComOK=InitialCom(m_val[1], 3, 9600, 1);
 	CImgDLL::WriteLog("串口2结果%d", bComOK);
-	bComOK=InitialCom(m_val[2], 9, 19200, 1);
+	bComOK=InitialCom(m_val[2], 4, 9600, 1);
 	CImgDLL::WriteLog("串口3结果%d", bComOK);
 	m_nIP[0] = 0;
 	m_nIP[1] = 0;
@@ -184,7 +184,7 @@ BOOL CDlgMes::OnInitDialog()
 	int nNetId = 0;
 	int nIpPort = pSng->GetCfgInt("参数", "PORT", 502);
 	BOOL  bRet;
-	pSng->_strIP = pSng->GetCfgString("参数", "IP1", "192.168.3.111");
+	pSng->_strIP = pSng->GetCfgString("参数", "IP1", "192.168.3.100");
 	bRet = Init_ETH_String(pSng->_strIP.GetBuffer(0), nNetId, nIpPort);
 	pSng->_strIP.ReleaseBuffer();
 	if (!bRet)
