@@ -37,7 +37,7 @@ using namespace std;
 		_strDate = _time.Format("%Y-%m-%d %H:%M:%S"); \
 		_str.Format(_T("[%s] %s"), _strDate, _str); \
 		\
-		auto* _logEditor = dynamic_cast<CEdit*>(GetDlgItem(IDC_LOG)); \
+		auto* _logEditor = (CEdit*)GetDlgItem(IDC_LOG); \
 		if (_logEditor) \
 		{ \
 			CString _currStr; \
@@ -191,36 +191,37 @@ BOOL CDlgMes::OnInitDialog()
 	}
 	int bComOK = 0;
 	bComOK=InitialCom(m_val[0], 2, 19200, 1);
-	MESLOG("串口1结果%d", bComOK);
+	MESLOG("称1串口结果%d", bComOK);
 	bComOK=InitialCom(m_val[1], 3, 19200, 1);
-	MESLOG("串口2结果%d", bComOK);
+	MESLOG("称2串口结果%d", bComOK);
 	bComOK=InitialCom(m_val[2], 4, 19200, 1);
-	MESLOG("串口3结果%d", bComOK);
-	m_nIP[0] = 0;
-	m_nIP[1] = 0;
-	m_nIP[2] = 0;
-	m_nIP[0] = 0;
-	m_nIP[1] = 0;
-	m_nIP[2] = 0;
-	bVal[0] = false;
-	bVal[1] = false;
-	bVal[2] = false;
-	bWZERO[0] = false;
-	bWZERO[1] = false;
-	bWZERO[2] = false;
-	bZERO[0] = false;
-	bZERO[1] = false;
-	bZERO[2] = false;
+	MESLOG("称3串口结果%d", bComOK);
+	for (int i = 0; i < 3; i++)
+	{
+		m_nIP[i] = 0;
+		bVal[i] = false;
+		bWZERO[i] = false;
+		bZERO[i] = false;
+		m_nWIP[i] = 0;
+		m_nWVAL[i] = 0;
+		m_nWZERO[i] = 0;
+		m_nVAL[i] = 0;
+		m_nZERO[i] = 0;
+	}
+	for (int j = 0; j < 8; j++)
+	{
+		m_nSleep[j] = 0;
+	}
 	pSng->_pMain = this;
 	int nNetId = 0;
 	int nIpPort = pSng->GetCfgInt("参数", "PORT", 502);
 	BOOL  bRet;
-	pSng->_strIP = pSng->GetCfgString("参数", "IP1", "192.168.3.100");
+	pSng->_strIP = pSng->GetCfgString("参数", "IP1", "192.168.3.111");
 	bRet = Init_ETH_String(pSng->_strIP.GetBuffer(0), nNetId, nIpPort);
 	pSng->_strIP.ReleaseBuffer();
 	if (!bRet)
 	{
-		AfxMessageBox(_T("PLC连接1失败"));
+		AfxMessageBox(_T("PLC连接失败"));
 		SendMessage(WM_CLOSE);
 		return FALSE;
 	}
@@ -244,48 +245,35 @@ BOOL CDlgMes::OnInitDialog()
 	AfxBeginThread(ThreadSLEEP, this);
 	AfxBeginThread(ThreadSLEEP1, this);
 	AfxBeginThread(ThreadSLEEP2, this);
-	SetTimer(TIME_VAL1, 500, NULL);
-	SetTimer(TIME_VAL2, 500, NULL);
-	SetTimer(TIME_VAL3, 500, NULL);
 	GetDlgItem(IDC_BTN_JZ1)->EnableWindow(FALSE);
 	GetDlgItem(IDC_BTN_JZ2)->EnableWindow(FALSE);
 	GetDlgItem(IDC_BTN_JZ3)->EnableWindow(FALSE);
-	int nOK[3], nNG[3];
+	GetDlgItem(IDC_BTN_JZ)->EnableWindow(FALSE);
+	int nOK[5], nNG[5];
 	nOK[0] = atoi(pSng->GetCfgString("工位1", "OK", "111"));
 	nOK[1] = atoi(pSng->GetCfgString("工位2", "OK", "111"));
 	nOK[2] = atoi(pSng->GetCfgString("工位3", "OK", "111"));
+	nOK[3] = atoi(pSng->GetCfgString("注水", "OK", "111"));
+	nOK[4] = atoi(pSng->GetCfgString("除气", "OK", "111"));
 	nNG[0] = atoi(pSng->GetCfgString("工位1", "NG", "111"));
 	nNG[1] = atoi(pSng->GetCfgString("工位2", "NG", "111"));
 	nNG[2] = atoi(pSng->GetCfgString("工位3", "NG", "111"));
-	float fOK[3];
-	if (nOK[0] + nNG[0]==0)
+	nNG[3] = atoi(pSng->GetCfgString("注水", "NG", "111"));
+	nNG[4] = atoi(pSng->GetCfgString("除气", "NG", "111"));
+	float fOK[5];
+	CString strOK[5];
+	for (int o = 0; o < 5; o++)
 	{
-		fOK[0] = 0.00;
+		if (nOK[o] + nNG[o] == 0)
+		{
+			fOK[o] = 0.00;
+		}
+		else
+		{
+			fOK[o] = float(nOK[o] * 100) / float((nOK[o] + nNG[o]));
+		}
+		strOK[o].Format("%.2f", fOK[o]);
 	}
-	else
-	{
-		fOK[0] = float(nOK[0] * 100) / float((nOK[0] + nNG[0]));
-	}
-	if (nOK[1] + nNG[1] == 0)
-	{
-		fOK[1] = 0.00;
-	}
-	else
-	{
-		fOK[1] = float(nOK[1] * 100) / float((nOK[1] + nNG[1]));
-	}
-	if (nOK[2] + nNG[2] == 0)
-	{
-		fOK[2] = 0.00;
-	}
-	else
-	{
-		fOK[2] = float(nOK[2] * 100) / float((nOK[2] + nNG[2]));
-	}
-	CString strOK[3];
-	strOK[0].Format("%.2f", fOK[0]);
-	strOK[1].Format("%.2f", fOK[1]);
-	strOK[2].Format("%.2f", fOK[2]);
 	SetDlgItemText(IDC_STATIC_IN7, pSng->GetCfgString("工位1", "OK", "111"));
 	SetDlgItemText(IDC_STATIC_IN8, pSng->GetCfgString("工位1", "NG", "111"));
 	SetDlgItemText(IDC_STATIC_IN9, strOK[0]);
@@ -295,6 +283,12 @@ BOOL CDlgMes::OnInitDialog()
 	SetDlgItemText(IDC_STATIC_IN13, pSng->GetCfgString("工位3", "OK", "111"));
 	SetDlgItemText(IDC_STATIC_IN14, pSng->GetCfgString("工位3", "NG", "111"));
 	SetDlgItemText(IDC_STATIC_IN15, strOK[2]);
+	SetDlgItemText(IDC_STATIC_IN16, pSng->GetCfgString("注水", "OK", "111"));
+	SetDlgItemText(IDC_STATIC_IN17, pSng->GetCfgString("注水", "NG", "111"));
+	SetDlgItemText(IDC_STATIC_IN18, strOK[3]);
+	SetDlgItemText(IDC_STATIC_IN19, pSng->GetCfgString("除气", "OK", "111"));
+	SetDlgItemText(IDC_STATIC_IN20, pSng->GetCfgString("除气", "NG", "111"));
+	SetDlgItemText(IDC_STATIC_IN21, strOK[4]);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
 }
@@ -470,18 +464,29 @@ void CDlgMes::OnBnClickedBtnRun()
 	GetDlgItemText(IDC_BTN_RUN, strText);
 	if (strText == "启动")
 	{
+		SetTimer(TIME_VAL1, 400, NULL);
+		SetTimer(TIME_VAL2, 400, NULL);
+		SetTimer(TIME_VAL3, 400, NULL);
 		TV.clear();
 		TV1.clear();
 		TV2.clear();
 		SetDlgItemText(IDC_BTN_RUN, "停止");
 		pSng->_nRun = RUN_WORK;
-		//MESLOG("条码清空，复位！！！！");
-
+		MESLOG("条码清空，复位！！！！");
+		GetDlgItem(IDOK)->EnableWindow(FALSE);
+		GetDlgItem(IDC_BTN_VAL)->EnableWindow(FALSE);
+		GetDlgItem(IDC_BTN_JZ)->EnableWindow(TRUE);
 	}
 	else
 	{
+		KillTimer(TIME_VAL1);
+		KillTimer(TIME_VAL2);
+		KillTimer(TIME_VAL3);
 		SetDlgItemText(IDC_BTN_RUN, "启动");
 		pSng->_nRun = RUN_NULL;
+		GetDlgItem(IDOK)->EnableWindow(TRUE);
+		GetDlgItem(IDC_BTN_VAL)->EnableWindow(TRUE);
+		GetDlgItem(IDC_BTN_JZ)->EnableWindow(FALSE);
 	}
 }
 
@@ -504,32 +509,32 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			CString strData;
 			strData.Format("LOF");
 			int nLen = strData.GetLength();
-			//pSng->_csClient[0].Lock();
+			pSng->_csClient[0].Lock();
 			m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();	
-			//pSng->_csClient[0].Unlock();
+			pSng->_csClient[0].Unlock();
 			MESLOG("空管扫码超时！！！！");
 		}
 		else
 		{
 			if (pSng->_strCliRobot[0].GetLength() > 3)
 			{
-				//nOK += 1;
+				nOK += 1;
 				MESLOG("工站1扫码成功：" + pSng->_strCliRobot[0]);
-				/*CString strData;
+				CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
 				pSng->_csClient[0].Lock();
 				m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
 				strData.ReleaseBuffer();
 				pSng->_csClient[0].Unlock();
-				m_nIP[0] = 1;*/
+				m_nIP[0] = 1;
 				CString strmoid = pSng->GetCfgString("MES", "mo_id", "111");
 				CString strpartID = pSng->GetCfgString("MES", "partID", "111");
 				CString strppid = pSng->_strCliRobot[0];
 				CString strtestStation = pSng->GetCfgString("MES", "testStation", "111");
 				KillTimer(TIME_IP1);
-				/*SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
+				SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
 				CZ a;
 				a.strCode.Format("%s",pSng->_strCliRobot[0]);
 				pSng->_csTV.Lock();
@@ -541,7 +546,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
 				pSng->_DB.ExecuteQueryValue(sql, strNum);
 				pSng->_csInfo.Unlock();
-				if (atoi(strNum) > 0)*/
+				//if (atoi(strNum) > 0)
 				bool bMESOK = MES1(strmoid, strpartID, strppid, strtestStation);
 				if (bMESOK == false)
 				{
@@ -550,40 +555,43 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				}
 				else
 				{
-					//MESLOG("已有数据！！！！！");
-					nOK += 1;
-					CString strData;
-					strData.Format("LOF");
-					int nLen = strData.GetLength();
-					m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
-					strData.ReleaseBuffer();
-					m_nIP[0] = 1;
-					SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
-					CZ a;
-					a.strCode.Format("%s", pSng->_strCliRobot[0]);
-					pSng->_csTV.Lock();
-					TV.push_back(a);
-					pSng->_csTV.Unlock();
-					CString sql, strNum;
-					pSng->_csInfo.Lock();
-					sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
-					pSng->_DB.ExecuteQueryValue(sql, strNum);
-					pSng->_csInfo.Unlock();
 					if (atoi(strNum) > 0)
 					{
-						MESLOG("已有数据！！！！！");
+						//MESLOG("已有数据！！！！！");
+						nOK += 1;
+						CString strData;
+						strData.Format("LOF");
+						int nLen = strData.GetLength();
+						m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
+						strData.ReleaseBuffer();
+						m_nIP[0] = 1;
+						SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
+						CZ a;
+						a.strCode.Format("%s", pSng->_strCliRobot[0]);
+						pSng->_csTV.Lock();
+						TV.push_back(a);
+						pSng->_csTV.Unlock();
+						CString sql, strNum;
 						pSng->_csInfo.Lock();
-						sql.Format("Delete WH where IP = '%s' ", pSng->_strCliRobot[0]);
+						sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
+						pSng->_DB.ExecuteQueryValue(sql, strNum);
+						pSng->_csInfo.Unlock();
+						if (atoi(strNum) > 0)
+						{
+							MESLOG("已有数据！！！！！");
+							pSng->_csInfo.Lock();
+							sql.Format("Delete WH where IP = '%s' ", pSng->_strCliRobot[0]);
+							pSng->_DB.Execute(sql);
+							pSng->_csInfo.Unlock();
+						}
+						pSng->_csInfo.Lock();
+						//sql.Format("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
+						sql.Format("insert into WH values ('%s','0.00','0.00','0.00','%s')", pSng->_strCliRobot[0], strMEStoken);
+						strMEStoken = "";
 						pSng->_DB.Execute(sql);
 						pSng->_csInfo.Unlock();
+						pSng->_strCliRobot[0].Empty();
 					}
-					pSng->_csInfo.Lock();
-					//sql.Format("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
-					sql.Format("insert into WH values ('%s','0.00','0.00','0.00','%s')", pSng->_strCliRobot[0], strMEStoken);
-					strMEStoken = "";
-					pSng->_DB.Execute(sql);
-					pSng->_csInfo.Unlock();
-					pSng->_strCliRobot[0].Empty();
 				}
 				/*pSng->_csInfo.Lock();
 				sql.Format("insert into WH values ('%s','0.00','0.00','0.00')", pSng->_strCliRobot[0]);
@@ -615,10 +623,10 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			CString strData;
 			strData.Format("LOF");
 			int nLen = strData.GetLength();
-			//pSng->_csClient[1].Lock();
+			pSng->_csClient[1].Lock();
 			m_pServer[1]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
-			//pSng->_csClient[1].Unlock();
+			pSng->_csClient[1].Unlock();
 			MESLOG("注水扫码超时！！！！");
 		}
 		else
@@ -630,10 +638,10 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
-				//pSng->_csClient[1].Lock();
+				pSng->_csClient[1].Lock();
 				m_pServer[1]->SendClient(strData.GetBuffer(0), nLen);
 				strData.ReleaseBuffer();
-				//pSng->_csClient[1].Unlock();
+				pSng->_csClient[1].Unlock();
 				m_nIP[1] = 1;
 				KillTimer(TIME_IP2);
 				SetDlgItemText(IDC_STATIC_IN2, pSng->_strCliRobot[1]);
@@ -679,10 +687,10 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			CString strData;
 			strData.Format("LOF");
 			int nLen = strData.GetLength();
-			//pSng->_csClient[2].Lock();
+			pSng->_csClient[2].Lock();
 			m_pServer[2]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
-			//pSng->_csClient[2].Unlock();
+			pSng->_csClient[2].Unlock();
 			MESLOG("除气扫码超时！！！！");
 		}
 		else
@@ -694,10 +702,10 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
-				//pSng->_csClient[2].Lock();
+				pSng->_csClient[2].Lock();
 				m_pServer[2]->SendClient(strData.GetBuffer(0), nLen);
 				strData.ReleaseBuffer();
-				//pSng->_csClient[2].Unlock();
+				pSng->_csClient[2].Unlock();
 				m_nIP[2] = 1;
 				KillTimer(TIME_IP3);
 				SetDlgItemText(IDC_STATIC_IN3, pSng->_strCliRobot[2]);
@@ -874,6 +882,18 @@ void CDlgMes::OnCommMscomm1()
 	COleSafeArray safearray_inp;
 	LONG len, k;
 	BYTE rxdata[2048];                                     //设置BYTE数组?An?8-bit?integerthat?is?not?signed.
+	DWORD dwC1 = GetTickCount();
+	for (int i = 0; i < 1;)
+	{
+		if (GetTickCount() - dwC1 < 100)
+		{
+			i = 0;
+		}
+		else
+		{
+			i = 1;
+		}
+	}
 	variant_inp = m_val[0].get_Input();                 //读缓冲区
 	safearray_inp = variant_inp;                         //VARIANT型变量转换为ColeSafeArray型变量     
 	len = safearray_inp.GetOneDimSize();          //得到有效数据长度    // 接受数据  
@@ -949,6 +969,7 @@ void CDlgMes::OnCommMscomm1()
 	fB = atof(pSng->GetCfgString("VAL补偿", "工站1", "0.000"));
 	fA += fB;
 	strVal.Format("%.3f", fA);
+	fA = atof(strVal);
 	SetDlgItemText(IDC_STATIC_IN4, strVal);
 	if (bVal[0] == true)
 	{
@@ -994,6 +1015,7 @@ void CDlgMes::OnCommMscomm1()
 		{
 			MESLOG("工站1称重清零成功");
 			m_nZERO[0] = 1;
+			SetTimer(TIME_VAL1, 800, NULL);
 		}
 	}
 }
@@ -1011,6 +1033,18 @@ void CDlgMes::OnCommMscomm2()
 	COleSafeArray safearray_inp;
 	LONG len, k;
 	BYTE rxdata[2048];                                     //设置BYTE数组?An?8-bit?integerthat?is?not?signed.
+	DWORD dwC2 = GetTickCount();
+	for (int i = 0; i < 1;)
+	{
+		if (GetTickCount() - dwC2 < 100)
+		{
+			i = 0;
+		}
+		else
+		{
+			i = 1;
+		}
+	}
 	variant_inp = m_val[1].get_Input();                 //读缓冲区
 	safearray_inp = variant_inp;                         //VARIANT型变量转换为ColeSafeArray型变量     
 	len = safearray_inp.GetOneDimSize();          //得到有效数据长度    // 接受数据  
@@ -1066,97 +1100,112 @@ void CDlgMes::OnCommMscomm2()
 			MESLOG("工站2校正人工操作阶段");
 		}
 	}
-	if (len !=11)
-		return;
-	//////////基于这个IO盒子不需要指令了////////////////////
-	BYTE btNum[4];                 //字符型 
-	btNum[0] = *(char*)(rxdata + 5);                 //字符型 
-	btNum[1] = *(char*)(rxdata + 6);                 //字符型 
-	btNum[2] = *(char*)(rxdata + 7);                 //字符型 
-	btNum[3] = *(char*)(rxdata + 8);                 //字符型 
-	float fVal = 0.00;
-	BYTE* p = (BYTE*)&fVal;
-	p[0] = btNum[3];
-	p[1] = btNum[2];
-	p[2] = btNum[1];
-	p[3] = btNum[0];
-	float fA = fVal;
-	float fB;
-	CString strVal;
-	fB = atof(pSng->GetCfgString("VAL补偿", "工站2", "0.000"));
-	fA += fB;
-	strVal.Format("%.3f", fA);
-	SetDlgItemText(IDC_STATIC_IN5, strVal);
-	if (bVal[1] == true)
+	if (len == 11)
 	{
-		bVal[1] = false;
-		MESLOG("工站2开始绑码");
-		//m_nVAL[1] = 1;
-		if (TV1.size() < 1)
+		BYTE btNum[4];                 //字符型 
+		btNum[0] = *(char*)(rxdata + 5);                 //字符型 
+		btNum[1] = *(char*)(rxdata + 6);                 //字符型 
+		btNum[2] = *(char*)(rxdata + 7);                 //字符型 
+		btNum[3] = *(char*)(rxdata + 8);                 //字符型 
+		float fVal = 0.00;
+		BYTE * p = (BYTE*)&fVal;
+		p[0] = btNum[3];
+		p[1] = btNum[2];
+		p[2] = btNum[1];
+		p[3] = btNum[0];
+		float fA = fVal;
+		float fB;
+		CString strVal;
+		fB = atof(pSng->GetCfgString("VAL补偿", "工站2", "0.000"));
+		fA += fB;
+		strVal.Format("%.3f", fA);
+		fA = atof(strVal);
+		SetDlgItemText(IDC_STATIC_IN5, strVal);
+		if (bVal[1] == true)
 		{
-			m_nVAL[1] = 2;
-			MESLOG("工站2无码可绑");
-			return;
+			bVal[1] = false;
+			MESLOG("工站2开始绑码");
+			//m_nVAL[1] = 1;
+			if (TV1.size() < 1)
+			{
+				m_nVAL[1] = 2;
+				MESLOG("工站2无码可绑");
+				return;
+			}
+			MESLOG("工站2称重成功：" + strVal);
+			MESLOG("工站2绑码成功");
+			CString sql, strNum;
+			TV1[0].fVal = fA;
+			pSng->_csInfo.Lock();
+			sql.Format("Select count(*) from WH where IP = '%s'", TV1[0].strCode);
+			pSng->_DB.ExecuteQueryValue(sql, strNum);
+			pSng->_csInfo.Unlock();
+			if (atoi(strNum) < 1)
+			{
+				MESLOG("无条码2数据！！！！！");
+			}
+			pSng->_csInfo.Lock();
+			sql.Format("Update WH set VAL2 = %.3f where IP = '%s'", fA, TV1[0].strCode);
+			pSng->_DB.Execute(sql);
+			pSng->_csInfo.Unlock();
+			pSng->_csInfo.Lock();
+			sql.Format("Select * from WH where  IP = '%s' ", TV1[0].strCode);
+			CDStrs strs;
+			pSng->_DB.ExecuteQuery(sql, strs);
+			pSng->_csInfo.Unlock();
+			int iLen = strs.size();
+			CString strVal1, strVal2;
+			strVal1 = strs.at(0).at(1);
+			strVal2 = strs.at(0).at(2);
+			float fVc, fVc1, fVc2;
+			fVc = atof(strVal2) - atof(strVal1);
+			fVc1 = atof(pSng->GetCfgString(pSng->strLiaohao, "注水量下限", "1.000"));
+			fVc2 = atof(pSng->GetCfgString(pSng->strLiaohao, "注水量上限", "2.000"));
+			int nOK = atoi(pSng->GetCfgString("注水", "OK", "111"));
+			int nNG = atoi(pSng->GetCfgString("注水", "NG", "111"));
+			if (fVc < fVc1 || fVc > fVc2)
+			{
+				nNG += 1;
+				m_nVAL[1] = 2;
+				MESLOG("工站2称重超上下限,值为%.4f", fVc);
+			}
+			else
+			{
+				nOK += 1;
+				m_nVAL[1] = 1;
+				MESLOG("工站2称重正常");
+			}
+			pSng->_csTV.Lock();
+			TV1.erase(TV1.begin());
+			MESLOG("工站2去除未用第一个码");
+			pSng->_csTV.Unlock();
+			float fOK = float(nOK * 100) / float((nOK + nNG));
+			CString strOK[3];
+			strOK[0].Format("%d", nOK);
+			strOK[1].Format("%d", nNG);
+			strOK[2].Format("%.2f", fOK);
+			SetDlgItemText(IDC_STATIC_IN16, strOK[0]);
+			SetDlgItemText(IDC_STATIC_IN17, strOK[1]);
+			SetDlgItemText(IDC_STATIC_IN18, strOK[2]);
+			pSng->SetCfgString("注水", "OK", strOK[0]);
+			pSng->SetCfgString("注水", "NG", strOK[1]);
 		}
-		MESLOG("工站2称重成功：" + strVal);
-		MESLOG("工站2绑码成功");
-		CString sql, strNum;
-		TV1[0].fVal = fA;
-		pSng->_csInfo.Lock();
-		sql.Format("Select count(*) from WH where IP = '%s'", TV1[0].strCode);
-		pSng->_DB.ExecuteQueryValue(sql, strNum);
-		pSng->_csInfo.Unlock();
-		if (atoi(strNum) < 1)
+		if (bZERO[1] == true)
 		{
-			MESLOG("无条码2数据！！！！！");
-		}
-		pSng->_csInfo.Lock();
-		sql.Format("Update WH set VAL2 = %.3f where IP = '%s'", fA, TV1[0].strCode);
-		pSng->_DB.Execute(sql);
-		pSng->_csInfo.Unlock();
-		pSng->_csInfo.Lock();
-		sql.Format("Select * from WH where  IP = '%s' ", TV1[0].strCode);
-		CDStrs strs;
-		pSng->_DB.ExecuteQuery(sql, strs);
-		pSng->_csInfo.Unlock();
-		int iLen = strs.size();
-		CString strVal1, strVal2;
-		strVal1 = strs.at(0).at(1);
-		strVal2 = strs.at(0).at(2);
-		float fVc, fVc1, fVc2;
-		fVc = atof(strVal2) - atof(strVal1);
-		fVc1 = atof(pSng->GetCfgString(pSng->strLiaohao, "注水量下限", "1.000"));
-		fVc2 = atof(pSng->GetCfgString(pSng->strLiaohao, "注水量上限", "2.000"));
-		if (fVc < fVc1 || fVc > fVc2)
-		{
-			m_nVAL[1] = 2;
-			MESLOG("工站2称重超上下限");
-		}
-		else
-		{
-			m_nVAL[1] = 1;
-			MESLOG("工站2称重正常");
-		}
-		pSng->_csTV.Lock();
-		TV1.erase(TV1.begin());
-		MESLOG("工站2去除未用第一个码");
-		pSng->_csTV.Unlock();
-	}
-	if (bZERO[1] == true)
-	{
-		bZERO[1] = false;
-		float fVc1, fVc2;
-		fVc1 = atof(pSng->GetCfgString("参数", "清零下限", "-0.010"));
-		fVc2 = atof(pSng->GetCfgString("参数", "清零上限", "0.010"));
-		if (fA < fVc1 || fA > fVc2)
-		{
-			MESLOG("工站2称重清零失败，重复");
-			m_nWZERO[1] = 1;
-		}
-		else
-		{
-			MESLOG("工站2称重清零成功");
-			m_nZERO[1] = 1;
+			bZERO[1] = false;
+			float fVc1, fVc2;
+			fVc1 = atof(pSng->GetCfgString("参数", "清零下限", "-0.010"));
+			fVc2 = atof(pSng->GetCfgString("参数", "清零上限", "0.010"));
+			if (fA < fVc1 || fA > fVc2)
+			{
+				MESLOG("工站2称重清零失败，重复");
+				m_nWZERO[1] = 1;
+			}
+			else
+			{
+				MESLOG("工站2称重清零成功");
+				m_nZERO[1] = 1;
+			}
 		}
 	}
 
@@ -1173,6 +1222,18 @@ void CDlgMes::OnCommMscomm3()
 	COleSafeArray safearray_inp;
 	LONG len, k;
 	BYTE rxdata[2048];                                     //设置BYTE数组?An?8-bit?integerthat?is?not?signed.
+	DWORD dwC3 = GetTickCount();
+	for (int i = 0; i < 1;)
+	{
+		if (GetTickCount() - dwC3 < 100)
+		{
+			i = 0;
+		}
+		else
+		{
+			i = 1;
+		}
+	}
 	variant_inp = m_val[2].get_Input();                 //读缓冲区
 	safearray_inp = variant_inp;                         //VARIANT型变量转换为ColeSafeArray型变量     
 	len = safearray_inp.GetOneDimSize();          //得到有效数据长度    // 接受数据  
@@ -1229,103 +1290,118 @@ void CDlgMes::OnCommMscomm3()
 			MESLOG("工站3校正人工操作阶段");
 		}
 	}
-	if (len !=11)
-		return;
-	//////////基于这个IO盒子不需要指令了////////////////////
-	BYTE btNum[4];                 //字符型 
-	btNum[0] = *(char*)(rxdata + 5);                 //字符型 
-	btNum[1] = *(char*)(rxdata + 6);                 //字符型 
-	btNum[2] = *(char*)(rxdata + 7);                 //字符型 
-	btNum[3] = *(char*)(rxdata + 8);                 //字符型 
-	float fVal = 0.00;
-	BYTE* p = (BYTE*)&fVal;
-	p[0] = btNum[3];
-	p[1] = btNum[2];
-	p[2] = btNum[1];
-	p[3] = btNum[0];
-	float fA = fVal;
-	float fB;
-	CString strVal;
-	fB = atof(pSng->GetCfgString("VAL补偿", "工站3", "0.000"));
-	fA += fB;
-	strVal.Format("%.3f", fA);
-	SetDlgItemText(IDC_STATIC_IN6, strVal);
-	if (bVal[2] == true)
+	if (len == 11)
 	{
-		bVal[2] = false;
-		MESLOG("工站3开始绑码" );
-		//m_nVAL[2] = 1;
-		if (TV2.size() < 1)
+		BYTE btNum[4];                 //字符型 
+		btNum[0] = *(char*)(rxdata + 5);                 //字符型 
+		btNum[1] = *(char*)(rxdata + 6);                 //字符型 
+		btNum[2] = *(char*)(rxdata + 7);                 //字符型 
+		btNum[3] = *(char*)(rxdata + 8);                 //字符型 
+		float fVal = 0.00;
+		BYTE * p = (BYTE*)&fVal;
+		p[0] = btNum[3];
+		p[1] = btNum[2];
+		p[2] = btNum[1];
+		p[3] = btNum[0];
+		float fA = fVal;
+		float fB;
+		CString strVal;
+		fB = atof(pSng->GetCfgString("VAL补偿", "工站3", "0.000"));
+		fA += fB;
+		strVal.Format("%.3f", fA);
+		fA = atof(strVal);
+		SetDlgItemText(IDC_STATIC_IN6, strVal);
+		if (bVal[2] == true)
 		{
-			m_nVAL[2] = 2;
-			MESLOG("工站3无码可绑");
-			return;
+			bVal[2] = false;
+			MESLOG("工站3开始绑码");
+			//m_nVAL[2] = 1;
+			if (TV2.size() < 1)
+			{
+				m_nVAL[2] = 2;
+				MESLOG("工站3无码可绑");
+				return;
+			}
+			MESLOG("工站3称重成功：" + strVal);
+			MESLOG("工站3绑码成功");
+			CString sql, strNum;
+			TV2[0].fVal = fA;
+			pSng->_csInfo.Lock();
+			sql.Format("Select count(*) from WH where IP = '%s'", TV2[0].strCode);
+			pSng->_DB.ExecuteQueryValue(sql, strNum);
+			pSng->_csInfo.Unlock();
+			if (atoi(strNum) < 1)
+			{
+				MESLOG("无条码3数据！！！！！");
+			}
+			pSng->_csInfo.Lock();
+			sql.Format("Update WH set VAL3 = %.3f where IP = '%s'", fA, TV2[0].strCode);
+			m_strEX = TV2[0].strCode;
+			SetTimer(TIME_MES, 100, NULL);
+			pSng->_DB.Execute(sql);
+			pSng->_csInfo.Unlock();
+			pSng->_csInfo.Lock();
+			sql.Format("Select * from WH where  IP = '%s' ", TV2[0].strCode);
+			CDStrs strs;
+			pSng->_DB.ExecuteQuery(sql, strs);
+			pSng->_csInfo.Unlock();
+			int iLen = strs.size();
+			CString strVal1, strVal2, strVal3;
+			strVal1 = strs.at(0).at(1);
+			strVal2 = strs.at(0).at(2);
+			strVal3 = strs.at(0).at(3);
+			float fVc, fVc1, fVc2, fVc3, fVc4, fVc5;
+			fVc = atof(strVal2) - atof(strVal3);
+			fVc3 = atof(strVal3) - atof(strVal1);
+			fVc1 = atof(pSng->GetCfgString(pSng->strLiaohao, "抽出量下限", "1.000"));
+			fVc2 = atof(pSng->GetCfgString(pSng->strLiaohao, "抽出量上限", "2.000"));
+			fVc4 = atof(pSng->GetCfgString(pSng->strLiaohao, "封存量下限", "1.000"));
+			fVc5 = atof(pSng->GetCfgString(pSng->strLiaohao, "封存量上限", "2.000"));
+			int nOK = atoi(pSng->GetCfgString("除气", "OK", "111"));
+			int nNG = atoi(pSng->GetCfgString("除气", "NG", "111"));
+			if (fVc < fVc1 || fVc > fVc2 || fVc3 < fVc4 || fVc3 > fVc5)
+			{
+				nNG += 1;
+				m_nVAL[2] = 2;
+				MESLOG("工站3称重超上下限,抽出值为%.4f,封存值为%.4f", fVc, fVc3);
+			}
+			else
+			{
+				nOK += 1;
+				m_nVAL[2] = 1;
+				MESLOG("工站3称重正常");
+			}
+			pSng->_csTV.Lock();
+			TV2.erase(TV2.begin());
+			MESLOG("工站3去除未用第一个码");
+			pSng->_csTV.Unlock();
+			float fOK = float(nOK * 100) / float((nOK + nNG));
+			CString strOK[3];
+			strOK[0].Format("%d", nOK);
+			strOK[1].Format("%d", nNG);
+			strOK[2].Format("%.2f", fOK);
+			SetDlgItemText(IDC_STATIC_IN19, strOK[0]);
+			SetDlgItemText(IDC_STATIC_IN20, strOK[1]);
+			SetDlgItemText(IDC_STATIC_IN21, strOK[2]);
+			pSng->SetCfgString("除气", "OK", strOK[0]);
+			pSng->SetCfgString("除气", "NG", strOK[1]);
 		}
-		MESLOG("工站3称重成功：" + strVal);
-		MESLOG("工站3绑码成功");
-		CString sql, strNum;
-		TV2[0].fVal = fA;
-		pSng->_csInfo.Lock();
-		sql.Format("Select count(*) from WH where IP = '%s'", TV2[0].strCode);
-		pSng->_DB.ExecuteQueryValue(sql, strNum);
-		pSng->_csInfo.Unlock();
-		if (atoi(strNum) < 1)
+		if (bZERO[2] == true)
 		{
-			MESLOG("无条码3数据！！！！！");
-		}
-		pSng->_csInfo.Lock();
-		sql.Format("Update WH set VAL3 = %.3f where IP = '%s'", fA, TV2[0].strCode);
-		m_strEX = TV2[0].strCode;
-		SetTimer(TIME_MES, 100, NULL);
-		pSng->_DB.Execute(sql);
-		pSng->_csInfo.Unlock();
-		pSng->_csInfo.Lock();
-		sql.Format("Select * from WH where  IP = '%s' ", TV2[0].strCode);
-		CDStrs strs;
-		pSng->_DB.ExecuteQuery(sql, strs);
-		pSng->_csInfo.Unlock();
-		int iLen = strs.size();
-		CString strVal1, strVal2, strVal3;
-		strVal1 = strs.at(0).at(1);
-		strVal2 = strs.at(0).at(2);
-		strVal3 = strs.at(0).at(3);
-		float fVc, fVc1, fVc2, fVc3, fVc4, fVc5;
-		fVc = atof(strVal2) - atof(strVal3);
-		fVc3 = atof(strVal3) - atof(strVal1);
-		fVc1 = atof(pSng->GetCfgString(pSng->strLiaohao, "抽出量下限", "1.000"));
-		fVc2 = atof(pSng->GetCfgString(pSng->strLiaohao, "抽出量上限", "2.000"));
-		fVc4 = atof(pSng->GetCfgString(pSng->strLiaohao, "封存量下限", "1.000"));
-		fVc5 = atof(pSng->GetCfgString(pSng->strLiaohao, "封存量上限", "2.000"));
-		if (fVc < fVc1 || fVc > fVc2 || fVc3 < fVc4 || fVc3 > fVc5)
-		{
-			m_nVAL[2] = 2;
-			MESLOG("工站3称重超上下限");
-		}
-		else
-		{
-			m_nVAL[2] = 1;
-			MESLOG("工站3称重正常");
-		}
-		pSng->_csTV.Lock();
-		TV2.erase(TV2.begin());
-		MESLOG("工站3去除未用第一个码");
-		pSng->_csTV.Unlock();
-	}
-	if (bZERO[2] == true)
-	{
-		bZERO[2] = false;
-		float fVc1, fVc2;
-		fVc1 = atof(pSng->GetCfgString("参数", "清零下限", "-0.010"));
-		fVc2 = atof(pSng->GetCfgString("参数", "清零上限", "0.010"));
-		if (fA < fVc1 || fA > fVc2)
-		{
-			MESLOG("工站3称重清零失败，重复");
-			m_nWZERO[2] = 1;
-		}
-		else
-		{
-			MESLOG("工站3称重清零成功");
-			m_nZERO[2] = 1;
+			bZERO[2] = false;
+			float fVc1, fVc2;
+			fVc1 = atof(pSng->GetCfgString("参数", "清零下限", "-0.010"));
+			fVc2 = atof(pSng->GetCfgString("参数", "清零上限", "0.010"));
+			if (fA < fVc1 || fA > fVc2)
+			{
+				MESLOG("工站3称重清零失败，重复");
+				m_nWZERO[2] = 1;
+			}
+			else
+			{
+				MESLOG("工站3称重清零成功");
+				m_nZERO[2] = 1;
+			}
 		}
 	}
 }
@@ -1509,6 +1585,16 @@ void CDlgMes::OnBnClickedBtnOkzero()
 	SetDlgItemText(IDC_STATIC_IN15, strZero);
 	pSng->SetCfgString("工位3", "OK", strZero);
 	pSng->SetCfgString("工位3", "NG", strZero);
+	SetDlgItemText(IDC_STATIC_IN16, strZero);
+	SetDlgItemText(IDC_STATIC_IN17, strZero);
+	SetDlgItemText(IDC_STATIC_IN18, strZero);
+	pSng->SetCfgString("注水", "OK", strZero);
+	pSng->SetCfgString("注水", "NG", strZero);
+	SetDlgItemText(IDC_STATIC_IN19, strZero);
+	SetDlgItemText(IDC_STATIC_IN20, strZero);
+	SetDlgItemText(IDC_STATIC_IN21, strZero);
+	pSng->SetCfgString("除气", "OK", strZero);
+	pSng->SetCfgString("除气", "NG", strZero);
 }
 
 
@@ -1775,10 +1861,10 @@ UINT ThreadIP(LPVOID p)
 			CString strData;
 			strData.Format("LON");
 			int nLen = strData.GetLength();
-			//pSng->_csClient[i].Lock();
+			pSng->_csClient[i].Lock();
 			pDlg->m_pServer[i]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
-			//pSng->_csClient[i].Unlock();
+			pSng->_csClient[i].Unlock();
 			if (i == 0)
 			{
 				MESLOG("开始扫码1！！！");
@@ -2194,7 +2280,7 @@ void CDlgMes::OnBnClickedBtnMes()
 void CDlgMes::OnBnClickedClearlog()
 {
 	/** Clear The Log Editor */
-	auto* logEditor = dynamic_cast<CEdit*>(GetDlgItem(IDC_LOG));
+	auto* logEditor = (CEdit*)GetDlgItem(IDC_LOG);
 	if (logEditor)
 	{
 		logEditor->Clear();
