@@ -51,7 +51,7 @@ using namespace std;
 #define MESLOG(_forStr, ...) \
 	do \
 	{ \
-		LogFile((char*)(CString(_forStr).GetBuffer()), __VA_ARGS__); \
+		CImgDLL::WriteLog((char*)(CString(_forStr).GetBuffer()), __VA_ARGS__); \
 		MESPRINT(_forStr, __VA_ARGS__); \
 	} \
 	while (false)
