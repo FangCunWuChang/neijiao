@@ -457,7 +457,7 @@ void CSingleton::Write2CSV(CString strIP, CString strVAL1, CString strVAL2, CStr
 	{
 		CString str1;
 		//[Code], [Time], [D1], [N1], [D2], [N2], [D3], N3,[D4],D4, [D5], [N5]
-		str1.Format("IP,空管重量,注水后管重量,除气后管重量,注水量,抽出量,封存量,时间,结果");
+		str1.Format("IP,空管重量,注水后管重量,除气后管重量,注水量,抽出量,封存量,时间,结果,料号");
 		CFile file(strPath, CFile::modeCreate | CFile::modeWrite);
 		file.Write(str1, str1.GetLength());
 		file.Flush();

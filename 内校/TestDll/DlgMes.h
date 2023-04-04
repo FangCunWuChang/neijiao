@@ -80,5 +80,8 @@ public:
 	afx_msg void OnBnClickedBtnJz3();
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg void OnBnClickedBtnMes();
+	afx_msg void OnBnClickedBtnOffset();
+	afx_msg void OnBnClickedBtnLog2();
+	afx_msg void OnBnClickedClearlog();
 };
 

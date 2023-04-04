@@ -25,6 +25,31 @@
 #pragma comment(lib, "StandardModbusApi.lib")
 using namespace std;
 
+/** Use Log Output Widget */
+#define MESPRINT(_forStr, ...) \
+	do \
+	{ \
+		CString _str; \
+		_str.Format(CString(_forStr).GetBuffer(), __VA_ARGS__); \
+		\
+		auto* _logEditor = dynamic_cast<CEdit*>(GetDlgItem(IDC_LOG)); \
+		if (_logEditor) \
+		{ \
+			CString _currStr; \
+			_logEditor->GetWindowText(_currStr); \
+			_logEditor->SetWindowText(_currStr + "\r\n" + _str); \
+		} \
+	} \
+	while (false)
+
+/** Wrap Current Log Output */
+#define MESLOG(_forStr, ...) \
+	do \
+	{ \
+		CImgDLL::WriteLog((char*)(CString(_forStr).GetBuffer()), __VA_ARGS__); \
+		MESPRINT(_forStr, __VA_ARGS__); \
+	} \
+	while (false)
 
 extern int g_nExt;
 extern void DoEvent();
@@ -79,6 +104,7 @@ ON_BN_CLICKED(IDC_BTN_JZ1, &CDlgMes::OnBnClickedBtnJz1)
 ON_BN_CLICKED(IDC_BTN_JZ2, &CDlgMes::OnBnClickedBtnJz2)
 ON_BN_CLICKED(IDC_BTN_JZ3, &CDlgMes::OnBnClickedBtnJz3)
 ON_BN_CLICKED(IDC_BTN_MES, &CDlgMes::OnBnClickedBtnMes)
+ON_BN_CLICKED(IDC_CLEARLOG, &CDlgMes::OnBnClickedClearlog)
 END_MESSAGE_MAP()
 
 
@@ -155,16 +181,16 @@ BOOL CDlgMes::OnInitDialog()
 		else
 		{
 			m_pServer[i]->StartReceiving(NULL, NULL, NULL);
-			CImgDLL::WriteLog("连接服务器%d成功！", i+1);
+			MESLOG("连接服务器%d成功！", i+1);
 		}
 	}
 	int bComOK = 0;
-	bComOK=InitialCom(m_val[0], 2, 9600, 1);
-	CImgDLL::WriteLog("串口1结果%d", bComOK);
-	bComOK=InitialCom(m_val[1], 3, 9600, 1);
-	CImgDLL::WriteLog("串口2结果%d", bComOK);
-	bComOK=InitialCom(m_val[2], 4, 9600, 1);
-	CImgDLL::WriteLog("串口3结果%d", bComOK);
+	bComOK=InitialCom(m_val[0], 2, 19200, 1);
+	MESLOG("串口1结果%d", bComOK);
+	bComOK=InitialCom(m_val[1], 3, 19200, 1);
+	MESLOG("串口2结果%d", bComOK);
+	bComOK=InitialCom(m_val[2], 4, 19200, 1);
+	MESLOG("串口3结果%d", bComOK);
 	m_nIP[0] = 0;
 	m_nIP[1] = 0;
 	m_nIP[2] = 0;
@@ -290,13 +316,13 @@ bool CDlgMes::Check_Json(std::string& str)
 		if (strtoken != "")
 		{
 			cstr.Format("TRACE 反馈 成功");
-			CImgDLL::WriteLog(cstr + "\nid = " + pSng->Str2Cstr(strtoken));
+			MESLOG(cstr + "\nid = " + pSng->Str2Cstr(strtoken));
 			strMEStoken = pSng->Str2Cstr(strtoken);
 			return true;
 		}
 		else
 		{
-			CImgDLL::WriteLog(cstr +
+			MESLOG(cstr +
 				"\ncontact = " + pSng->Str2Cstr(strContact) +
 				"\nerror = " + pSng->Str2Cstr(strError));
 			MessageBox(cstr +
@@ -305,7 +331,7 @@ bool CDlgMes::Check_Json(std::string& str)
 			return false;
 		}
 	}
-	CImgDLL::WriteLog(cstr + "\nMES数据格式错误，无法解析" + "\n" + pSng->Str2Cstr(str));
+	MESLOG(cstr + "\nMES数据格式错误，无法解析" + "\n" + pSng->Str2Cstr(str));
 	MessageBox(cstr + "\nMES数据格式错误，无法解析" + "\n" + pSng->Str2Cstr(str));
 	return false;
 }
@@ -444,7 +470,7 @@ void CDlgMes::OnBnClickedBtnRun()
 		TV2.clear();
 		SetDlgItemText(IDC_BTN_RUN, "停止");
 		pSng->_nRun = RUN_WORK;
-		//CImgDLL::WriteLog("条码清空，复位！！！！");
+		//MESLOG("条码清空，复位！！！！");
 
 	}
 	else
@@ -477,14 +503,14 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();	
 			//pSng->_csClient[0].Unlock();
-			CImgDLL::WriteLog("空管扫码超时！！！！");
+			MESLOG("空管扫码超时！！！！");
 		}
 		else
 		{
 			if (pSng->_strCliRobot[0].GetLength() > 3)
 			{
 				//nOK += 1;
-				CImgDLL::WriteLog("工站1扫码成功：" + pSng->_strCliRobot[0]);
+				MESLOG("工站1扫码成功：" + pSng->_strCliRobot[0]);
 				/*CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
@@ -504,7 +530,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				pSng->_csTV.Lock();
 				TV.push_back(a);
 				pSng->_csTV.Unlock();
-				CImgDLL::WriteLog("工站1增加一个未用码");
+				MESLOG("工站1增加一个未用码");
 				CString sql, strNum;
 				pSng->_csInfo.Lock();
 				sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
@@ -519,7 +545,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				}
 				else
 				{
-					//CImgDLL::WriteLog("已有数据！！！！！");
+					//MESLOG("已有数据！！！！！");
 					nOK += 1;
 					CString strData;
 					strData.Format("LOF");
@@ -540,7 +566,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 					pSng->_csInfo.Unlock();
 					if (atoi(strNum) > 0)
 					{
-						CImgDLL::WriteLog("已有数据！！！！！");
+						MESLOG("已有数据！！！！！");
 						pSng->_csInfo.Lock();
 						sql.Format("Delete WH where IP = '%s' ", pSng->_strCliRobot[0]);
 						pSng->_DB.Execute(sql);
@@ -588,14 +614,14 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			m_pServer[1]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
 			//pSng->_csClient[1].Unlock();
-			CImgDLL::WriteLog("注水扫码超时！！！！");
+			MESLOG("注水扫码超时！！！！");
 		}
 		else
 		{
 			if (pSng->_strCliRobot[1].GetLength() > 3)
 			{
 				nOK += 1;
-				CImgDLL::WriteLog("工站2扫码成功：" + pSng->_strCliRobot[1]);
+				MESLOG("工站2扫码成功：" + pSng->_strCliRobot[1]);
 				CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
@@ -610,7 +636,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				a.strCode.Format("%s", pSng->_strCliRobot[1]);
 				pSng->_csTV.Lock();
 				TV1.push_back(a);
-				CImgDLL::WriteLog("工站2增加一个未用码");
+				MESLOG("工站2增加一个未用码");
 				pSng->_csTV.Unlock();
 				CString sql, strNum;
 				pSng->_csInfo.Lock();
@@ -619,7 +645,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				pSng->_csInfo.Unlock();
 				if (atoi(strNum) < 1)
 				{
-					CImgDLL::WriteLog("无条码数据！！！！！");
+					MESLOG("无条码数据！！！！！");
 				}
 				pSng->_strCliRobot[1].Empty();
 			}
@@ -652,14 +678,14 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			m_pServer[2]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
 			//pSng->_csClient[2].Unlock();
-			CImgDLL::WriteLog("除气扫码超时！！！！");
+			MESLOG("除气扫码超时！！！！");
 		}
 		else
 		{
 			if (pSng->_strCliRobot[2].GetLength() > 3)
 			{
 				nOK += 1;
-				CImgDLL::WriteLog("工站3扫码成功：" + pSng->_strCliRobot[2]);
+				MESLOG("工站3扫码成功：" + pSng->_strCliRobot[2]);
 				CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
@@ -674,7 +700,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				a.strCode.Format("%s", pSng->_strCliRobot[2]);
 				pSng->_csTV.Lock();
 				TV2.push_back(a);
-				CImgDLL::WriteLog("工站3增加一个未用码");
+				MESLOG("工站3增加一个未用码");
 				pSng->_csTV.Unlock();
 				CString sql, strNum;
 				pSng->_csInfo.Lock();
@@ -683,7 +709,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				pSng->_csInfo.Unlock();
 				if (atoi(strNum) < 1)
 				{
-					CImgDLL::WriteLog("无条码数据！！！！！");
+					MESLOG("无条码数据！！！！！");
 				}
 				pSng->_strCliRobot[2].Empty();
 				//bVal[2] = true;
@@ -725,7 +751,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 		int iLen = strs.size();
 		if (iLen==0)
 		{
-			CImgDLL::WriteLog("无效条码！！！！");
+			MESLOG("无效条码！！！！");
 		}
 		else
 		{
@@ -762,11 +788,11 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				strtestchannelID, strVal1, strVal2, strVal3, strfill_empty, strfill_degass, strdegass_empty, strdegass_empty_p1, strdegass_empty_l1);
 			if (bMESOK == true)
 			{
-				CImgDLL::WriteLog("上传成功！！！");
+				MESLOG("上传成功！！！");
 			}
 			else
 			{
-				CImgDLL::WriteLog("上传失败！！！");
+				MESLOG("上传失败！！！");
 			}
 		}
 	}
@@ -862,7 +888,7 @@ void CDlgMes::OnCommMscomm1()
 		btx2 = *(char*)(rxdata + 3);
 		if (btx == 6 && btx1 == 0 && btx2 == 27)
 		{
-			CImgDLL::WriteLog("工站1称重清零完成，进入判定");
+			MESLOG("工站1称重清零完成，进入判定");
 			bWZERO[0] = true;
 			KillTimer(TIME_ZERO1);
 		}
@@ -876,26 +902,26 @@ void CDlgMes::OnCommMscomm1()
 		btx3 = *(char*)(rxdata + 4);
 		if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 0)
 		{
-			CImgDLL::WriteLog("工站1校正完成");
+			MESLOG("工站1校正完成");
 			GetDlgItem(IDC_BTN_JZ1)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ1);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 255)
 
 		{
-			CImgDLL::WriteLog("工站1校正失败");
+			MESLOG("工站1校正失败");
 			GetDlgItem(IDC_BTN_JZ1)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ1);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 1)
 
 		{
-			CImgDLL::WriteLog("工站1校正正在运行");
+			MESLOG("工站1校正正在运行");
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 2)
 
 		{
-			CImgDLL::WriteLog("工站1校正人工操作阶段");
+			MESLOG("工站1校正人工操作阶段");
 		}
 	}
 	if (len !=11)
@@ -928,7 +954,7 @@ void CDlgMes::OnCommMscomm1()
 			return;
 		}
 		m_nVAL[0] = 1;
-		CImgDLL::WriteLog("工站1称重成功：" + strVal);
+		MESLOG("工站1称重成功：" + strVal);
 		CString sql, strNum;
 		TV[0].fVal = fA;
 		pSng->_csInfo.Lock();
@@ -937,7 +963,7 @@ void CDlgMes::OnCommMscomm1()
 		pSng->_csInfo.Unlock();
 		if (atoi(strNum) < 1)
 		{
-			CImgDLL::WriteLog("无条码数据！！！！！");
+			MESLOG("无条码数据！！！！！");
 		}
 		pSng->_csInfo.Lock();
 		sql.Format("Update WH set VAL1 = %.3f where IP = '%s'", fA, TV[0].strCode);
@@ -945,7 +971,7 @@ void CDlgMes::OnCommMscomm1()
 		pSng->_csInfo.Unlock();
 		pSng->_csTV.Lock();
 		TV.erase(TV.begin());
-		CImgDLL::WriteLog("工站1去除未用第一个码");
+		MESLOG("工站1去除未用第一个码");
 		pSng->_csTV.Unlock();
 	}
 	if (bZERO[0]==true)
@@ -956,12 +982,12 @@ void CDlgMes::OnCommMscomm1()
 		fVc2 = atof(pSng->GetCfgString("参数", "清零上限", "0.010"));
 		if (fA < fVc1|| fA > fVc2)
 		{
-			CImgDLL::WriteLog("工站1称重清零失败，重复");
+			MESLOG("工站1称重清零失败，重复");
 			m_nWZERO[0] = 1;
 		}
 		else
 		{
-			CImgDLL::WriteLog("工站1称重清零成功");
+			MESLOG("工站1称重清零成功");
 			m_nZERO[0] = 1;
 		}
 	}
@@ -999,7 +1025,7 @@ void CDlgMes::OnCommMscomm2()
 		btx2 = *(char*)(rxdata + 3);
 		if (btx == 6 && btx1 == 0 && btx2 == 27)
 		{
-			CImgDLL::WriteLog("工站2称重清零完成，进入判定");
+			MESLOG("工站2称重清零完成，进入判定");
 			bWZERO[1] = true;
 			KillTimer(TIME_ZERO2);
 		}
@@ -1013,26 +1039,26 @@ void CDlgMes::OnCommMscomm2()
 		btx3 = *(char*)(rxdata + 4);
 		if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 0)
 		{
-			CImgDLL::WriteLog("工站2校正完成");
+			MESLOG("工站2校正完成");
 			GetDlgItem(IDC_BTN_JZ2)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ2);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 255)
 
 		{
-			CImgDLL::WriteLog("工站2校正失败");
+			MESLOG("工站2校正失败");
 			GetDlgItem(IDC_BTN_JZ2)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ2);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 1)
 
 		{
-			CImgDLL::WriteLog("工站2校正正在运行");
+			MESLOG("工站2校正正在运行");
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 2)
 
 		{
-			CImgDLL::WriteLog("工站2校正人工操作阶段");
+			MESLOG("工站2校正人工操作阶段");
 		}
 	}
 	if (len !=11)
@@ -1059,16 +1085,16 @@ void CDlgMes::OnCommMscomm2()
 	if (bVal[1] == true)
 	{
 		bVal[1] = false;
-		CImgDLL::WriteLog("工站2开始绑码");
+		MESLOG("工站2开始绑码");
 		//m_nVAL[1] = 1;
 		if (TV1.size() < 1)
 		{
 			m_nVAL[1] = 2;
-			CImgDLL::WriteLog("工站2无码可绑");
+			MESLOG("工站2无码可绑");
 			return;
 		}
-		CImgDLL::WriteLog("工站2称重成功：" + strVal);
-		CImgDLL::WriteLog("工站2绑码成功");
+		MESLOG("工站2称重成功：" + strVal);
+		MESLOG("工站2绑码成功");
 		CString sql, strNum;
 		TV1[0].fVal = fA;
 		pSng->_csInfo.Lock();
@@ -1077,7 +1103,7 @@ void CDlgMes::OnCommMscomm2()
 		pSng->_csInfo.Unlock();
 		if (atoi(strNum) < 1)
 		{
-			CImgDLL::WriteLog("无条码2数据！！！！！");
+			MESLOG("无条码2数据！！！！！");
 		}
 		pSng->_csInfo.Lock();
 		sql.Format("Update WH set VAL2 = %.3f where IP = '%s'", fA, TV1[0].strCode);
@@ -1099,16 +1125,16 @@ void CDlgMes::OnCommMscomm2()
 		if (fVc < fVc1 || fVc > fVc2)
 		{
 			m_nVAL[1] = 2;
-			CImgDLL::WriteLog("工站2称重超上下限");
+			MESLOG("工站2称重超上下限");
 		}
 		else
 		{
 			m_nVAL[1] = 1;
-			CImgDLL::WriteLog("工站2称重正常");
+			MESLOG("工站2称重正常");
 		}
 		pSng->_csTV.Lock();
 		TV1.erase(TV1.begin());
-		CImgDLL::WriteLog("工站2去除未用第一个码");
+		MESLOG("工站2去除未用第一个码");
 		pSng->_csTV.Unlock();
 	}
 	if (bZERO[1] == true)
@@ -1119,12 +1145,12 @@ void CDlgMes::OnCommMscomm2()
 		fVc2 = atof(pSng->GetCfgString("参数", "清零上限", "0.010"));
 		if (fA < fVc1 || fA > fVc2)
 		{
-			CImgDLL::WriteLog("工站2称重清零失败，重复");
+			MESLOG("工站2称重清零失败，重复");
 			m_nWZERO[1] = 1;
 		}
 		else
 		{
-			CImgDLL::WriteLog("工站2称重清零成功");
+			MESLOG("工站2称重清零成功");
 			m_nZERO[1] = 1;
 		}
 	}
@@ -1161,7 +1187,7 @@ void CDlgMes::OnCommMscomm3()
 		btx2 = *(char*)(rxdata + 3);
 		if (btx == 6 && btx1 == 0 && btx2 == 27)
 		{
-			CImgDLL::WriteLog("工站3称重清零完成，进入判定");
+			MESLOG("工站3称重清零完成，进入判定");
 			bWZERO[2] = true;
 			KillTimer(TIME_ZERO3);
 		}
@@ -1175,7 +1201,7 @@ void CDlgMes::OnCommMscomm3()
 		btx3 = *(char*)(rxdata + 4);
 		if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 0)
 		{
-			CImgDLL::WriteLog("工站3校正完成");
+			MESLOG("工站3校正完成");
 			GetDlgItem(IDC_BTN_JZ3)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ3);
 
@@ -1183,19 +1209,19 @@ void CDlgMes::OnCommMscomm3()
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 255)
 
 		{
-			CImgDLL::WriteLog("工站3校正失败");
+			MESLOG("工站3校正失败");
 			GetDlgItem(IDC_BTN_JZ3)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ3);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 1)
 
 		{
-			CImgDLL::WriteLog("工站3校正正在运行");
+			MESLOG("工站3校正正在运行");
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 2)
 
 		{
-			CImgDLL::WriteLog("工站3校正人工操作阶段");
+			MESLOG("工站3校正人工操作阶段");
 		}
 	}
 	if (len !=11)
@@ -1222,16 +1248,16 @@ void CDlgMes::OnCommMscomm3()
 	if (bVal[2] == true)
 	{
 		bVal[2] = false;
-		CImgDLL::WriteLog("工站3开始绑码" );
+		MESLOG("工站3开始绑码" );
 		//m_nVAL[2] = 1;
 		if (TV2.size() < 1)
 		{
 			m_nVAL[2] = 2;
-			CImgDLL::WriteLog("工站3无码可绑");
+			MESLOG("工站3无码可绑");
 			return;
 		}
-		CImgDLL::WriteLog("工站3称重成功：" + strVal);
-		CImgDLL::WriteLog("工站3绑码成功");
+		MESLOG("工站3称重成功：" + strVal);
+		MESLOG("工站3绑码成功");
 		CString sql, strNum;
 		TV2[0].fVal = fA;
 		pSng->_csInfo.Lock();
@@ -1240,7 +1266,7 @@ void CDlgMes::OnCommMscomm3()
 		pSng->_csInfo.Unlock();
 		if (atoi(strNum) < 1)
 		{
-			CImgDLL::WriteLog("无条码3数据！！！！！");
+			MESLOG("无条码3数据！！！！！");
 		}
 		pSng->_csInfo.Lock();
 		sql.Format("Update WH set VAL3 = %.3f where IP = '%s'", fA, TV2[0].strCode);
@@ -1268,16 +1294,16 @@ void CDlgMes::OnCommMscomm3()
 		if (fVc < fVc1 || fVc > fVc2 || fVc3 < fVc4 || fVc3 > fVc5)
 		{
 			m_nVAL[2] = 2;
-			CImgDLL::WriteLog("工站3称重超上下限");
+			MESLOG("工站3称重超上下限");
 		}
 		else
 		{
 			m_nVAL[2] = 1;
-			CImgDLL::WriteLog("工站3称重正常");
+			MESLOG("工站3称重正常");
 		}
 		pSng->_csTV.Lock();
 		TV2.erase(TV2.begin());
-		CImgDLL::WriteLog("工站3去除未用第一个码");
+		MESLOG("工站3去除未用第一个码");
 		pSng->_csTV.Unlock();
 	}
 	if (bZERO[2] == true)
@@ -1288,12 +1314,12 @@ void CDlgMes::OnCommMscomm3()
 		fVc2 = atof(pSng->GetCfgString("参数", "清零上限", "0.010"));
 		if (fA < fVc1 || fA > fVc2)
 		{
-			CImgDLL::WriteLog("工站3称重清零失败，重复");
+			MESLOG("工站3称重清零失败，重复");
 			m_nWZERO[2] = 1;
 		}
 		else
 		{
-			CImgDLL::WriteLog("工站3称重清零成功");
+			MESLOG("工站3称重清零成功");
 			m_nZERO[2] = 1;
 		}
 	}
@@ -1501,7 +1527,7 @@ UINT ThreadWatchCheng(LPVOID p)
 		Sleep(500);
 		if (GetTickCount() - dwHeart > 60000)
 		{
-			CImgDLL::WriteLog("--------检测称重心跳正常---------");
+			MESLOG("--------检测称重心跳正常---------");
 			dwHeart = GetTickCount();
 		}
 		if (pSng->_nRun == RUN_WORK)
@@ -1526,14 +1552,14 @@ UINT ThreadWatchCheng(LPVOID p)
 				pSng->_csPLC.Unlock();
 				if (nRet == 0)
 				{
-					CImgDLL::WriteLog("无法收到PLC数据，连接有问题！！！！");
+					MESLOG("无法收到PLC数据，连接有问题！！！！");
 					bPLc = false;
 					break;
 				}
 				memcpy(&nValueRD, pValue, sizeof(nValueRD));
 				if (nValueRD[0] == 1)
 				{
-					CImgDLL::WriteLog("收到数据%d！！！！", nValueRD[0]);
+					MESLOG("收到数据%d！！！！", nValueRD[0]);
 					ZeroMemory(pValue, sizeof(pValue));
 					DWORD deT = GetTickCount();
 					int nRetWR = 0;
@@ -1560,15 +1586,15 @@ UINT ThreadWatchCheng(LPVOID p)
 					if (nRetWR == 0)
 					{
 						pDlg->m_nWVAL[i] = 0;
-						CImgDLL::WriteLog("无法写入PLC，连接有问题！！！！");
+						MESLOG("无法写入PLC，连接有问题！！！！");
 						bPLc = false;
 						break;
 					}
 					else
 					{
 						pDlg->m_nWVAL[i] = 1;
-						CImgDLL::WriteLog("清空D%d成功！！！，结果%d", nAddr[i], nRetWR);
-						CImgDLL::WriteLog("D%d 收到检测指令", nAddr[i]);
+						MESLOG("清空D%d成功！！！，结果%d", nAddr[i], nRetWR);
+						MESLOG("D%d 收到检测指令", nAddr[i]);
 						bPLc = true;
 					}
 				}
@@ -1642,7 +1668,7 @@ UINT ThreadWatchIP(LPVOID p)
 		Sleep(500);
 		if (GetTickCount() - dwHeart > 60000)
 		{
-			CImgDLL::WriteLog("--------检测IP心跳正常---------");
+			MESLOG("--------检测IP心跳正常---------");
 			dwHeart = GetTickCount();
 		}
 		if (pSng->_nRun == RUN_WORK)
@@ -1667,14 +1693,14 @@ UINT ThreadWatchIP(LPVOID p)
 				pSng->_csPLC.Unlock();
 				if (nRet == 0)
 				{
-					CImgDLL::WriteLog("无法收到PLC数据，连接有问题！！！！");
+					MESLOG("无法收到PLC数据，连接有问题！！！！");
 					bPLc = false;
 					break;
 				}
 				memcpy(&nValueRD, pValue, sizeof(nValueRD));
 				if (nValueRD[0] == 1)
 				{
-					CImgDLL::WriteLog("收到数据%d！！！！", nValueRD[0]);
+					MESLOG("收到数据%d！！！！", nValueRD[0]);
 					ZeroMemory(pValue, sizeof(pValue));
 					DWORD deT = GetTickCount();
 					int nRetWR = 0;
@@ -1701,15 +1727,15 @@ UINT ThreadWatchIP(LPVOID p)
 					if (nRetWR == 0)
 					{
 						pDlg->m_nWIP[i] = 0;
-						CImgDLL::WriteLog("无法写入PLC，连接有问题！！！！");
+						MESLOG("无法写入PLC，连接有问题！！！！");
 						bPLc = false;
 						break;
 					}
 					else
 					{
 						pDlg->m_nWIP[i] = 1;
-						CImgDLL::WriteLog("清空D%d成功！！！，结果%d", nAddr[i], nRetWR);
-						CImgDLL::WriteLog("D%d 收到检测指令", nAddr[i]);
+						MESLOG("清空D%d成功！！！，结果%d", nAddr[i], nRetWR);
+						MESLOG("D%d 收到检测指令", nAddr[i]);
 						bPLc = true;
 					}
 				}
@@ -1750,17 +1776,17 @@ UINT ThreadIP(LPVOID p)
 			//pSng->_csClient[i].Unlock();
 			if (i == 0)
 			{
-				CImgDLL::WriteLog("开始扫码1！！！");
+				MESLOG("开始扫码1！！！");
 				pDlg->SetTimer(TIME_IP1, 200, NULL);
 			}
 			else if (i == 1)
 			{
-				CImgDLL::WriteLog("开始扫码2！！！");
+				MESLOG("开始扫码2！！！");
 				pDlg->SetTimer(TIME_IP2, 200, NULL);
 			}
 			else if (i == 2)
 			{
-				CImgDLL::WriteLog("开始扫码3！！！");
+				MESLOG("开始扫码3！！！");
 				pDlg->SetTimer(TIME_IP3, 200, NULL);
 			}
 			pDlg->dwIP[i] = GetTickCount();
@@ -1805,7 +1831,7 @@ UINT ThreadWatchZERO(LPVOID p)
 		Sleep(500);
 		if (GetTickCount() - dwHeart > 60000)
 		{
-			CImgDLL::WriteLog("--------检测ZERO心跳正常---------");
+			MESLOG("--------检测ZERO心跳正常---------");
 			dwHeart = GetTickCount();
 		}
 		if (pSng->_nRun == RUN_WORK)
@@ -1830,14 +1856,14 @@ UINT ThreadWatchZERO(LPVOID p)
 				pSng->_csPLC.Unlock();
 				if (nRet == 0)
 				{
-					CImgDLL::WriteLog("无法收到PLC数据，连接有问题！！！！");
+					MESLOG("无法收到PLC数据，连接有问题！！！！");
 					bPLc = false;
 					break;
 				}
 				memcpy(&nValueRD, pValue, sizeof(nValueRD));
 				if (nValueRD[0] == 1)
 				{
-					CImgDLL::WriteLog("收到数据%d！！！！", nValueRD[0]);
+					MESLOG("收到数据%d！！！！", nValueRD[0]);
 					ZeroMemory(pValue, sizeof(pValue));
 					DWORD deT = GetTickCount();
 					int nRetWR = 0;
@@ -1866,15 +1892,15 @@ UINT ThreadWatchZERO(LPVOID p)
 					if (nRetWR == 0)
 					{
 						pDlg->m_nWZERO[i] = 0;
-						CImgDLL::WriteLog("无法写入PLC，连接有问题！！！！");
+						MESLOG("无法写入PLC，连接有问题！！！！");
 						bPLc = false;
 						break;
 					}
 					else
 					{
 						pDlg->m_nWZERO[i] = 1;
-						CImgDLL::WriteLog("清空D%d成功！！！，结果%d", nAddr[i], nRetWR);
-						CImgDLL::WriteLog("D%d 收到检测指令", nAddr[i]);
+						MESLOG("清空D%d成功！！！，结果%d", nAddr[i], nRetWR);
+						MESLOG("D%d 收到检测指令", nAddr[i]);
 						bPLc = true;
 					}
 				}
@@ -2073,7 +2099,7 @@ void CDlgMes::OnBnClickedOk()
 	// TODO: 在此添加控件通知处理程序代码
 	CDialogEx::OnOK();
 	g_nExt = 0;
-	CImgDLL::WriteLog("退出程序！！！");
+	MESLOG("退出程序！！！");
 }
 
 BOOL CDlgMes::PreTranslateMessage(MSG* pMsg)
@@ -2103,7 +2129,7 @@ void CDlgMes::OnBnClickedBtnJz1()
 	Array.Add(0x46);
 	m_val[0].put_InBufferCount(0);
 	m_val[0].put_Output(COleVariant(Array));
-	CImgDLL::WriteLog("开始内校1");
+	MESLOG("开始内校1");
 	GetDlgItem(IDC_BTN_JZ1)->EnableWindow(FALSE);
 	SetTimer(TIME_JZ1, 500, NULL);
 }
@@ -2124,7 +2150,7 @@ void CDlgMes::OnBnClickedBtnJz2()
 	Array.Add(0x75);
 	m_val[1].put_InBufferCount(0);
 	m_val[1].put_Output(COleVariant(Array));
-	CImgDLL::WriteLog("开始内校2");
+	MESLOG("开始内校2");
 	GetDlgItem(IDC_BTN_JZ2)->EnableWindow(FALSE);
 	SetTimer(TIME_JZ2, 500, NULL);
 }
@@ -2145,7 +2171,7 @@ void CDlgMes::OnBnClickedBtnJz3()
 	Array.Add(0xA4);
 	m_val[2].put_InBufferCount(0);
 	m_val[2].put_Output(COleVariant(Array));
-	CImgDLL::WriteLog("开始内校3");
+	MESLOG("开始内校3");
 	GetDlgItem(IDC_BTN_JZ3)->EnableWindow(FALSE);
 	SetTimer(TIME_JZ3, 500, NULL);
 
@@ -2156,5 +2182,16 @@ void CDlgMes::OnBnClickedBtnMes()
 	MESSZ dlg;
 	if (dlg.DoModal() == IDOK)
 	{
+	}
+}
+
+
+void CDlgMes::OnBnClickedClearlog()
+{
+	/** Clear The Log Editor */
+	auto* logEditor = dynamic_cast<CEdit*>(GetDlgItem(IDC_LOG));
+	if (logEditor)
+	{
+		logEditor->Clear();
 	}
 }
