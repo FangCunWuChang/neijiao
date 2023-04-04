@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DllMod", "DllMod\DllMod.vcxproj", "{64370D15-2ECC-4699-95BA-F3D17B870876}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestDll", "TestDll\TestDll.vcxproj", "{EE3FAE3B-9423-41C9-A15D-7395F3487080}"
+	ProjectSection(ProjectDependencies) = postProject
+		{64370D15-2ECC-4699-95BA-F3D17B870876} = {64370D15-2ECC-4699-95BA-F3D17B870876}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Qzd", "Qzd\Qzd.vcxproj", "{98ACA2C2-1549-4557-A8C6-95CF1C2DF70B}"
 EndProject

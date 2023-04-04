@@ -1,6 +1,8 @@
 #pragma once
 #include "mscomm1.h"
 #include "..\DllMod\Singleton.h"
+#include "MESSZ.h"
+
 struct CZ
 {
 	CZ()
@@ -32,13 +34,15 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	HICON m_hIcon;
+	MESSZ messzDlg;
 	CComboBox m_comboLiao;
 	int m_nWIP[3], m_nWVAL[3], m_nWZERO[3],m_nSleep[8];
 	int m_nIP[3], m_nVAL[3], m_nZERO[3];
 	bool bVal[3],bZERO[3],bWZERO[3];
 	CTCPSocket* m_pServer[3];
 	DWORD dwIP[3], dwVal[3],dwZero[3];
-	bool Check_Json(std::string& str);
+	bool Check_Json1(std::string& str);
+	bool Check_Json2(std::string& str);
 	string GetTimeMillisecondsStr();
 	template<typename T> string ValueToStr(T value)
 	{

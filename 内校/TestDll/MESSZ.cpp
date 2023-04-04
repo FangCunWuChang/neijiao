@@ -5,7 +5,7 @@
 #include "TestDll.h"
 #include "MESSZ.h"
 #include "afxdialogex.h"
-
+#include "Define.h"
 
 // MESSZ 对话框
 
@@ -14,7 +14,15 @@ IMPLEMENT_DYNAMIC(MESSZ, CDialogEx)
 MESSZ::MESSZ(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_MESSZ, pParent)
 {
-
+	CSingleton* pSng = CSingleton::GetInstance();
+	pSng->SetCfgString("MES", "deptID", DEPTID);
+	pSng->SetCfgString("MES", "partID", PARTID);
+	pSng->SetCfgString("MES", "mo_id", MO_ID);
+	pSng->SetCfgString("MES", "lineID", LINEID);
+	pSng->SetCfgString("MES", "test_Station", TEST_STATION);
+	pSng->SetCfgString("MES", "testResult", TESTRESULT);
+	pSng->SetCfgString("MES", "machineSN", MACHINESN);
+	pSng->SetCfgString("MES", "testchannelID", TESTCHANNELID);
 }
 
 MESSZ::~MESSZ()
@@ -37,14 +45,14 @@ BOOL MESSZ::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 	CSingleton* pSng = CSingleton::GetInstance();
-	CString strdeptID = pSng->GetCfgString("MES", "deptID", "111");
-	CString strpartID = pSng->GetCfgString("MES", "partID", "111");
-	CString strmo_id = pSng->GetCfgString("MES", "mo_id", "111");
-	CString strlineID = pSng->GetCfgString("MES", "lineID", "111");
-	CString strtest_Station = pSng->GetCfgString("MES", "test_Station", "111");
-	CString strtestResult = pSng->GetCfgString("MES", "testResult", "111");
-	CString strmachineSN = pSng->GetCfgString("MES", "machineSN", "111");
-	CString strtestchannelID = pSng->GetCfgString("MES", "testchannelID", "111");
+	CString strdeptID = pSng->GetCfgString("MES", "deptID", DEPTID);
+	CString strpartID = pSng->GetCfgString("MES", "partID", PARTID);
+	CString strmo_id = pSng->GetCfgString("MES", "mo_id", MO_ID);
+	CString strlineID = pSng->GetCfgString("MES", "lineID", LINEID);
+	CString strtest_Station = pSng->GetCfgString("MES", "test_Station", TEST_STATION);
+	CString strtestResult = pSng->GetCfgString("MES", "testResult", TESTRESULT);
+	CString strmachineSN = pSng->GetCfgString("MES", "machineSN", MACHINESN);
+	CString strtestchannelID = pSng->GetCfgString("MES", "testchannelID", TESTCHANNELID);
 	SetDlgItemText(IDC_EDIT1, strdeptID);
 	SetDlgItemText(IDC_EDIT2, strpartID);
 	SetDlgItemText(IDC_EDIT3, strmo_id);

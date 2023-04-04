@@ -12,7 +12,7 @@
 #include "ImgDLL.h"
 #include "MESKEY.h"
 #include "VAL.h"
-#include "MESSZ.h"
+#include "Define.h"
 
 
 #include "WininetHttp.h"
@@ -25,27 +25,31 @@
 #pragma comment(lib, "StandardModbusApi.lib")
 using namespace std;
 
+CDlgMes* mesDlg = nullptr;
+
 /** Use Log Output Widget */
-#define MESPRINT(_forStr, ...) \
-	do \
-	{ \
-		CString _str; \
-		_str.Format(CString(_forStr).GetBuffer(), __VA_ARGS__); \
-		\
-		CTime _time = CTime::GetCurrentTime(); \
-		CString _strDate; \
-		_strDate = _time.Format("%Y-%m-%d %H:%M:%S"); \
-		_str.Format(_T("[%s] %s"), _strDate, _str); \
-		\
-		auto* _logEditor = (CEdit*)GetDlgItem(IDC_LOG); \
-		if (_logEditor) \
-		{ \
-			CString _currStr; \
-			_logEditor->GetWindowText(_currStr); \
-			_logEditor->SetWindowText(_currStr + "\r\n" + _str); \
-		} \
-	} \
-	while (false)
+void MESPRINT(CString forStr, ...)
+{
+	va_list args;
+
+	CString str;
+	va_start(args, forStr);
+	str.Format(forStr.GetBuffer(), args);
+	va_end(args);
+
+	CTime time = CTime::GetCurrentTime();
+	CString strDate;
+	strDate = time.Format("%Y-%m-%d %H:%M:%S");
+	str.Format(_T("[%s] %s"), strDate, str);
+
+	CEdit* logEditor = (CEdit*)GetDlgItem((HWND)::mesDlg, IDC_LOG);
+	if (logEditor)
+	{
+		CString currStr;
+		logEditor->GetWindowText(currStr);
+		logEditor->SetWindowText(currStr + "\r\n" + str);
+	}	
+}
 
 /** Wrap Current Log Output */
 #define MESLOG(_forStr, ...) \
@@ -76,6 +80,8 @@ IMPLEMENT_DYNAMIC(CDlgMes, CDialogEx)
 CDlgMes::CDlgMes(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CDlgMes::IDD, pParent)
 {
+	::mesDlg = this;
+
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_pServer[0] = new CTCPSocket(TCP_SOCKET_CLIENT);
 	m_pServer[1] = new CTCPSocket(TCP_SOCKET_CLIENT);
@@ -300,39 +306,56 @@ BEGIN_EVENTSINK_MAP(CDlgMes, CDialogEx)
 	ON_EVENT(CDlgMes, IDC_MSCOMM3, 1, CDlgMes::OnCommMscomm3, VTS_NONE)
 END_EVENTSINK_MAP()
 
-bool CDlgMes::Check_Json(std::string& str)
+bool CDlgMes::Check_Json1(std::string& str)
 {
 	CSingleton* pSng = CSingleton::GetInstance();
 	Json::Reader reader;
 	Json::Value root;
-	CString cstr;
-	cstr.Format("TRACE 反馈 异常");
-	if (reader.parse(str, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
+	if (reader.parse(str, root))
 	{
-		//std::string upload_id = root["uploadid"].asString();  // 访问节点，upload_id = "UP000000"  
-		string strtoken = root["Token:"].asString();                              //  访问节点，code = 100
-		string strContact = root["}"].asString();
-		string strError = root["error"].asString();
-		if (strtoken != "")
+		int result = root["result"].asInt();
+		if (result == 100)
 		{
-			cstr.Format("TRACE 反馈 成功");
-			MESLOG(cstr + "\nid = " + pSng->Str2Cstr(strtoken));
+			string strtoken = root["token"].asString();
+			MESLOG("100: 工序校验通过");
+			MESLOG("token = " + pSng->Str2Cstr(strtoken));
 			strMEStoken = pSng->Str2Cstr(strtoken);
 			return true;
 		}
 		else
 		{
-			MESLOG(cstr +
-				"\ncontact = " + pSng->Str2Cstr(strContact) +
-				"\nerror = " + pSng->Str2Cstr(strError));
-			MessageBox(cstr +
-				"\ncontact = " + pSng->Str2Cstr(strContact) +
-				"\nerror = " + pSng->Str2Cstr(strError));
-			return false;
+			MESLOG("MES错误码: " + pSng->Str2Cstr(std::to_string(result)));
 		}
 	}
-	MESLOG(cstr + "\nMES数据格式错误，无法解析" + "\n" + pSng->Str2Cstr(str));
-	MessageBox(cstr + "\nMES数据格式错误，无法解析" + "\n" + pSng->Str2Cstr(str));
+	else
+	{
+		MESLOG("MES返回数据解析错误: " + pSng->Str2Cstr(str));
+	}
+	return false;
+}
+
+bool CDlgMes::Check_Json2(std::string& str)
+{
+	CSingleton* pSng = CSingleton::GetInstance();
+	Json::Reader reader;
+	Json::Value root;
+	if (reader.parse(str, root))
+	{
+		int result = root["result"].asInt();
+		if (result == 102)
+		{
+			MESLOG("102: 测试PASS");
+			return true;
+		}
+		else
+		{
+			MESLOG("MES错误码: " + pSng->Str2Cstr(std::to_string(result)));
+		}
+	}
+	else
+	{
+		MESLOG("MES返回数据解析错误: " + pSng->Str2Cstr(str));
+	}
 	return false;
 }
 
@@ -366,21 +389,20 @@ bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString 
 	CWininetHttp whttp = CWininetHttp();
 	string url = "http://192.168.180.131:8091/JavaInterfaces/UniServices.asmx";
 	CString strMXL;
-	strMXL.Format("<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:tem=\"http://tempuri.org/\">\
-<soap:Header/>\
+	strMXL.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \
+xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \
+xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\
 <soap:Body>\
-<tem:UniRequest>\
-<tem:rb>\
-<tem:account>user</tem:account>\
-<tem:company>avcwh</tem:company>\
-<tem:ip>192.168.180.131</tem:ip>\
-<tem:optype>0</tem:optype>\
-<tem:param> { \"moid\":\"%s\", \"partID\" : \"%s\", \"ppid\" : \"%s\", \"testStation\" : \"%s\"}</tem:param>\
-<tem:password>123456</tem:password>\
-<tem:sericeName>GET_PROCESS_STATUS</tem:sericeName>\
-<tem:sysType>\"\"</tem:sysType>\
-</tem:rb>\
-</tem:UniRequest>\
+<UniRequest xmlns=\"http://tempuri.org/\">\
+<rb>\
+<account>SaoMaChuQi</account>\
+<optype>0</optype>\
+<param>{ \"moid\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"testStation\":\"%s\"}</param>\
+<password>114514</password>\
+<sericeName>GET_PROCESS_STATUS</sericeName>\
+</rb>\
+</UniRequest>\
 </soap:Body>\
 </soap:Envelope>", strmoid, strpartID, strppid, strtestStation);
 	string xml_string;
@@ -397,13 +419,16 @@ bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString 
 	ofs.open(strWrite);
 	ofs << xml_string;
 	ofs.close();
-	std::string xml_header = "Content-Type:text/xml";
+	std::string xml_header 
+		= std::string("Host:192.168.180.131\r\nContent-Type:text/xml;charset=utf-8\r\n")
+		+ "Content-Length:" + std::to_string(xml_string.size()) + "\r\n"
+		+ "SOAPAction:\"http://tempuri.org/UniRequest\"";
 	string strxmlRtn = whttp.RequestJsonInfo(url, Hr_Post, xml_header, xml_string);
 	CString strName = strData + strStartTime + ".xml";
 	ofs.open(strName);
 	ofs << strxmlRtn;
 	ofs.close();
-	bool bRet = Check_Json(strxmlRtn);
+	bool bRet = Check_Json1(strxmlRtn);
 	return bRet;
 }
 
@@ -417,21 +442,20 @@ bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CStri
 	CWininetHttp whttp = CWininetHttp();
 	string url = "http://192.168.180.131:8091/JavaInterfaces/UniServices.asmx";
 	CString strMXL;
-	strMXL.Format("<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:tem=\"http://tempuri.org/\">\
-<soap:Header/>\
+	strMXL.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \
+xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \
+xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\
 <soap:Body>\
-<tem:UniRequest>\
-<tem:rb>\
-<tem:account>user</tem:account>\
-<tem:company>avcwh</tem:company>\
-<tem:ip>192.168.180.131</tem:ip>\
-<tem:optype>0</tem:optype>\
-<tem:param> { \"token\":\"%s\", \"deptID\" : \"%s\", \"partID\" : \"%s\", \"ppid\" : \"%s\",\"mo_id\" : \"%s\",\"lineID\" : \"%s\",\"test_Station\" : \"%s\",\"testTime\" : \"%s\",\"testResult\" : \"%s\",\"machineSN\" : \"%s\",\"testchannelID\" : \"%s\",\"measurementData\" : {\"empty\" : \"%s\",\"filling\" : \"%s\",\"degassing\" : \"%s\",\"fill_empty\" : \"%s\",\"fill_degass\" : \"%s\",\"degass_empty\" : \"%s\",\"degass_empty_p1\" : \"%s\",\"degass_empty_l1\" : \"%s\"}</tem:param>\
-<tem:password>123456</tem:password>\
-<tem:sericeName>GET_PROCESS_STATUS</tem:sericeName>\
-<tem:sysType>\"\"</tem:sysType>\
-</tem:rb>\
-</tem:UniRequest>\
+<UniRequest xmlns=\"http://tempuri.org/\">\
+<rb>\
+<account>SaoMaChuQi</account>\
+<optype>0</optype>\
+<param>{ \"token\":\"%s\", \"deptID\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"mo_id\":\"%s\", \"lineID\":\"%s\", \"test_Station\":\"%s\", \"testTime\":\"%s\", \"testResult\":\"%s\", \"machineSN\":\"%s\", \"testchannelID\":\"%s\", \"measurementData\":{\"empty\":\"%s\", \"filling\":\"%s\", \"degassing\":\"%s\", \"fill_empty\":\"%s\", \"fill_degass\":\"%s\", \"degass_empty\":\"%s\", \"degass_empty_p1\":\"%s\", \"degass_empty_l1\":\"%s\"}</param>\
+<password>114514</password>\
+<sericeName>PUT_TESTDATA_INFO</sericeName>\
+</rb>\
+</UniRequest>\
 </soap:Body>\
 </soap:Envelope>", strtoken, strdeptID, strpartID, strppid, strmoid, strlineID, strtestStation, strTime, strtestResult, strmachineSN, strtestchannelID, strempty, strfilling, strdegassing, strfill_empty, strill_degass, strdegass_empty, strempty_p1, strempty_l1);
 	string xml_string;
@@ -448,13 +472,16 @@ bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CStri
 	ofs.open(strWrite);
 	ofs << xml_string;
 	ofs.close();
-	std::string xml_header = "Content-Type:text/xml";
+	std::string xml_header
+		= std::string("Host:192.168.180.131\r\nContent-Type:text/xml;charset=utf-8\r\n")
+		+ "Content-Length:" + std::to_string(xml_string.size()) + "\r\n"
+		+ "SOAPAction:\"http://tempuri.org/UniRequest\"";
 	string strxmlRtn = whttp.RequestJsonInfo(url, Hr_Post, xml_header, xml_string);
 	CString strName = strData + strStartTime + ".xml";
 	ofs.open(strName);
 	ofs << strxmlRtn;
 	ofs.close();
-	bool bRet = Check_Json(strxmlRtn);
+	bool bRet = Check_Json2(strxmlRtn);
 	return bRet;
 }
 
@@ -530,10 +557,10 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				strData.ReleaseBuffer();
 				pSng->_csClient[0].Unlock();
 				m_nIP[0] = 1;
-				CString strmoid = pSng->GetCfgString("MES", "mo_id", "111");
-				CString strpartID = pSng->GetCfgString("MES", "partID", "111");
+				CString strmoid = pSng->GetCfgString("MES", "mo_id", MO_ID);
+				CString strpartID = pSng->GetCfgString("MES", "partID", PARTID);
 				CString strppid = pSng->_strCliRobot[0];
-				CString strtestStation = pSng->GetCfgString("MES", "testStation", "111");
+				CString strtestStation = pSng->GetCfgString("MES", "test_Station", TEST_STATION);
 				KillTimer(TIME_IP1);
 				SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
 				CZ a;
@@ -782,14 +809,14 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			fCha[0] = fVal[1] - fVal[0];
 			fCha[1] = fVal[1] - fVal[2];
 			fCha[2] = fVal[2] - fVal[0];
-			CString strdeptID = pSng->GetCfgString("MES", "deptID", "111");
-			CString strpartID = pSng->GetCfgString("MES", "partID", "111");
-			CString strmo_id = pSng->GetCfgString("MES", "mo_id", "111");
-			CString strlineID = pSng->GetCfgString("MES", "lineID", "111");
-			CString strtest_Station = pSng->GetCfgString("MES", "test_Station", "111");
-			CString strtestResult = pSng->GetCfgString("MES", "testResult", "111");
-			CString strmachineSN = pSng->GetCfgString("MES", "machineSN", "111");
-			CString strtestchannelID = pSng->GetCfgString("MES", "testchannelID", "111");
+			CString strdeptID = pSng->GetCfgString("MES", "deptID", DEPTID);
+			CString strpartID = pSng->GetCfgString("MES", "partID", PARTID);
+			CString strmo_id = pSng->GetCfgString("MES", "mo_id", MO_ID);
+			CString strlineID = pSng->GetCfgString("MES", "lineID", LINEID);
+			CString strtest_Station = pSng->GetCfgString("MES", "test_Station", TEST_STATION);
+			CString strtestResult = pSng->GetCfgString("MES", "testResult", TESTRESULT);
+			CString strmachineSN = pSng->GetCfgString("MES", "machineSN", MACHINESN);
+			CString strtestchannelID = pSng->GetCfgString("MES", "testchannelID", TESTCHANNELID);
 			CString strfill_empty;
 			strfill_empty.Format("%.3f", fCha[0]);
 			CString strfill_degass;
@@ -2271,8 +2298,7 @@ void CDlgMes::OnBnClickedBtnJz3()
 
 void CDlgMes::OnBnClickedBtnMes()
 {
-	MESSZ dlg;
-	if (dlg.DoModal() == IDOK)
+	if (messzDlg.DoModal() == IDOK)
 	{
 	}
 }
