@@ -32,6 +32,11 @@ using namespace std;
 		CString _str; \
 		_str.Format(CString(_forStr).GetBuffer(), __VA_ARGS__); \
 		\
+		CTime _time = CTime::GetCurrentTime(); \
+		CString _strDate; \
+		_strDate = _time.Format("%Y-%m-%d %H:%M:%S"); \
+		_str.Format(_T("[%s] %s"), _strDate, _str); \
+		\
 		auto* _logEditor = dynamic_cast<CEdit*>(GetDlgItem(IDC_LOG)); \
 		if (_logEditor) \
 		{ \
@@ -46,7 +51,7 @@ using namespace std;
 #define MESLOG(_forStr, ...) \
 	do \
 	{ \
-		CImgDLL::WriteLog((char*)(CString(_forStr).GetBuffer()), __VA_ARGS__); \
+		LogFile((char*)(CString(_forStr).GetBuffer()), __VA_ARGS__); \
 		MESPRINT(_forStr, __VA_ARGS__); \
 	} \
 	while (false)
@@ -135,10 +140,10 @@ bool CDlgMes::InitialCom(CMscomm1 &Com, int iNO, int nBaud, int nLen)
 			LogFile(szError);
 			return false;
 		}
-		LogFile("串口打开成功！");
+		MESLOG("串口打开成功！");
 		return true;
 	}
-	LogFile("串口打开失败！");
+	MESLOG("串口打开失败！");
 	return false;
 }
 
