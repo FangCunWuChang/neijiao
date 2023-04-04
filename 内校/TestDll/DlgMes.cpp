@@ -1,4 +1,4 @@
-ï»¿// DlgMes.cpp : å®ç°æ–‡ä»¶
+// DlgMes.cpp : ÊµÏÖÎÄ¼ş
 //
 
 #include "stdafx.h"
@@ -54,7 +54,7 @@ using namespace std;
 extern int g_nExt;
 extern void DoEvent();
 
-// CDlgMes å¯¹è¯æ¡†
+// CDlgMes ¶Ô»°¿ò
 UINT ThreadWatchIP(LPVOID p);
 UINT ThreadWatchCheng(LPVOID p);
 UINT ThreadWatchZERO(LPVOID p);
@@ -108,25 +108,25 @@ ON_BN_CLICKED(IDC_CLEARLOG, &CDlgMes::OnBnClickedClearlog)
 END_MESSAGE_MAP()
 
 
-// CDlgMes æ¶ˆæ¯å¤„ç†ç¨‹åº
+// CDlgMes ÏûÏ¢´¦Àí³ÌĞò
 
 bool CDlgMes::InitialCom(CMscomm1 &Com, int iNO, int nBaud, int nLen)
 {
-	Com.put_CommPort(iNO);                             //è®¾å®šä¸²å£ä¸ºÂ COM1Â 
+	Com.put_CommPort(iNO);                             //Éè¶¨´®¿ÚÎª?COM1?
 	CString strBaud, strSetting;
 	strSetting.Format(_T("%d,n,8,1"), nBaud);
-	Com.put_Settings(strSetting);                    //è®¾å®šæ³¢ç‰¹ç‡9600ï¼Œæ— å¥‡å¶æ ¡éªŒï¼Œ8ä½æ•°æ®ä½ï¼Œ1ä½œä¸ºåœæ­¢ä½Â Â Â Â Â Â Â Â Â 
-	Com.put_InputMode(1);                            //è®¾å®šæ•°æ®æ¥æ”¶æ¨¡å¼ï¼Œ1ä¸ºäºŒè¿›åˆ¶ï¼Œ0ä¸ºæ–‡æœ¬Â Â Â Â Â Â Â Â Â 
-	Com.put_InputLen(0);                              //è®¾å®šå½“å‰æ¥æ”¶åŒºæ•°æ®é•¿åº¦Â 9
-	Com.put_InBufferSize(1024);                     //è®¾ç½®è¾“å…¥ç¼“å†²åŒºå¤§å°ä¸º1024Â byteÂ Â Â Â Â Â Â Â Â 
-	Com.put_OutBufferSize(1024);                   //è®¾ç½®è¾“å‡ºç¼“å†²åŒºå¤§å°ä¸º1024Â byteÂ Â Â Â Â Â Â Â Â 
-	Com.put_RThreshold(nLen);                         //æ¯æ¥æ”¶åˆ°ä¸€ä¸ªå­—ç¬¦æ—¶ï¼Œè§¦å‘OnCommäº‹ä»¶Â Â Â Â Â Â Â Â Â 
-	Com.put_SThreshold(0);                         //æ¯å‘é€ä¸€ä¸ªå­—ç¬¦æ—¶ï¼Œä¸è§¦å‘OnCommäº‹ä»¶
+	Com.put_Settings(strSetting);                    //Éè¶¨²¨ÌØÂÊ9600£¬ÎŞÆæÅ¼Ğ£Ñé£¬8Î»Êı¾İÎ»£¬1×÷ÎªÍ£Ö¹Î»?????????
+	Com.put_InputMode(1);                            //Éè¶¨Êı¾İ½ÓÊÕÄ£Ê½£¬1Îª¶ş½øÖÆ£¬0ÎªÎÄ±¾?????????
+	Com.put_InputLen(0);                              //Éè¶¨µ±Ç°½ÓÊÕÇøÊı¾İ³¤¶È?9
+	Com.put_InBufferSize(1024);                     //ÉèÖÃÊäÈë»º³åÇø´óĞ¡Îª1024?byte?????????
+	Com.put_OutBufferSize(1024);                   //ÉèÖÃÊä³ö»º³åÇø´óĞ¡Îª1024?byte?????????
+	Com.put_RThreshold(nLen);                         //Ã¿½ÓÊÕµ½Ò»¸ö×Ö·ûÊ±£¬´¥·¢OnCommÊÂ¼ş?????????
+	Com.put_SThreshold(0);                         //Ã¿·¢ËÍÒ»¸ö×Ö·ûÊ±£¬²»´¥·¢OnCommÊÂ¼ş
 	if (!Com.get_PortOpen())
 	{
 		try
 		{
-			Com.put_PortOpen(true);//æ‰“å¼€ä¸²å£
+			Com.put_PortOpen(true);//´ò¿ª´®¿Ú
 		}
 		catch (CException* e)
 		{
@@ -135,10 +135,10 @@ bool CDlgMes::InitialCom(CMscomm1 &Com, int iNO, int nBaud, int nLen)
 			LogFile(szError);
 			return false;
 		}
-		LogFile("ä¸²å£æ‰“å¼€æˆåŠŸï¼");
+		LogFile("´®¿Ú´ò¿ª³É¹¦£¡");
 		return true;
 	}
-	LogFile("ä¸²å£æ‰“å¼€å¤±è´¥ï¼");
+	LogFile("´®¿Ú´ò¿ªÊ§°Ü£¡");
 	return false;
 }
 
@@ -149,7 +149,7 @@ BOOL CDlgMes::OnInitDialog()
 	CSingleton* pSng = CSingleton::GetInstance();
 	if (CImgDLL::Init() == FALSE)
 	{
-		MessageBox("è½½å…¥å›¾åƒåº“DLLå¤±è´¥!");
+		MessageBox("ÔØÈëÍ¼Ïñ¿âDLLÊ§°Ü!");
 		SendMessage(WM_CLOSE);
 		return FALSE;
 	}
@@ -181,16 +181,16 @@ BOOL CDlgMes::OnInitDialog()
 		else
 		{
 			m_pServer[i]->StartReceiving(NULL, NULL, NULL);
-			MESLOG("è¿æ¥æœåŠ¡å™¨%dæˆåŠŸï¼", i+1);
+			MESLOG("Á¬½Ó·şÎñÆ÷%d³É¹¦£¡", i+1);
 		}
 	}
 	int bComOK = 0;
 	bComOK=InitialCom(m_val[0], 2, 19200, 1);
-	MESLOG("ä¸²å£1ç»“æœ%d", bComOK);
+	MESLOG("´®¿Ú1½á¹û%d", bComOK);
 	bComOK=InitialCom(m_val[1], 3, 19200, 1);
-	MESLOG("ä¸²å£2ç»“æœ%d", bComOK);
+	MESLOG("´®¿Ú2½á¹û%d", bComOK);
 	bComOK=InitialCom(m_val[2], 4, 19200, 1);
-	MESLOG("ä¸²å£3ç»“æœ%d", bComOK);
+	MESLOG("´®¿Ú3½á¹û%d", bComOK);
 	m_nIP[0] = 0;
 	m_nIP[1] = 0;
 	m_nIP[2] = 0;
@@ -208,24 +208,24 @@ BOOL CDlgMes::OnInitDialog()
 	bZERO[2] = false;
 	pSng->_pMain = this;
 	int nNetId = 0;
-	int nIpPort = pSng->GetCfgInt("å‚æ•°", "PORT", 502);
+	int nIpPort = pSng->GetCfgInt("²ÎÊı", "PORT", 502);
 	BOOL  bRet;
-	pSng->_strIP = pSng->GetCfgString("å‚æ•°", "IP1", "192.168.3.100");
+	pSng->_strIP = pSng->GetCfgString("²ÎÊı", "IP1", "192.168.3.100");
 	bRet = Init_ETH_String(pSng->_strIP.GetBuffer(0), nNetId, nIpPort);
 	pSng->_strIP.ReleaseBuffer();
 	if (!bRet)
 	{
-		AfxMessageBox(_T("PLCè¿æ¥1å¤±è´¥"));
+		AfxMessageBox(_T("PLCÁ¬½Ó1Ê§°Ü"));
 		SendMessage(WM_CLOSE);
 		return FALSE;
 	}
 	//nIpPort = 503;
-	//pSng->_strIP = pSng->GetCfgString("å‚æ•°", "IP2", "192.168.3.101");
+	//pSng->_strIP = pSng->GetCfgString("²ÎÊı", "IP2", "192.168.3.101");
 	//bRet = Init_ETH_String(pSng->_strIP.GetBuffer(0), nNetId, nIpPort);
 	//pSng->_strIP.ReleaseBuffer();
 	//if (!bRet)
 	//{
-	//	AfxMessageBox(_T("PLCè¿æ¥2å¤±è´¥"));
+	//	AfxMessageBox(_T("PLCÁ¬½Ó2Ê§°Ü"));
 	//	SendMessage(WM_CLOSE);
 	//	return FALSE;
 	//}
@@ -246,12 +246,12 @@ BOOL CDlgMes::OnInitDialog()
 	GetDlgItem(IDC_BTN_JZ2)->EnableWindow(FALSE);
 	GetDlgItem(IDC_BTN_JZ3)->EnableWindow(FALSE);
 	int nOK[3], nNG[3];
-	nOK[0] = atoi(pSng->GetCfgString("å·¥ä½1", "OK", "111"));
-	nOK[1] = atoi(pSng->GetCfgString("å·¥ä½2", "OK", "111"));
-	nOK[2] = atoi(pSng->GetCfgString("å·¥ä½3", "OK", "111"));
-	nNG[0] = atoi(pSng->GetCfgString("å·¥ä½1", "NG", "111"));
-	nNG[1] = atoi(pSng->GetCfgString("å·¥ä½2", "NG", "111"));
-	nNG[2] = atoi(pSng->GetCfgString("å·¥ä½3", "NG", "111"));
+	nOK[0] = atoi(pSng->GetCfgString("¹¤Î»1", "OK", "111"));
+	nOK[1] = atoi(pSng->GetCfgString("¹¤Î»2", "OK", "111"));
+	nOK[2] = atoi(pSng->GetCfgString("¹¤Î»3", "OK", "111"));
+	nNG[0] = atoi(pSng->GetCfgString("¹¤Î»1", "NG", "111"));
+	nNG[1] = atoi(pSng->GetCfgString("¹¤Î»2", "NG", "111"));
+	nNG[2] = atoi(pSng->GetCfgString("¹¤Î»3", "NG", "111"));
 	float fOK[3];
 	if (nOK[0] + nNG[0]==0)
 	{
@@ -281,17 +281,17 @@ BOOL CDlgMes::OnInitDialog()
 	strOK[0].Format("%.2f", fOK[0]);
 	strOK[1].Format("%.2f", fOK[1]);
 	strOK[2].Format("%.2f", fOK[2]);
-	SetDlgItemText(IDC_STATIC_IN7, pSng->GetCfgString("å·¥ä½1", "OK", "111"));
-	SetDlgItemText(IDC_STATIC_IN8, pSng->GetCfgString("å·¥ä½1", "NG", "111"));
+	SetDlgItemText(IDC_STATIC_IN7, pSng->GetCfgString("¹¤Î»1", "OK", "111"));
+	SetDlgItemText(IDC_STATIC_IN8, pSng->GetCfgString("¹¤Î»1", "NG", "111"));
 	SetDlgItemText(IDC_STATIC_IN9, strOK[0]);
-	SetDlgItemText(IDC_STATIC_IN10, pSng->GetCfgString("å·¥ä½2", "OK", "111"));
-	SetDlgItemText(IDC_STATIC_IN11, pSng->GetCfgString("å·¥ä½2", "NG", "111"));
+	SetDlgItemText(IDC_STATIC_IN10, pSng->GetCfgString("¹¤Î»2", "OK", "111"));
+	SetDlgItemText(IDC_STATIC_IN11, pSng->GetCfgString("¹¤Î»2", "NG", "111"));
 	SetDlgItemText(IDC_STATIC_IN12, strOK[1]);
-	SetDlgItemText(IDC_STATIC_IN13, pSng->GetCfgString("å·¥ä½3", "OK", "111"));
-	SetDlgItemText(IDC_STATIC_IN14, pSng->GetCfgString("å·¥ä½3", "NG", "111"));
+	SetDlgItemText(IDC_STATIC_IN13, pSng->GetCfgString("¹¤Î»3", "OK", "111"));
+	SetDlgItemText(IDC_STATIC_IN14, pSng->GetCfgString("¹¤Î»3", "NG", "111"));
 	SetDlgItemText(IDC_STATIC_IN15, strOK[2]);
 	return TRUE;  // return TRUE unless you set the focus to a control
-	// å¼‚å¸¸:  OCX å±æ€§é¡µåº”è¿”å› FALSE
+	// Òì³£:  OCX ÊôĞÔÒ³Ó¦·µ»Ø FALSE
 }
 
 BEGIN_EVENTSINK_MAP(CDlgMes, CDialogEx)
@@ -306,16 +306,16 @@ bool CDlgMes::Check_Json(std::string& str)
 	Json::Reader reader;
 	Json::Value root;
 	CString cstr;
-	cstr.Format("TRACE åé¦ˆ å¼‚å¸¸");
-	if (reader.parse(str, root))  // readerå°†Jsonå­—ç¬¦ä¸²è§£æåˆ°rootï¼Œrootå°†åŒ…å«Jsoné‡Œæ‰€æœ‰å­å…ƒç´   
+	cstr.Format("TRACE ·´À¡ Òì³£");
+	if (reader.parse(str, root))  // reader½«Json×Ö·û´®½âÎöµ½root£¬root½«°üº¬JsonÀïËùÓĞ×ÓÔªËØ  
 	{
-		//std::string upload_id = root["uploadid"].asString();  // è®¿é—®èŠ‚ç‚¹ï¼Œupload_id = "UP000000"  
-		string strtoken = root["Token:"].asString();                              //  è®¿é—®èŠ‚ç‚¹ï¼Œcode = 100
+		//std::string upload_id = root["uploadid"].asString();  // ·ÃÎÊ½Úµã£¬upload_id = "UP000000"  
+		string strtoken = root["Token:"].asString();                              //  ·ÃÎÊ½Úµã£¬code = 100
 		string strContact = root["}"].asString();
 		string strError = root["error"].asString();
 		if (strtoken != "")
 		{
-			cstr.Format("TRACE åé¦ˆ æˆåŠŸ");
+			cstr.Format("TRACE ·´À¡ ³É¹¦");
 			MESLOG(cstr + "\nid = " + pSng->Str2Cstr(strtoken));
 			strMEStoken = pSng->Str2Cstr(strtoken);
 			return true;
@@ -331,8 +331,8 @@ bool CDlgMes::Check_Json(std::string& str)
 			return false;
 		}
 	}
-	MESLOG(cstr + "\nMESæ•°æ®æ ¼å¼é”™è¯¯ï¼Œæ— æ³•è§£æ" + "\n" + pSng->Str2Cstr(str));
-	MessageBox(cstr + "\nMESæ•°æ®æ ¼å¼é”™è¯¯ï¼Œæ— æ³•è§£æ" + "\n" + pSng->Str2Cstr(str));
+	MESLOG(cstr + "\nMESÊı¾İ¸ñÊ½´íÎó£¬ÎŞ·¨½âÎö" + "\n" + pSng->Str2Cstr(str));
+	MessageBox(cstr + "\nMESÊı¾İ¸ñÊ½´íÎó£¬ÎŞ·¨½âÎö" + "\n" + pSng->Str2Cstr(str));
 	return false;
 }
 
@@ -343,7 +343,7 @@ string CDlgMes::GetTimeMillisecondsStr()
 	CString strDate;
 	GetLocalTime(&st);
 
-	//å¾—åˆ°æ—¥æœŸçš„å­—ç¬¦ä¸²
+	//µÃµ½ÈÕÆÚµÄ×Ö·û´®
 
 	CString strTime;
 	strTime.Format("%d-%02d-%02d %02d:%02d:%02d", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
@@ -389,8 +389,8 @@ bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString 
 	std::ofstream ofs;
 	CString strData;
 	strData.Format("D:\\DATA\\1\\");
-	pSng->CreateDir("D:\\DATA");                          //åˆ›å»ºä¸€ä¸ªç›®å½•
-	pSng->CreateDir("D:\\DATA\\1");                          //åˆ›å»ºä¸€ä¸ªç›®å½•
+	pSng->CreateDir("D:\\DATA");                          //´´½¨Ò»¸öÄ¿Â¼
+	pSng->CreateDir("D:\\DATA\\1");                          //´´½¨Ò»¸öÄ¿Â¼
 	CTime StartTime = CTime::GetCurrentTime();
 	CString strStartTime = StartTime.Format("%Y-%m-%d %H_%M_%S");
 	CString strWrite = strData + strStartTime + "write.xml";
@@ -440,8 +440,8 @@ bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CStri
 	std::ofstream ofs;
 	CString strData;
 	strData.Format("D:\\DATA\\2\\");
-	pSng->CreateDir("D:\\DATA");                          //åˆ›å»ºä¸€ä¸ªç›®å½•
-	pSng->CreateDir("D:\\DATA\\2");                          //åˆ›å»ºä¸€ä¸ªç›®å½•
+	pSng->CreateDir("D:\\DATA");                          //´´½¨Ò»¸öÄ¿Â¼
+	pSng->CreateDir("D:\\DATA\\2");                          //´´½¨Ò»¸öÄ¿Â¼
 	CTime StartTime = CTime::GetCurrentTime();
 	CString strStartTime = StartTime.Format("%Y-%m-%d %H_%M_%S");
 	CString strWrite = strData + strStartTime + "write.xml";
@@ -463,19 +463,19 @@ void CDlgMes::OnBnClickedBtnRun()
 	CSingleton* pSng = CSingleton::GetInstance();
 	CString strText,strTime;
 	GetDlgItemText(IDC_BTN_RUN, strText);
-	if (strText == "å¯åŠ¨")
+	if (strText == "Æô¶¯")
 	{
 		TV.clear();
 		TV1.clear();
 		TV2.clear();
-		SetDlgItemText(IDC_BTN_RUN, "åœæ­¢");
+		SetDlgItemText(IDC_BTN_RUN, "Í£Ö¹");
 		pSng->_nRun = RUN_WORK;
-		//MESLOG("æ¡ç æ¸…ç©ºï¼Œå¤ä½ï¼ï¼ï¼ï¼");
+		//MESLOG("ÌõÂëÇå¿Õ£¬¸´Î»£¡£¡£¡£¡");
 
 	}
 	else
 	{
-		SetDlgItemText(IDC_BTN_RUN, "å¯åŠ¨");
+		SetDlgItemText(IDC_BTN_RUN, "Æô¶¯");
 		pSng->_nRun = RUN_NULL;
 	}
 }
@@ -486,11 +486,11 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 	CSingleton* pSng = CSingleton::GetInstance();
 	CString strCode[3];
 	int nTime;
-	nTime = pSng->GetCfgInt("å‚æ•°", "æ‰«ç æ—¶é•¿", 6000);
+	nTime = pSng->GetCfgInt("²ÎÊı", "É¨ÂëÊ±³¤", 6000);
 	if (nIDEvent == TIME_IP1)
 	{
-		int nOK = atoi(pSng->GetCfgString("å·¥ä½1", "OK", "111"));
-		int nNG = atoi(pSng->GetCfgString("å·¥ä½1", "NG", "111"));
+		int nOK = atoi(pSng->GetCfgString("¹¤Î»1", "OK", "111"));
+		int nNG = atoi(pSng->GetCfgString("¹¤Î»1", "NG", "111"));
 		if (GetTickCount() - dwIP[0] > nTime || pSng->_strCliRobot[0] == "R")
 		{
 			nNG += 1;
@@ -503,14 +503,14 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();	
 			//pSng->_csClient[0].Unlock();
-			MESLOG("ç©ºç®¡æ‰«ç è¶…æ—¶ï¼ï¼ï¼ï¼");
+			MESLOG("¿Õ¹ÜÉ¨Âë³¬Ê±£¡£¡£¡£¡");
 		}
 		else
 		{
 			if (pSng->_strCliRobot[0].GetLength() > 3)
 			{
 				//nOK += 1;
-				MESLOG("å·¥ç«™1æ‰«ç æˆåŠŸï¼š" + pSng->_strCliRobot[0]);
+				MESLOG("¹¤Õ¾1É¨Âë³É¹¦£º" + pSng->_strCliRobot[0]);
 				/*CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
@@ -530,7 +530,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				pSng->_csTV.Lock();
 				TV.push_back(a);
 				pSng->_csTV.Unlock();
-				MESLOG("å·¥ç«™1å¢åŠ ä¸€ä¸ªæœªç”¨ç ");
+				MESLOG("¹¤Õ¾1Ôö¼ÓÒ»¸öÎ´ÓÃÂë");
 				CString sql, strNum;
 				pSng->_csInfo.Lock();
 				sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
@@ -545,7 +545,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				}
 				else
 				{
-					//MESLOG("å·²æœ‰æ•°æ®ï¼ï¼ï¼ï¼ï¼");
+					//MESLOG("ÒÑÓĞÊı¾İ£¡£¡£¡£¡£¡");
 					nOK += 1;
 					CString strData;
 					strData.Format("LOF");
@@ -566,7 +566,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 					pSng->_csInfo.Unlock();
 					if (atoi(strNum) > 0)
 					{
-						MESLOG("å·²æœ‰æ•°æ®ï¼ï¼ï¼ï¼ï¼");
+						MESLOG("ÒÑÓĞÊı¾İ£¡£¡£¡£¡£¡");
 						pSng->_csInfo.Lock();
 						sql.Format("Delete WH where IP = '%s' ", pSng->_strCliRobot[0]);
 						pSng->_DB.Execute(sql);
@@ -595,13 +595,13 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 		SetDlgItemText(IDC_STATIC_IN7, strOK[0]);
 		SetDlgItemText(IDC_STATIC_IN8, strOK[1]);
 		SetDlgItemText(IDC_STATIC_IN9, strOK[2]);
-		pSng->SetCfgString("å·¥ä½1", "OK", strOK[0]);
-		pSng->SetCfgString("å·¥ä½1", "NG", strOK[1]);
+		pSng->SetCfgString("¹¤Î»1", "OK", strOK[0]);
+		pSng->SetCfgString("¹¤Î»1", "NG", strOK[1]);
 	}
 	if (nIDEvent == TIME_IP2)
 	{
-		int nOK = atoi(pSng->GetCfgString("å·¥ä½2", "OK", "111"));
-		int nNG = atoi(pSng->GetCfgString("å·¥ä½2", "NG", "111"));
+		int nOK = atoi(pSng->GetCfgString("¹¤Î»2", "OK", "111"));
+		int nNG = atoi(pSng->GetCfgString("¹¤Î»2", "NG", "111"));
 		if (GetTickCount() - dwIP[1] > nTime || pSng->_strCliRobot[1] == "R")
 		{
 			nNG += 1;
@@ -614,14 +614,14 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			m_pServer[1]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
 			//pSng->_csClient[1].Unlock();
-			MESLOG("æ³¨æ°´æ‰«ç è¶…æ—¶ï¼ï¼ï¼ï¼");
+			MESLOG("×¢Ë®É¨Âë³¬Ê±£¡£¡£¡£¡");
 		}
 		else
 		{
 			if (pSng->_strCliRobot[1].GetLength() > 3)
 			{
 				nOK += 1;
-				MESLOG("å·¥ç«™2æ‰«ç æˆåŠŸï¼š" + pSng->_strCliRobot[1]);
+				MESLOG("¹¤Õ¾2É¨Âë³É¹¦£º" + pSng->_strCliRobot[1]);
 				CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
@@ -636,7 +636,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				a.strCode.Format("%s", pSng->_strCliRobot[1]);
 				pSng->_csTV.Lock();
 				TV1.push_back(a);
-				MESLOG("å·¥ç«™2å¢åŠ ä¸€ä¸ªæœªç”¨ç ");
+				MESLOG("¹¤Õ¾2Ôö¼ÓÒ»¸öÎ´ÓÃÂë");
 				pSng->_csTV.Unlock();
 				CString sql, strNum;
 				pSng->_csInfo.Lock();
@@ -645,7 +645,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				pSng->_csInfo.Unlock();
 				if (atoi(strNum) < 1)
 				{
-					MESLOG("æ— æ¡ç æ•°æ®ï¼ï¼ï¼ï¼ï¼");
+					MESLOG("ÎŞÌõÂëÊı¾İ£¡£¡£¡£¡£¡");
 				}
 				pSng->_strCliRobot[1].Empty();
 			}
@@ -658,13 +658,13 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 		SetDlgItemText(IDC_STATIC_IN10, strOK[0]);
 		SetDlgItemText(IDC_STATIC_IN11, strOK[1]);
 		SetDlgItemText(IDC_STATIC_IN12, strOK[2]);
-		pSng->SetCfgString("å·¥ä½2", "OK", strOK[0]);
-		pSng->SetCfgString("å·¥ä½2", "NG", strOK[1]);
+		pSng->SetCfgString("¹¤Î»2", "OK", strOK[0]);
+		pSng->SetCfgString("¹¤Î»2", "NG", strOK[1]);
 	}
 	if (nIDEvent == TIME_IP3)
 	{
-		int nOK = atoi(pSng->GetCfgString("å·¥ä½3", "OK", "111"));
-		int nNG = atoi(pSng->GetCfgString("å·¥ä½3", "NG", "111"));
+		int nOK = atoi(pSng->GetCfgString("¹¤Î»3", "OK", "111"));
+		int nNG = atoi(pSng->GetCfgString("¹¤Î»3", "NG", "111"));
 		//pSng->_strCliRobot[2] = "D4V3103H1QD1RM18L";
 		if (GetTickCount() - dwIP[2] > nTime || pSng->_strCliRobot[2] == "R")
 		{
@@ -678,14 +678,14 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			m_pServer[2]->SendClient(strData.GetBuffer(0), nLen);
 			strData.ReleaseBuffer();
 			//pSng->_csClient[2].Unlock();
-			MESLOG("é™¤æ°”æ‰«ç è¶…æ—¶ï¼ï¼ï¼ï¼");
+			MESLOG("³ıÆøÉ¨Âë³¬Ê±£¡£¡£¡£¡");
 		}
 		else
 		{
 			if (pSng->_strCliRobot[2].GetLength() > 3)
 			{
 				nOK += 1;
-				MESLOG("å·¥ç«™3æ‰«ç æˆåŠŸï¼š" + pSng->_strCliRobot[2]);
+				MESLOG("¹¤Õ¾3É¨Âë³É¹¦£º" + pSng->_strCliRobot[2]);
 				CString strData;
 				strData.Format("LOF");
 				int nLen = strData.GetLength();
@@ -700,7 +700,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				a.strCode.Format("%s", pSng->_strCliRobot[2]);
 				pSng->_csTV.Lock();
 				TV2.push_back(a);
-				MESLOG("å·¥ç«™3å¢åŠ ä¸€ä¸ªæœªç”¨ç ");
+				MESLOG("¹¤Õ¾3Ôö¼ÓÒ»¸öÎ´ÓÃÂë");
 				pSng->_csTV.Unlock();
 				CString sql, strNum;
 				pSng->_csInfo.Lock();
@@ -709,7 +709,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				pSng->_csInfo.Unlock();
 				if (atoi(strNum) < 1)
 				{
-					MESLOG("æ— æ¡ç æ•°æ®ï¼ï¼ï¼ï¼ï¼");
+					MESLOG("ÎŞÌõÂëÊı¾İ£¡£¡£¡£¡£¡");
 				}
 				pSng->_strCliRobot[2].Empty();
 				//bVal[2] = true;
@@ -724,8 +724,8 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 		SetDlgItemText(IDC_STATIC_IN13, strOK[0]);
 		SetDlgItemText(IDC_STATIC_IN14, strOK[1]);
 		SetDlgItemText(IDC_STATIC_IN15, strOK[2]);
-		pSng->SetCfgString("å·¥ä½3", "OK", strOK[0]);
-		pSng->SetCfgString("å·¥ä½3", "NG", strOK[1]);
+		pSng->SetCfgString("¹¤Î»3", "OK", strOK[0]);
+		pSng->SetCfgString("¹¤Î»3", "NG", strOK[1]);
 	}
 	if (nIDEvent == TIME_VAL1)
 	{
@@ -751,7 +751,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 		int iLen = strs.size();
 		if (iLen==0)
 		{
-			MESLOG("æ— æ•ˆæ¡ç ï¼ï¼ï¼ï¼");
+			MESLOG("ÎŞĞ§ÌõÂë£¡£¡£¡£¡");
 		}
 		else
 		{
@@ -782,17 +782,17 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			strfill_degass.Format("%.3f", fCha[1]);
 			CString strdegass_empty;
 			strdegass_empty.Format("%.3f", fCha[2]);
-			CString strdegass_empty_p1 = pSng->GetCfgString(pSng->strLiaohao, "å°å­˜é‡ä¸Šé™", "2.000");
-			CString strdegass_empty_l1 = pSng->GetCfgString(pSng->strLiaohao, "å°å­˜é‡ä¸‹é™", "-1.000");
+			CString strdegass_empty_p1 = pSng->GetCfgString(pSng->strLiaohao, "·â´æÁ¿ÉÏÏŞ", "2.000");
+			CString strdegass_empty_l1 = pSng->GetCfgString(pSng->strLiaohao, "·â´æÁ¿ÏÂÏŞ", "-1.000");
 			bool bMESOK = MES2(strtoken, strdeptID, strpartID, strIP, strmo_id, strlineID, strtest_Station, strtestResult, strmachineSN,
 				strtestchannelID, strVal1, strVal2, strVal3, strfill_empty, strfill_degass, strdegass_empty, strdegass_empty_p1, strdegass_empty_l1);
 			if (bMESOK == true)
 			{
-				MESLOG("ä¸Šä¼ æˆåŠŸï¼ï¼ï¼");
+				MESLOG("ÉÏ´«³É¹¦£¡£¡£¡");
 			}
 			else
 			{
-				MESLOG("ä¸Šä¼ å¤±è´¥ï¼ï¼ï¼");
+				MESLOG("ÉÏ´«Ê§°Ü£¡£¡£¡");
 			}
 		}
 	}
@@ -868,17 +868,17 @@ void CDlgMes::OnCommMscomm1()
 	VARIANT variant_inp;
 	COleSafeArray safearray_inp;
 	LONG len, k;
-	BYTE rxdata[2048];                                     //è®¾ç½®BYTEæ•°ç»„Â AnÂ 8-bitÂ integerthatÂ isÂ notÂ signed.
-	variant_inp = m_val[0].get_Input();                 //è¯»ç¼“å†²åŒº
-	safearray_inp = variant_inp;                         //VARIANTå‹å˜é‡è½¬æ¢ä¸ºColeSafeArrayå‹å˜é‡     
-	len = safearray_inp.GetOneDimSize();          //å¾—åˆ°æœ‰æ•ˆæ•°æ®é•¿åº¦    // æ¥å—æ•°æ®  
+	BYTE rxdata[2048];                                     //ÉèÖÃBYTEÊı×é?An?8-bit?integerthat?is?not?signed.
+	variant_inp = m_val[0].get_Input();                 //¶Á»º³åÇø
+	safearray_inp = variant_inp;                         //VARIANTĞÍ±äÁ¿×ª»»ÎªColeSafeArrayĞÍ±äÁ¿     
+	len = safearray_inp.GetOneDimSize();          //µÃµ½ÓĞĞ§Êı¾İ³¤¶È    // ½ÓÊÜÊı¾İ  
 	TRACE("\n %d", len);
 	for (k = 0; k < len; k++)
 	{
-		safearray_inp.GetElement(&k, rxdata + k);       //è½¬æ¢ä¸ºBYTEå‹æ•°ç»„     
-		BYTE bt = *(char*)(rxdata + k);                     //å­—ç¬¦å‹ 	                     
+		safearray_inp.GetElement(&k, rxdata + k);       //×ª»»ÎªBYTEĞÍÊı×é     
+		BYTE bt = *(char*)(rxdata + k);                     //×Ö·ûĞÍ 	                     
 		TRACE(" %02x", bt);
-		//LogFile(" %02x", bt);//è¾“å‡ºæ£€æµ‹æŒ‡ä»¤
+		//LogFile(" %02x", bt);//Êä³ö¼ì²âÖ¸Áî
 	}
 	if (len == 8)
 	{
@@ -888,7 +888,7 @@ void CDlgMes::OnCommMscomm1()
 		btx2 = *(char*)(rxdata + 3);
 		if (btx == 6 && btx1 == 0 && btx2 == 27)
 		{
-			MESLOG("å·¥ç«™1ç§°é‡æ¸…é›¶å®Œæˆï¼Œè¿›å…¥åˆ¤å®š");
+			MESLOG("¹¤Õ¾1³ÆÖØÇåÁãÍê³É£¬½øÈëÅĞ¶¨");
 			bWZERO[0] = true;
 			KillTimer(TIME_ZERO1);
 		}
@@ -902,36 +902,36 @@ void CDlgMes::OnCommMscomm1()
 		btx3 = *(char*)(rxdata + 4);
 		if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 0)
 		{
-			MESLOG("å·¥ç«™1æ ¡æ­£å®Œæˆ");
+			MESLOG("¹¤Õ¾1Ğ£ÕıÍê³É");
 			GetDlgItem(IDC_BTN_JZ1)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ1);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 255)
 
 		{
-			MESLOG("å·¥ç«™1æ ¡æ­£å¤±è´¥");
+			MESLOG("¹¤Õ¾1Ğ£ÕıÊ§°Ü");
 			GetDlgItem(IDC_BTN_JZ1)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ1);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 1)
 
 		{
-			MESLOG("å·¥ç«™1æ ¡æ­£æ­£åœ¨è¿è¡Œ");
+			MESLOG("¹¤Õ¾1Ğ£ÕıÕıÔÚÔËĞĞ");
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 2)
 
 		{
-			MESLOG("å·¥ç«™1æ ¡æ­£äººå·¥æ“ä½œé˜¶æ®µ");
+			MESLOG("¹¤Õ¾1Ğ£ÕıÈË¹¤²Ù×÷½×¶Î");
 		}
 	}
 	if (len !=11)
 		return;
-	//////////åŸºäºè¿™ä¸ªIOç›’å­ä¸éœ€è¦æŒ‡ä»¤äº†////////////////////
-	BYTE btNum[4];                 //å­—ç¬¦å‹ 
-	btNum[0] = *(char*)(rxdata + 5);                 //å­—ç¬¦å‹ 
-	btNum[1] = *(char*)(rxdata + 6);                 //å­—ç¬¦å‹ 
-	btNum[2] = *(char*)(rxdata + 7);                 //å­—ç¬¦å‹ 
-	btNum[3] = *(char*)(rxdata + 8);                 //å­—ç¬¦å‹ 
+	//////////»ùÓÚÕâ¸öIOºĞ×Ó²»ĞèÒªÖ¸ÁîÁË////////////////////
+	BYTE btNum[4];                 //×Ö·ûĞÍ 
+	btNum[0] = *(char*)(rxdata + 5);                 //×Ö·ûĞÍ 
+	btNum[1] = *(char*)(rxdata + 6);                 //×Ö·ûĞÍ 
+	btNum[2] = *(char*)(rxdata + 7);                 //×Ö·ûĞÍ 
+	btNum[3] = *(char*)(rxdata + 8);                 //×Ö·ûĞÍ 
 	float fVal = 0.00;
 	BYTE* p = (BYTE*)&fVal;
 	p[0] = btNum[3];
@@ -941,7 +941,7 @@ void CDlgMes::OnCommMscomm1()
 	float fA = fVal;
 	float fB;
 	CString strVal;
-	fB = atof(pSng->GetCfgString("VALè¡¥å¿", "å·¥ç«™1", "0.000"));
+	fB = atof(pSng->GetCfgString("VAL²¹³¥", "¹¤Õ¾1", "0.000"));
 	fA += fB;
 	strVal.Format("%.3f", fA);
 	SetDlgItemText(IDC_STATIC_IN4, strVal);
@@ -954,7 +954,7 @@ void CDlgMes::OnCommMscomm1()
 			return;
 		}
 		m_nVAL[0] = 1;
-		MESLOG("å·¥ç«™1ç§°é‡æˆåŠŸï¼š" + strVal);
+		MESLOG("¹¤Õ¾1³ÆÖØ³É¹¦£º" + strVal);
 		CString sql, strNum;
 		TV[0].fVal = fA;
 		pSng->_csInfo.Lock();
@@ -963,7 +963,7 @@ void CDlgMes::OnCommMscomm1()
 		pSng->_csInfo.Unlock();
 		if (atoi(strNum) < 1)
 		{
-			MESLOG("æ— æ¡ç æ•°æ®ï¼ï¼ï¼ï¼ï¼");
+			MESLOG("ÎŞÌõÂëÊı¾İ£¡£¡£¡£¡£¡");
 		}
 		pSng->_csInfo.Lock();
 		sql.Format("Update WH set VAL1 = %.3f where IP = '%s'", fA, TV[0].strCode);
@@ -971,51 +971,51 @@ void CDlgMes::OnCommMscomm1()
 		pSng->_csInfo.Unlock();
 		pSng->_csTV.Lock();
 		TV.erase(TV.begin());
-		MESLOG("å·¥ç«™1å»é™¤æœªç”¨ç¬¬ä¸€ä¸ªç ");
+		MESLOG("¹¤Õ¾1È¥³ıÎ´ÓÃµÚÒ»¸öÂë");
 		pSng->_csTV.Unlock();
 	}
 	if (bZERO[0]==true)
 	{
 		bZERO[0] = false;
 		float fVc1, fVc2;
-		fVc1 = atof(pSng->GetCfgString("å‚æ•°", "æ¸…é›¶ä¸‹é™", "-0.010"));
-		fVc2 = atof(pSng->GetCfgString("å‚æ•°", "æ¸…é›¶ä¸Šé™", "0.010"));
+		fVc1 = atof(pSng->GetCfgString("²ÎÊı", "ÇåÁãÏÂÏŞ", "-0.010"));
+		fVc2 = atof(pSng->GetCfgString("²ÎÊı", "ÇåÁãÉÏÏŞ", "0.010"));
 		if (fA < fVc1|| fA > fVc2)
 		{
-			MESLOG("å·¥ç«™1ç§°é‡æ¸…é›¶å¤±è´¥ï¼Œé‡å¤");
+			MESLOG("¹¤Õ¾1³ÆÖØÇåÁãÊ§°Ü£¬ÖØ¸´");
 			m_nWZERO[0] = 1;
 		}
 		else
 		{
-			MESLOG("å·¥ç«™1ç§°é‡æ¸…é›¶æˆåŠŸ");
+			MESLOG("¹¤Õ¾1³ÆÖØÇåÁã³É¹¦");
 			m_nZERO[0] = 1;
 		}
 	}
 }
 
 /************************************************************************/
-/* com2 å’Œcom3 æ˜¯485è½¬232çš„ä¸¤ä¸ªæ¸©åº¦ä¼ æ„Ÿå™¨ï¼Œå…·ä½“åè®®å‚çœ‹ä¼ æ„Ÿå™¨é€šè®¯æ–‡æ¡£
+/* com2 ºÍcom3 ÊÇ485×ª232µÄÁ½¸öÎÂ¶È´«¸ĞÆ÷£¬¾ßÌåĞ­Òé²Î¿´´«¸ĞÆ÷Í¨Ñ¶ÎÄµµ
 /************************************************************************/
 void CDlgMes::OnCommMscomm2()
 {
-	// TODO:  åœ¨æ­¤å¤„æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç 
+	// TODO:  ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂë
 	CSingleton* pSng = CSingleton::GetInstance();
 	if (pSng->_nRun != RUN_WORK)
 		return;
 	VARIANT variant_inp;
 	COleSafeArray safearray_inp;
 	LONG len, k;
-	BYTE rxdata[2048];                                     //è®¾ç½®BYTEæ•°ç»„Â AnÂ 8-bitÂ integerthatÂ isÂ notÂ signed.
-	variant_inp = m_val[1].get_Input();                 //è¯»ç¼“å†²åŒº
-	safearray_inp = variant_inp;                         //VARIANTå‹å˜é‡è½¬æ¢ä¸ºColeSafeArrayå‹å˜é‡     
-	len = safearray_inp.GetOneDimSize();          //å¾—åˆ°æœ‰æ•ˆæ•°æ®é•¿åº¦    // æ¥å—æ•°æ®  
+	BYTE rxdata[2048];                                     //ÉèÖÃBYTEÊı×é?An?8-bit?integerthat?is?not?signed.
+	variant_inp = m_val[1].get_Input();                 //¶Á»º³åÇø
+	safearray_inp = variant_inp;                         //VARIANTĞÍ±äÁ¿×ª»»ÎªColeSafeArrayĞÍ±äÁ¿     
+	len = safearray_inp.GetOneDimSize();          //µÃµ½ÓĞĞ§Êı¾İ³¤¶È    // ½ÓÊÜÊı¾İ  
 	TRACE("\n %d", len);
 	for (k = 0; k < len; k++)
 	{
-		safearray_inp.GetElement(&k, rxdata + k);       //è½¬æ¢ä¸ºBYTEå‹æ•°ç»„     
-		BYTE bt = *(char*)(rxdata + k);                     //å­—ç¬¦å‹ 	                     
+		safearray_inp.GetElement(&k, rxdata + k);       //×ª»»ÎªBYTEĞÍÊı×é     
+		BYTE bt = *(char*)(rxdata + k);                     //×Ö·ûĞÍ 	                     
 		TRACE(" %02x", bt);
-		//LogFile(" %02x", bt);//è¾“å‡ºæ£€æµ‹æŒ‡ä»¤
+		//LogFile(" %02x", bt);//Êä³ö¼ì²âÖ¸Áî
 	}
 	if (len == 8)
 	{
@@ -1025,7 +1025,7 @@ void CDlgMes::OnCommMscomm2()
 		btx2 = *(char*)(rxdata + 3);
 		if (btx == 6 && btx1 == 0 && btx2 == 27)
 		{
-			MESLOG("å·¥ç«™2ç§°é‡æ¸…é›¶å®Œæˆï¼Œè¿›å…¥åˆ¤å®š");
+			MESLOG("¹¤Õ¾2³ÆÖØÇåÁãÍê³É£¬½øÈëÅĞ¶¨");
 			bWZERO[1] = true;
 			KillTimer(TIME_ZERO2);
 		}
@@ -1039,36 +1039,36 @@ void CDlgMes::OnCommMscomm2()
 		btx3 = *(char*)(rxdata + 4);
 		if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 0)
 		{
-			MESLOG("å·¥ç«™2æ ¡æ­£å®Œæˆ");
+			MESLOG("¹¤Õ¾2Ğ£ÕıÍê³É");
 			GetDlgItem(IDC_BTN_JZ2)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ2);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 255)
 
 		{
-			MESLOG("å·¥ç«™2æ ¡æ­£å¤±è´¥");
+			MESLOG("¹¤Õ¾2Ğ£ÕıÊ§°Ü");
 			GetDlgItem(IDC_BTN_JZ2)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ2);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 1)
 
 		{
-			MESLOG("å·¥ç«™2æ ¡æ­£æ­£åœ¨è¿è¡Œ");
+			MESLOG("¹¤Õ¾2Ğ£ÕıÕıÔÚÔËĞĞ");
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 2)
 
 		{
-			MESLOG("å·¥ç«™2æ ¡æ­£äººå·¥æ“ä½œé˜¶æ®µ");
+			MESLOG("¹¤Õ¾2Ğ£ÕıÈË¹¤²Ù×÷½×¶Î");
 		}
 	}
 	if (len !=11)
 		return;
-	//////////åŸºäºè¿™ä¸ªIOç›’å­ä¸éœ€è¦æŒ‡ä»¤äº†////////////////////
-	BYTE btNum[4];                 //å­—ç¬¦å‹ 
-	btNum[0] = *(char*)(rxdata + 5);                 //å­—ç¬¦å‹ 
-	btNum[1] = *(char*)(rxdata + 6);                 //å­—ç¬¦å‹ 
-	btNum[2] = *(char*)(rxdata + 7);                 //å­—ç¬¦å‹ 
-	btNum[3] = *(char*)(rxdata + 8);                 //å­—ç¬¦å‹ 
+	//////////»ùÓÚÕâ¸öIOºĞ×Ó²»ĞèÒªÖ¸ÁîÁË////////////////////
+	BYTE btNum[4];                 //×Ö·ûĞÍ 
+	btNum[0] = *(char*)(rxdata + 5);                 //×Ö·ûĞÍ 
+	btNum[1] = *(char*)(rxdata + 6);                 //×Ö·ûĞÍ 
+	btNum[2] = *(char*)(rxdata + 7);                 //×Ö·ûĞÍ 
+	btNum[3] = *(char*)(rxdata + 8);                 //×Ö·ûĞÍ 
 	float fVal = 0.00;
 	BYTE* p = (BYTE*)&fVal;
 	p[0] = btNum[3];
@@ -1078,23 +1078,23 @@ void CDlgMes::OnCommMscomm2()
 	float fA = fVal;
 	float fB;
 	CString strVal;
-	fB = atof(pSng->GetCfgString("VALè¡¥å¿", "å·¥ç«™2", "0.000"));
+	fB = atof(pSng->GetCfgString("VAL²¹³¥", "¹¤Õ¾2", "0.000"));
 	fA += fB;
 	strVal.Format("%.3f", fA);
 	SetDlgItemText(IDC_STATIC_IN5, strVal);
 	if (bVal[1] == true)
 	{
 		bVal[1] = false;
-		MESLOG("å·¥ç«™2å¼€å§‹ç»‘ç ");
+		MESLOG("¹¤Õ¾2¿ªÊ¼°óÂë");
 		//m_nVAL[1] = 1;
 		if (TV1.size() < 1)
 		{
 			m_nVAL[1] = 2;
-			MESLOG("å·¥ç«™2æ— ç å¯ç»‘");
+			MESLOG("¹¤Õ¾2ÎŞÂë¿É°ó");
 			return;
 		}
-		MESLOG("å·¥ç«™2ç§°é‡æˆåŠŸï¼š" + strVal);
-		MESLOG("å·¥ç«™2ç»‘ç æˆåŠŸ");
+		MESLOG("¹¤Õ¾2³ÆÖØ³É¹¦£º" + strVal);
+		MESLOG("¹¤Õ¾2°óÂë³É¹¦");
 		CString sql, strNum;
 		TV1[0].fVal = fA;
 		pSng->_csInfo.Lock();
@@ -1103,7 +1103,7 @@ void CDlgMes::OnCommMscomm2()
 		pSng->_csInfo.Unlock();
 		if (atoi(strNum) < 1)
 		{
-			MESLOG("æ— æ¡ç 2æ•°æ®ï¼ï¼ï¼ï¼ï¼");
+			MESLOG("ÎŞÌõÂë2Êı¾İ£¡£¡£¡£¡£¡");
 		}
 		pSng->_csInfo.Lock();
 		sql.Format("Update WH set VAL2 = %.3f where IP = '%s'", fA, TV1[0].strCode);
@@ -1120,37 +1120,37 @@ void CDlgMes::OnCommMscomm2()
 		strVal2 = strs.at(0).at(2);
 		float fVc, fVc1, fVc2;
 		fVc = atof(strVal2) - atof(strVal1);
-		fVc1 = atof(pSng->GetCfgString(pSng->strLiaohao, "æ³¨æ°´é‡ä¸‹é™", "1.000"));
-		fVc2 = atof(pSng->GetCfgString(pSng->strLiaohao, "æ³¨æ°´é‡ä¸Šé™", "2.000"));
+		fVc1 = atof(pSng->GetCfgString(pSng->strLiaohao, "×¢Ë®Á¿ÏÂÏŞ", "1.000"));
+		fVc2 = atof(pSng->GetCfgString(pSng->strLiaohao, "×¢Ë®Á¿ÉÏÏŞ", "2.000"));
 		if (fVc < fVc1 || fVc > fVc2)
 		{
 			m_nVAL[1] = 2;
-			MESLOG("å·¥ç«™2ç§°é‡è¶…ä¸Šä¸‹é™");
+			MESLOG("¹¤Õ¾2³ÆÖØ³¬ÉÏÏÂÏŞ");
 		}
 		else
 		{
 			m_nVAL[1] = 1;
-			MESLOG("å·¥ç«™2ç§°é‡æ­£å¸¸");
+			MESLOG("¹¤Õ¾2³ÆÖØÕı³£");
 		}
 		pSng->_csTV.Lock();
 		TV1.erase(TV1.begin());
-		MESLOG("å·¥ç«™2å»é™¤æœªç”¨ç¬¬ä¸€ä¸ªç ");
+		MESLOG("¹¤Õ¾2È¥³ıÎ´ÓÃµÚÒ»¸öÂë");
 		pSng->_csTV.Unlock();
 	}
 	if (bZERO[1] == true)
 	{
 		bZERO[1] = false;
 		float fVc1, fVc2;
-		fVc1 = atof(pSng->GetCfgString("å‚æ•°", "æ¸…é›¶ä¸‹é™", "-0.010"));
-		fVc2 = atof(pSng->GetCfgString("å‚æ•°", "æ¸…é›¶ä¸Šé™", "0.010"));
+		fVc1 = atof(pSng->GetCfgString("²ÎÊı", "ÇåÁãÏÂÏŞ", "-0.010"));
+		fVc2 = atof(pSng->GetCfgString("²ÎÊı", "ÇåÁãÉÏÏŞ", "0.010"));
 		if (fA < fVc1 || fA > fVc2)
 		{
-			MESLOG("å·¥ç«™2ç§°é‡æ¸…é›¶å¤±è´¥ï¼Œé‡å¤");
+			MESLOG("¹¤Õ¾2³ÆÖØÇåÁãÊ§°Ü£¬ÖØ¸´");
 			m_nWZERO[1] = 1;
 		}
 		else
 		{
-			MESLOG("å·¥ç«™2ç§°é‡æ¸…é›¶æˆåŠŸ");
+			MESLOG("¹¤Õ¾2³ÆÖØÇåÁã³É¹¦");
 			m_nZERO[1] = 1;
 		}
 	}
@@ -1160,24 +1160,24 @@ void CDlgMes::OnCommMscomm2()
 
 void CDlgMes::OnCommMscomm3()
 {
-	// TODO:  åœ¨æ­¤å¤„æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç 
+	// TODO:  ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂë
 	CSingleton* pSng = CSingleton::GetInstance();
 	if (pSng->_nRun != RUN_WORK)
 		return;
 	VARIANT variant_inp;
 	COleSafeArray safearray_inp;
 	LONG len, k;
-	BYTE rxdata[2048];                                     //è®¾ç½®BYTEæ•°ç»„Â AnÂ 8-bitÂ integerthatÂ isÂ notÂ signed.
-	variant_inp = m_val[2].get_Input();                 //è¯»ç¼“å†²åŒº
-	safearray_inp = variant_inp;                         //VARIANTå‹å˜é‡è½¬æ¢ä¸ºColeSafeArrayå‹å˜é‡     
-	len = safearray_inp.GetOneDimSize();          //å¾—åˆ°æœ‰æ•ˆæ•°æ®é•¿åº¦    // æ¥å—æ•°æ®  
+	BYTE rxdata[2048];                                     //ÉèÖÃBYTEÊı×é?An?8-bit?integerthat?is?not?signed.
+	variant_inp = m_val[2].get_Input();                 //¶Á»º³åÇø
+	safearray_inp = variant_inp;                         //VARIANTĞÍ±äÁ¿×ª»»ÎªColeSafeArrayĞÍ±äÁ¿     
+	len = safearray_inp.GetOneDimSize();          //µÃµ½ÓĞĞ§Êı¾İ³¤¶È    // ½ÓÊÜÊı¾İ  
 	TRACE("\n %d", len);
 	for (k = 0; k < len; k++)
 	{
-		safearray_inp.GetElement(&k, rxdata + k);       //è½¬æ¢ä¸ºBYTEå‹æ•°ç»„     
-		BYTE bt = *(char*)(rxdata + k);                     //å­—ç¬¦å‹ 	                     
+		safearray_inp.GetElement(&k, rxdata + k);       //×ª»»ÎªBYTEĞÍÊı×é     
+		BYTE bt = *(char*)(rxdata + k);                     //×Ö·ûĞÍ 	                     
 		TRACE(" %02x", bt);
-		//LogFile(" %02x", bt);//è¾“å‡ºæ£€æµ‹æŒ‡ä»¤
+		//LogFile(" %02x", bt);//Êä³ö¼ì²âÖ¸Áî
 	}
 	if (len == 8)
 	{
@@ -1187,7 +1187,7 @@ void CDlgMes::OnCommMscomm3()
 		btx2 = *(char*)(rxdata + 3);
 		if (btx == 6 && btx1 == 0 && btx2 == 27)
 		{
-			MESLOG("å·¥ç«™3ç§°é‡æ¸…é›¶å®Œæˆï¼Œè¿›å…¥åˆ¤å®š");
+			MESLOG("¹¤Õ¾3³ÆÖØÇåÁãÍê³É£¬½øÈëÅĞ¶¨");
 			bWZERO[2] = true;
 			KillTimer(TIME_ZERO3);
 		}
@@ -1201,7 +1201,7 @@ void CDlgMes::OnCommMscomm3()
 		btx3 = *(char*)(rxdata + 4);
 		if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 0)
 		{
-			MESLOG("å·¥ç«™3æ ¡æ­£å®Œæˆ");
+			MESLOG("¹¤Õ¾3Ğ£ÕıÍê³É");
 			GetDlgItem(IDC_BTN_JZ3)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ3);
 
@@ -1209,29 +1209,29 @@ void CDlgMes::OnCommMscomm3()
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 255)
 
 		{
-			MESLOG("å·¥ç«™3æ ¡æ­£å¤±è´¥");
+			MESLOG("¹¤Õ¾3Ğ£ÕıÊ§°Ü");
 			GetDlgItem(IDC_BTN_JZ3)->EnableWindow(TRUE);
 			KillTimer(TIME_JZ3);
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 1)
 
 		{
-			MESLOG("å·¥ç«™3æ ¡æ­£æ­£åœ¨è¿è¡Œ");
+			MESLOG("¹¤Õ¾3Ğ£ÕıÕıÔÚÔËĞĞ");
 		}
 		else if (btx == 3 && btx1 == 2 && btx2 == 0 && btx3 == 2)
 
 		{
-			MESLOG("å·¥ç«™3æ ¡æ­£äººå·¥æ“ä½œé˜¶æ®µ");
+			MESLOG("¹¤Õ¾3Ğ£ÕıÈË¹¤²Ù×÷½×¶Î");
 		}
 	}
 	if (len !=11)
 		return;
-	//////////åŸºäºè¿™ä¸ªIOç›’å­ä¸éœ€è¦æŒ‡ä»¤äº†////////////////////
-	BYTE btNum[4];                 //å­—ç¬¦å‹ 
-	btNum[0] = *(char*)(rxdata + 5);                 //å­—ç¬¦å‹ 
-	btNum[1] = *(char*)(rxdata + 6);                 //å­—ç¬¦å‹ 
-	btNum[2] = *(char*)(rxdata + 7);                 //å­—ç¬¦å‹ 
-	btNum[3] = *(char*)(rxdata + 8);                 //å­—ç¬¦å‹ 
+	//////////»ùÓÚÕâ¸öIOºĞ×Ó²»ĞèÒªÖ¸ÁîÁË////////////////////
+	BYTE btNum[4];                 //×Ö·ûĞÍ 
+	btNum[0] = *(char*)(rxdata + 5);                 //×Ö·ûĞÍ 
+	btNum[1] = *(char*)(rxdata + 6);                 //×Ö·ûĞÍ 
+	btNum[2] = *(char*)(rxdata + 7);                 //×Ö·ûĞÍ 
+	btNum[3] = *(char*)(rxdata + 8);                 //×Ö·ûĞÍ 
 	float fVal = 0.00;
 	BYTE* p = (BYTE*)&fVal;
 	p[0] = btNum[3];
@@ -1241,23 +1241,23 @@ void CDlgMes::OnCommMscomm3()
 	float fA = fVal;
 	float fB;
 	CString strVal;
-	fB = atof(pSng->GetCfgString("VALè¡¥å¿", "å·¥ç«™3", "0.000"));
+	fB = atof(pSng->GetCfgString("VAL²¹³¥", "¹¤Õ¾3", "0.000"));
 	fA += fB;
 	strVal.Format("%.3f", fA);
 	SetDlgItemText(IDC_STATIC_IN6, strVal);
 	if (bVal[2] == true)
 	{
 		bVal[2] = false;
-		MESLOG("å·¥ç«™3å¼€å§‹ç»‘ç " );
+		MESLOG("¹¤Õ¾3¿ªÊ¼°óÂë" );
 		//m_nVAL[2] = 1;
 		if (TV2.size() < 1)
 		{
 			m_nVAL[2] = 2;
-			MESLOG("å·¥ç«™3æ— ç å¯ç»‘");
+			MESLOG("¹¤Õ¾3ÎŞÂë¿É°ó");
 			return;
 		}
-		MESLOG("å·¥ç«™3ç§°é‡æˆåŠŸï¼š" + strVal);
-		MESLOG("å·¥ç«™3ç»‘ç æˆåŠŸ");
+		MESLOG("¹¤Õ¾3³ÆÖØ³É¹¦£º" + strVal);
+		MESLOG("¹¤Õ¾3°óÂë³É¹¦");
 		CString sql, strNum;
 		TV2[0].fVal = fA;
 		pSng->_csInfo.Lock();
@@ -1266,7 +1266,7 @@ void CDlgMes::OnCommMscomm3()
 		pSng->_csInfo.Unlock();
 		if (atoi(strNum) < 1)
 		{
-			MESLOG("æ— æ¡ç 3æ•°æ®ï¼ï¼ï¼ï¼ï¼");
+			MESLOG("ÎŞÌõÂë3Êı¾İ£¡£¡£¡£¡£¡");
 		}
 		pSng->_csInfo.Lock();
 		sql.Format("Update WH set VAL3 = %.3f where IP = '%s'", fA, TV2[0].strCode);
@@ -1287,39 +1287,39 @@ void CDlgMes::OnCommMscomm3()
 		float fVc, fVc1, fVc2, fVc3, fVc4, fVc5;
 		fVc = atof(strVal2) - atof(strVal3);
 		fVc3 = atof(strVal3) - atof(strVal1);
-		fVc1 = atof(pSng->GetCfgString(pSng->strLiaohao, "æŠ½å‡ºé‡ä¸‹é™", "1.000"));
-		fVc2 = atof(pSng->GetCfgString(pSng->strLiaohao, "æŠ½å‡ºé‡ä¸Šé™", "2.000"));
-		fVc4 = atof(pSng->GetCfgString(pSng->strLiaohao, "å°å­˜é‡ä¸‹é™", "1.000"));
-		fVc5 = atof(pSng->GetCfgString(pSng->strLiaohao, "å°å­˜é‡ä¸Šé™", "2.000"));
+		fVc1 = atof(pSng->GetCfgString(pSng->strLiaohao, "³é³öÁ¿ÏÂÏŞ", "1.000"));
+		fVc2 = atof(pSng->GetCfgString(pSng->strLiaohao, "³é³öÁ¿ÉÏÏŞ", "2.000"));
+		fVc4 = atof(pSng->GetCfgString(pSng->strLiaohao, "·â´æÁ¿ÏÂÏŞ", "1.000"));
+		fVc5 = atof(pSng->GetCfgString(pSng->strLiaohao, "·â´æÁ¿ÉÏÏŞ", "2.000"));
 		if (fVc < fVc1 || fVc > fVc2 || fVc3 < fVc4 || fVc3 > fVc5)
 		{
 			m_nVAL[2] = 2;
-			MESLOG("å·¥ç«™3ç§°é‡è¶…ä¸Šä¸‹é™");
+			MESLOG("¹¤Õ¾3³ÆÖØ³¬ÉÏÏÂÏŞ");
 		}
 		else
 		{
 			m_nVAL[2] = 1;
-			MESLOG("å·¥ç«™3ç§°é‡æ­£å¸¸");
+			MESLOG("¹¤Õ¾3³ÆÖØÕı³£");
 		}
 		pSng->_csTV.Lock();
 		TV2.erase(TV2.begin());
-		MESLOG("å·¥ç«™3å»é™¤æœªç”¨ç¬¬ä¸€ä¸ªç ");
+		MESLOG("¹¤Õ¾3È¥³ıÎ´ÓÃµÚÒ»¸öÂë");
 		pSng->_csTV.Unlock();
 	}
 	if (bZERO[2] == true)
 	{
 		bZERO[2] = false;
 		float fVc1, fVc2;
-		fVc1 = atof(pSng->GetCfgString("å‚æ•°", "æ¸…é›¶ä¸‹é™", "-0.010"));
-		fVc2 = atof(pSng->GetCfgString("å‚æ•°", "æ¸…é›¶ä¸Šé™", "0.010"));
+		fVc1 = atof(pSng->GetCfgString("²ÎÊı", "ÇåÁãÏÂÏŞ", "-0.010"));
+		fVc2 = atof(pSng->GetCfgString("²ÎÊı", "ÇåÁãÉÏÏŞ", "0.010"));
 		if (fA < fVc1 || fA > fVc2)
 		{
-			MESLOG("å·¥ç«™3ç§°é‡æ¸…é›¶å¤±è´¥ï¼Œé‡å¤");
+			MESLOG("¹¤Õ¾3³ÆÖØÇåÁãÊ§°Ü£¬ÖØ¸´");
 			m_nWZERO[2] = 1;
 		}
 		else
 		{
-			MESLOG("å·¥ç«™3ç§°é‡æ¸…é›¶æˆåŠŸ");
+			MESLOG("¹¤Õ¾3³ÆÖØÇåÁã³É¹¦");
 			m_nZERO[2] = 1;
 		}
 	}
@@ -1468,7 +1468,7 @@ void CDlgMes::OnBnClickedBtnVal()
 
 void CDlgMes::OnBnClickedBtnLog()
 {
-	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	CSingleton* pSng = CSingleton::GetInstance();
 	pSng->_pLog = (CIDlgInfo*)CImgDLL::LogDlg();
 }
@@ -1476,7 +1476,7 @@ void CDlgMes::OnBnClickedBtnLog()
 
 void CDlgMes::OnBnClickedBtnZero()
 {
-	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	SetTimer(TIME_ZERO1, 500, NULL);
 	SetTimer(TIME_ZERO2, 500, NULL);
 	SetTimer(TIME_ZERO3, 500, NULL);
@@ -1485,25 +1485,25 @@ void CDlgMes::OnBnClickedBtnZero()
 
 void CDlgMes::OnBnClickedBtnOkzero()
 {
-	// TODO:  åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	CSingleton* pSng = CSingleton::GetInstance();
 	CString strZero;
 	strZero.Format("0");
 	SetDlgItemText(IDC_STATIC_IN7, strZero);
 	SetDlgItemText(IDC_STATIC_IN8, strZero);
 	SetDlgItemText(IDC_STATIC_IN9, strZero);
-	pSng->SetCfgString("å·¥ä½1", "OK", strZero);
-	pSng->SetCfgString("å·¥ä½1", "NG", strZero);
+	pSng->SetCfgString("¹¤Î»1", "OK", strZero);
+	pSng->SetCfgString("¹¤Î»1", "NG", strZero);
 	SetDlgItemText(IDC_STATIC_IN10, strZero);
 	SetDlgItemText(IDC_STATIC_IN11, strZero);
 	SetDlgItemText(IDC_STATIC_IN12, strZero);
-	pSng->SetCfgString("å·¥ä½2", "OK", strZero);
-	pSng->SetCfgString("å·¥ä½2", "NG", strZero);
+	pSng->SetCfgString("¹¤Î»2", "OK", strZero);
+	pSng->SetCfgString("¹¤Î»2", "NG", strZero);
 	SetDlgItemText(IDC_STATIC_IN13, strZero);
 	SetDlgItemText(IDC_STATIC_IN14, strZero);
 	SetDlgItemText(IDC_STATIC_IN15, strZero);
-	pSng->SetCfgString("å·¥ä½3", "OK", strZero);
-	pSng->SetCfgString("å·¥ä½3", "NG", strZero);
+	pSng->SetCfgString("¹¤Î»3", "OK", strZero);
+	pSng->SetCfgString("¹¤Î»3", "NG", strZero);
 }
 
 
@@ -1513,9 +1513,9 @@ UINT ThreadWatchCheng(LPVOID p)
 	CDlgMes* pDlg = (CDlgMes*)pSng->_pMain;
 	SoftElemType eType = REGI_H3U_DW;
 	int nAddr[3];
-	nAddr[0] = pSng->GetCfgInt("å‚æ•°", "ç§°é‡1åœ°å€", 110);
-	nAddr[1] = pSng->GetCfgInt("å‚æ•°", "ç§°é‡2åœ°å€", 130);
-	nAddr[2] = pSng->GetCfgInt("å‚æ•°", "ç§°é‡3åœ°å€", 150);
+	nAddr[0] = pSng->GetCfgInt("²ÎÊı", "³ÆÖØ1µØÖ·", 110);
+	nAddr[1] = pSng->GetCfgInt("²ÎÊı", "³ÆÖØ2µØÖ·", 130);
+	nAddr[2] = pSng->GetCfgInt("²ÎÊı", "³ÆÖØ3µØÖ·", 150);
 	const int nNetId = 0;
 	unsigned short nValueRD[4];
 	int nCount = 4;
@@ -1527,15 +1527,15 @@ UINT ThreadWatchCheng(LPVOID p)
 		Sleep(500);
 		if (GetTickCount() - dwHeart > 60000)
 		{
-			MESLOG("--------æ£€æµ‹ç§°é‡å¿ƒè·³æ­£å¸¸---------");
+			MESLOG("--------¼ì²â³ÆÖØĞÄÌøÕı³£---------");
 			dwHeart = GetTickCount();
 		}
 		if (pSng->_nRun == RUN_WORK)
 		{
 			//if (bPLc == false)
 			//{
-			//	int nIpPort = pSng->GetCfgInt("å‚æ•°", "PORT", 502);
-			//	pSng->_strIP = pSng->GetCfgString("å‚æ•°", "IP", "192.168.3.100");
+			//	int nIpPort = pSng->GetCfgInt("²ÎÊı", "PORT", 502);
+			//	pSng->_strIP = pSng->GetCfgString("²ÎÊı", "IP", "192.168.3.100");
 			//	pSng->_csPLC.Lock();
 			//	BOOL  bRet = Exit_ETH(nNetId);
 			//	pSng->_csPLC.Unlock();
@@ -1552,14 +1552,14 @@ UINT ThreadWatchCheng(LPVOID p)
 				pSng->_csPLC.Unlock();
 				if (nRet == 0)
 				{
-					MESLOG("æ— æ³•æ”¶åˆ°PLCæ•°æ®ï¼Œè¿æ¥æœ‰é—®é¢˜ï¼ï¼ï¼ï¼");
+					MESLOG("ÎŞ·¨ÊÕµ½PLCÊı¾İ£¬Á¬½ÓÓĞÎÊÌâ£¡£¡£¡£¡");
 					bPLc = false;
 					break;
 				}
 				memcpy(&nValueRD, pValue, sizeof(nValueRD));
 				if (nValueRD[0] == 1)
 				{
-					MESLOG("æ”¶åˆ°æ•°æ®%dï¼ï¼ï¼ï¼", nValueRD[0]);
+					MESLOG("ÊÕµ½Êı¾İ%d£¡£¡£¡£¡", nValueRD[0]);
 					ZeroMemory(pValue, sizeof(pValue));
 					DWORD deT = GetTickCount();
 					int nRetWR = 0;
@@ -1586,15 +1586,15 @@ UINT ThreadWatchCheng(LPVOID p)
 					if (nRetWR == 0)
 					{
 						pDlg->m_nWVAL[i] = 0;
-						MESLOG("æ— æ³•å†™å…¥PLCï¼Œè¿æ¥æœ‰é—®é¢˜ï¼ï¼ï¼ï¼");
+						MESLOG("ÎŞ·¨Ğ´ÈëPLC£¬Á¬½ÓÓĞÎÊÌâ£¡£¡£¡£¡");
 						bPLc = false;
 						break;
 					}
 					else
 					{
 						pDlg->m_nWVAL[i] = 1;
-						MESLOG("æ¸…ç©ºD%dæˆåŠŸï¼ï¼ï¼ï¼Œç»“æœ%d", nAddr[i], nRetWR);
-						MESLOG("D%d æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤", nAddr[i]);
+						MESLOG("Çå¿ÕD%d³É¹¦£¡£¡£¡£¬½á¹û%d", nAddr[i], nRetWR);
+						MESLOG("D%d ÊÕµ½¼ì²âÖ¸Áî", nAddr[i]);
 						bPLc = true;
 					}
 				}
@@ -1611,9 +1611,9 @@ UINT ThreadCheng(LPVOID p)
 	CString strThread;
 	int nCount = 1;
 	int nAddrVal[3];
-	nAddrVal[0] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™1VAL", 111);
-	nAddrVal[1] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™2VAL", 131);
-	nAddrVal[2] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™3VAL", 151);
+	nAddrVal[0] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾1VAL", 111);
+	nAddrVal[1] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾2VAL", 131);
+	nAddrVal[2] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾3VAL", 151);
 	for (; g_nExt != 1;)
 	{
 		Sleep(10);
@@ -1621,7 +1621,7 @@ UINT ThreadCheng(LPVOID p)
 			continue;
 		for (int i = 0; i < 3; i++)
 		{
-			if (pDlg->m_nWVAL[i] == 0)                           //æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤
+			if (pDlg->m_nWVAL[i] == 0)                           //ÊÕµ½¼ì²âÖ¸Áî
 				continue;
 			pDlg->m_nWVAL[i] = 0;
 			pDlg->bVal[i] = true;
@@ -1654,9 +1654,9 @@ UINT ThreadWatchIP(LPVOID p)
 	CDlgMes* pDlg = (CDlgMes*)pSng->_pMain;
 	SoftElemType eType = REGI_H3U_DW;
 	int nAddr[3];
-	nAddr[0] = pSng->GetCfgInt("å‚æ•°", "æ‰«ç 1åœ°å€", 100);
-	nAddr[1] = pSng->GetCfgInt("å‚æ•°", "æ‰«ç 2åœ°å€", 120);
-	nAddr[2] = pSng->GetCfgInt("å‚æ•°", "æ‰«ç 3åœ°å€", 140);
+	nAddr[0] = pSng->GetCfgInt("²ÎÊı", "É¨Âë1µØÖ·", 100);
+	nAddr[1] = pSng->GetCfgInt("²ÎÊı", "É¨Âë2µØÖ·", 120);
+	nAddr[2] = pSng->GetCfgInt("²ÎÊı", "É¨Âë3µØÖ·", 140);
 	const int nNetId = 0;
 	unsigned short nValueRD[4];
 	int nCount = 1;
@@ -1668,15 +1668,15 @@ UINT ThreadWatchIP(LPVOID p)
 		Sleep(500);
 		if (GetTickCount() - dwHeart > 60000)
 		{
-			MESLOG("--------æ£€æµ‹IPå¿ƒè·³æ­£å¸¸---------");
+			MESLOG("--------¼ì²âIPĞÄÌøÕı³£---------");
 			dwHeart = GetTickCount();
 		}
 		if (pSng->_nRun == RUN_WORK)
 		{
 			//if (bPLc == false)
 			//{
-			//	int nIpPort = pSng->GetCfgInt("å‚æ•°", "PORT", 502);
-			//	pSng->_strIP = pSng->GetCfgString("å‚æ•°", "IP", "192.168.3.100");
+			//	int nIpPort = pSng->GetCfgInt("²ÎÊı", "PORT", 502);
+			//	pSng->_strIP = pSng->GetCfgString("²ÎÊı", "IP", "192.168.3.100");
 			//	pSng->_csPLC.Lock();
 			//	BOOL  bRet = Exit_ETH(nNetId);
 			//	pSng->_csPLC.Unlock();
@@ -1693,14 +1693,14 @@ UINT ThreadWatchIP(LPVOID p)
 				pSng->_csPLC.Unlock();
 				if (nRet == 0)
 				{
-					MESLOG("æ— æ³•æ”¶åˆ°PLCæ•°æ®ï¼Œè¿æ¥æœ‰é—®é¢˜ï¼ï¼ï¼ï¼");
+					MESLOG("ÎŞ·¨ÊÕµ½PLCÊı¾İ£¬Á¬½ÓÓĞÎÊÌâ£¡£¡£¡£¡");
 					bPLc = false;
 					break;
 				}
 				memcpy(&nValueRD, pValue, sizeof(nValueRD));
 				if (nValueRD[0] == 1)
 				{
-					MESLOG("æ”¶åˆ°æ•°æ®%dï¼ï¼ï¼ï¼", nValueRD[0]);
+					MESLOG("ÊÕµ½Êı¾İ%d£¡£¡£¡£¡", nValueRD[0]);
 					ZeroMemory(pValue, sizeof(pValue));
 					DWORD deT = GetTickCount();
 					int nRetWR = 0;
@@ -1727,15 +1727,15 @@ UINT ThreadWatchIP(LPVOID p)
 					if (nRetWR == 0)
 					{
 						pDlg->m_nWIP[i] = 0;
-						MESLOG("æ— æ³•å†™å…¥PLCï¼Œè¿æ¥æœ‰é—®é¢˜ï¼ï¼ï¼ï¼");
+						MESLOG("ÎŞ·¨Ğ´ÈëPLC£¬Á¬½ÓÓĞÎÊÌâ£¡£¡£¡£¡");
 						bPLc = false;
 						break;
 					}
 					else
 					{
 						pDlg->m_nWIP[i] = 1;
-						MESLOG("æ¸…ç©ºD%dæˆåŠŸï¼ï¼ï¼ï¼Œç»“æœ%d", nAddr[i], nRetWR);
-						MESLOG("D%d æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤", nAddr[i]);
+						MESLOG("Çå¿ÕD%d³É¹¦£¡£¡£¡£¬½á¹û%d", nAddr[i], nRetWR);
+						MESLOG("D%d ÊÕµ½¼ì²âÖ¸Áî", nAddr[i]);
 						bPLc = true;
 					}
 				}
@@ -1753,9 +1753,9 @@ UINT ThreadIP(LPVOID p)
 	CString strThread;
 	int nCount = 1;
 	int nAddrIP[3];
-	nAddrIP[0] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™1IP", 101);
-	nAddrIP[1] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™2IP", 121);
-	nAddrIP[2] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™3IP", 141);
+	nAddrIP[0] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾1IP", 101);
+	nAddrIP[1] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾2IP", 121);
+	nAddrIP[2] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾3IP", 141);
 	for (; g_nExt != 1;)
 	{
 		Sleep(10);
@@ -1763,7 +1763,7 @@ UINT ThreadIP(LPVOID p)
 			continue;
 		for (int i = 0; i < 3; i++)
 		{
-			if (pDlg->m_nWIP[i] == 0)                           //æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤
+			if (pDlg->m_nWIP[i] == 0)                           //ÊÕµ½¼ì²âÖ¸Áî
 				continue;
 			pDlg->m_nWIP[i] = 0;
 			pSng->_strCliRobot[i].Empty();
@@ -1776,17 +1776,17 @@ UINT ThreadIP(LPVOID p)
 			//pSng->_csClient[i].Unlock();
 			if (i == 0)
 			{
-				MESLOG("å¼€å§‹æ‰«ç 1ï¼ï¼ï¼");
+				MESLOG("¿ªÊ¼É¨Âë1£¡£¡£¡");
 				pDlg->SetTimer(TIME_IP1, 200, NULL);
 			}
 			else if (i == 1)
 			{
-				MESLOG("å¼€å§‹æ‰«ç 2ï¼ï¼ï¼");
+				MESLOG("¿ªÊ¼É¨Âë2£¡£¡£¡");
 				pDlg->SetTimer(TIME_IP2, 200, NULL);
 			}
 			else if (i == 2)
 			{
-				MESLOG("å¼€å§‹æ‰«ç 3ï¼ï¼ï¼");
+				MESLOG("¿ªÊ¼É¨Âë3£¡£¡£¡");
 				pDlg->SetTimer(TIME_IP3, 200, NULL);
 			}
 			pDlg->dwIP[i] = GetTickCount();
@@ -1817,9 +1817,9 @@ UINT ThreadWatchZERO(LPVOID p)
 	CDlgMes* pDlg = (CDlgMes*)pSng->_pMain;
 	SoftElemType eType = REGI_H3U_DW;
 	int nAddr[3];
-	nAddr[0] = pSng->GetCfgInt("å‚æ•°", "æ¸…é›¶1åœ°å€", 115);
-	nAddr[1] = pSng->GetCfgInt("å‚æ•°", "æ¸…é›¶2åœ°å€", 135);
-	nAddr[2] = pSng->GetCfgInt("å‚æ•°", "æ¸…é›¶3åœ°å€", 155);
+	nAddr[0] = pSng->GetCfgInt("²ÎÊı", "ÇåÁã1µØÖ·", 115);
+	nAddr[1] = pSng->GetCfgInt("²ÎÊı", "ÇåÁã2µØÖ·", 135);
+	nAddr[2] = pSng->GetCfgInt("²ÎÊı", "ÇåÁã3µØÖ·", 155);
 	const int nNetId = 0;
 	unsigned short nValueRD[4];
 	int nCount = 1;
@@ -1831,15 +1831,15 @@ UINT ThreadWatchZERO(LPVOID p)
 		Sleep(500);
 		if (GetTickCount() - dwHeart > 60000)
 		{
-			MESLOG("--------æ£€æµ‹ZEROå¿ƒè·³æ­£å¸¸---------");
+			MESLOG("--------¼ì²âZEROĞÄÌøÕı³£---------");
 			dwHeart = GetTickCount();
 		}
 		if (pSng->_nRun == RUN_WORK)
 		{
 			if (bPLc == false)
 			{
-				int nIpPort = pSng->GetCfgInt("å‚æ•°", "PORT", 502);
-				pSng->_strIP = pSng->GetCfgString("å‚æ•°", "IP", "192.168.3.100");
+				int nIpPort = pSng->GetCfgInt("²ÎÊı", "PORT", 502);
+				pSng->_strIP = pSng->GetCfgString("²ÎÊı", "IP", "192.168.3.100");
 				pSng->_csPLC.Lock();
 				BOOL  bRet = Exit_ETH(nNetId);
 				pSng->_csPLC.Unlock();
@@ -1856,14 +1856,14 @@ UINT ThreadWatchZERO(LPVOID p)
 				pSng->_csPLC.Unlock();
 				if (nRet == 0)
 				{
-					MESLOG("æ— æ³•æ”¶åˆ°PLCæ•°æ®ï¼Œè¿æ¥æœ‰é—®é¢˜ï¼ï¼ï¼ï¼");
+					MESLOG("ÎŞ·¨ÊÕµ½PLCÊı¾İ£¬Á¬½ÓÓĞÎÊÌâ£¡£¡£¡£¡");
 					bPLc = false;
 					break;
 				}
 				memcpy(&nValueRD, pValue, sizeof(nValueRD));
 				if (nValueRD[0] == 1)
 				{
-					MESLOG("æ”¶åˆ°æ•°æ®%dï¼ï¼ï¼ï¼", nValueRD[0]);
+					MESLOG("ÊÕµ½Êı¾İ%d£¡£¡£¡£¡", nValueRD[0]);
 					ZeroMemory(pValue, sizeof(pValue));
 					DWORD deT = GetTickCount();
 					int nRetWR = 0;
@@ -1892,15 +1892,15 @@ UINT ThreadWatchZERO(LPVOID p)
 					if (nRetWR == 0)
 					{
 						pDlg->m_nWZERO[i] = 0;
-						MESLOG("æ— æ³•å†™å…¥PLCï¼Œè¿æ¥æœ‰é—®é¢˜ï¼ï¼ï¼ï¼");
+						MESLOG("ÎŞ·¨Ğ´ÈëPLC£¬Á¬½ÓÓĞÎÊÌâ£¡£¡£¡£¡");
 						bPLc = false;
 						break;
 					}
 					else
 					{
 						pDlg->m_nWZERO[i] = 1;
-						MESLOG("æ¸…ç©ºD%dæˆåŠŸï¼ï¼ï¼ï¼Œç»“æœ%d", nAddr[i], nRetWR);
-						MESLOG("D%d æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤", nAddr[i]);
+						MESLOG("Çå¿ÕD%d³É¹¦£¡£¡£¡£¬½á¹û%d", nAddr[i], nRetWR);
+						MESLOG("D%d ÊÕµ½¼ì²âÖ¸Áî", nAddr[i]);
 						bPLc = true;
 					}
 				}
@@ -1918,11 +1918,11 @@ UINT ThreadZERO(LPVOID p)
 	CString strThread;
 	int nCount = 1;
 	int nAddrZero[3];
-	nAddrZero[0] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™1ZWEO", 116);
-	nAddrZero[1] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™2ZWEO", 136);
-	nAddrZero[2] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™3ZWEO", 156);
+	nAddrZero[0] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾1ZWEO", 116);
+	nAddrZero[1] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾2ZWEO", 136);
+	nAddrZero[2] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾3ZWEO", 156);
 	int nTime;
-	nTime = pSng->GetCfgInt("å‚æ•°", "æ¸…é›¶æ—¶é•¿", 1000);
+	nTime = pSng->GetCfgInt("²ÎÊı", "ÇåÁãÊ±³¤", 1000);
 	for (; g_nExt != 1;)
 	{
 		Sleep(10);
@@ -1930,7 +1930,7 @@ UINT ThreadZERO(LPVOID p)
 			continue;
 		for (int i = 0; i < 3; i++)
 		{
-			if (pDlg->m_nWZERO[i] == 0)                           //æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤
+			if (pDlg->m_nWZERO[i] == 0)                           //ÊÕµ½¼ì²âÖ¸Áî
 				continue;
 			pDlg->m_nWZERO[i] = 0;
 			int nValue = 0;
@@ -1978,11 +1978,11 @@ UINT ThreadPLC(LPVOID p)
 	int nAddr[8];
 	nAddr[0] = 142;
 	nAddr[1] = 152;
-	nAddr[2] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™3IP", 141);
-	nAddr[3] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™3VAL", 151);
-	nAddr[4] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™1ZWEO", 116);
-	nAddr[5] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™2ZWEO", 136);
-	nAddr[6] = pSng->GetCfgInt("å‚æ•°", "å·¥ç«™3ZWEO", 156);
+	nAddr[2] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾3IP", 141);
+	nAddr[3] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾3VAL", 151);
+	nAddr[4] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾1ZWEO", 116);
+	nAddr[5] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾2ZWEO", 136);
+	nAddr[6] = pSng->GetCfgInt("²ÎÊı", "¹¤Õ¾3ZWEO", 156);
 	nAddr[7] = 157;
 	for (; g_nExt != 1;)
 	{
@@ -1991,7 +1991,7 @@ UINT ThreadPLC(LPVOID p)
 			continue;
 		for (int i = 0; i < 8; i++)
 		{
-			if (pDlg->m_nSleep[i] == 0)                           //æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤
+			if (pDlg->m_nSleep[i] == 0)                           //ÊÕµ½¼ì²âÖ¸Áî
 				continue;
 			pDlg->m_nSleep[i] = 0;
 			Sleep(1000);
@@ -2010,13 +2010,13 @@ UINT ThreadSLEEP(LPVOID p)
 	CSingleton* pSng = CSingleton::GetInstance();
 	CDlgMes* pDlg = (CDlgMes*)pSng->_pMain;
 	int nTime;
-	nTime = pSng->GetCfgInt("å‚æ•°", "æ¸…é›¶æ—¶é•¿", 6000);
+	nTime = pSng->GetCfgInt("²ÎÊı", "ÇåÁãÊ±³¤", 6000);
 	for (; g_nExt != 1;)
 	{
 		Sleep(10);
 		if (pSng->_nRun == RUN_NULL)
 			continue;
-		if (pDlg->bWZERO[0] == false)                           //æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤
+		if (pDlg->bWZERO[0] == false)                           //ÊÕµ½¼ì²âÖ¸Áî
 			continue;
 		Sleep(nTime);
 		pDlg->bWZERO[0] = false;
@@ -2030,13 +2030,13 @@ UINT ThreadSLEEP1(LPVOID p)
 	CSingleton* pSng = CSingleton::GetInstance();
 	CDlgMes* pDlg = (CDlgMes*)pSng->_pMain;
 	int nTime;
-	nTime = pSng->GetCfgInt("å‚æ•°", "æ¸…é›¶æ—¶é•¿", 6000);
+	nTime = pSng->GetCfgInt("²ÎÊı", "ÇåÁãÊ±³¤", 6000);
 	for (; g_nExt != 1;)
 	{
 		Sleep(10);
 		if (pSng->_nRun == RUN_NULL)
 			continue;
-		if (pDlg->bWZERO[1] == false)                           //æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤
+		if (pDlg->bWZERO[1] == false)                           //ÊÕµ½¼ì²âÖ¸Áî
 			continue;
 		Sleep(nTime);
 		pDlg->bWZERO[1] = false;
@@ -2050,13 +2050,13 @@ UINT ThreadSLEEP2(LPVOID p)
 	CSingleton* pSng = CSingleton::GetInstance();
 	CDlgMes* pDlg = (CDlgMes*)pSng->_pMain;
 	int nTime;
-	nTime = pSng->GetCfgInt("å‚æ•°", "æ¸…é›¶æ—¶é•¿", 6000);
+	nTime = pSng->GetCfgInt("²ÎÊı", "ÇåÁãÊ±³¤", 6000);
 	for (; g_nExt != 1;)
 	{
 		Sleep(10);
 		if (pSng->_nRun == RUN_NULL)
 			continue;
-		if (pDlg->bWZERO[2] == false)                           //æ”¶åˆ°æ£€æµ‹æŒ‡ä»¤
+		if (pDlg->bWZERO[2] == false)                           //ÊÕµ½¼ì²âÖ¸Áî
 			continue;
 		Sleep(nTime);
 		pDlg->bWZERO[2] = false;
@@ -2071,9 +2071,9 @@ void CDlgMes::OnBnClickedBtnJz()
 	CSingleton* pSng = CSingleton::GetInstance();
 	CString strText, strTime;
 	GetDlgItemText(IDC_BTN_JZ, strText);
-	if (strText == "å¼€å§‹æ ¡æ­£")
+	if (strText == "¿ªÊ¼Ğ£Õı")
 	{
-		SetDlgItemText(IDC_BTN_JZ, "æ ¡æ­£å®Œæˆ");
+		SetDlgItemText(IDC_BTN_JZ, "Ğ£ÕıÍê³É");
 		KillTimer(TIME_VAL1);
 		KillTimer(TIME_VAL2);
 		KillTimer(TIME_VAL3);
@@ -2083,7 +2083,7 @@ void CDlgMes::OnBnClickedBtnJz()
 	}
 	else
 	{
-		SetDlgItemText(IDC_BTN_JZ, "å¼€å§‹æ ¡æ­£");
+		SetDlgItemText(IDC_BTN_JZ, "¿ªÊ¼Ğ£Õı");
 		SetTimer(TIME_VAL1, 500, NULL);
 		SetTimer(TIME_VAL2, 500, NULL);
 		SetTimer(TIME_VAL3, 500, NULL);
@@ -2096,17 +2096,17 @@ void CDlgMes::OnBnClickedBtnJz()
 
 void CDlgMes::OnBnClickedOk()
 {
-	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	CDialogEx::OnOK();
 	g_nExt = 0;
-	MESLOG("é€€å‡ºç¨‹åºï¼ï¼ï¼");
+	MESLOG("ÍË³ö³ÌĞò£¡£¡£¡");
 }
 
 BOOL CDlgMes::PreTranslateMessage(MSG* pMsg)
 {
 	if (pMsg->message == WM_KEYDOWN)
 	{
-		if (pMsg->wParam == VK_ESCAPE || pMsg->wParam == VK_RETURN)  //å±è”½ESC/ENTER
+		if (pMsg->wParam == VK_ESCAPE || pMsg->wParam == VK_RETURN)  //ÆÁ±ÎESC/ENTER
 		{
 			return TRUE;
 		}
@@ -2129,7 +2129,7 @@ void CDlgMes::OnBnClickedBtnJz1()
 	Array.Add(0x46);
 	m_val[0].put_InBufferCount(0);
 	m_val[0].put_Output(COleVariant(Array));
-	MESLOG("å¼€å§‹å†…æ ¡1");
+	MESLOG("¿ªÊ¼ÄÚĞ£1");
 	GetDlgItem(IDC_BTN_JZ1)->EnableWindow(FALSE);
 	SetTimer(TIME_JZ1, 500, NULL);
 }
@@ -2150,7 +2150,7 @@ void CDlgMes::OnBnClickedBtnJz2()
 	Array.Add(0x75);
 	m_val[1].put_InBufferCount(0);
 	m_val[1].put_Output(COleVariant(Array));
-	MESLOG("å¼€å§‹å†…æ ¡2");
+	MESLOG("¿ªÊ¼ÄÚĞ£2");
 	GetDlgItem(IDC_BTN_JZ2)->EnableWindow(FALSE);
 	SetTimer(TIME_JZ2, 500, NULL);
 }
@@ -2171,7 +2171,7 @@ void CDlgMes::OnBnClickedBtnJz3()
 	Array.Add(0xA4);
 	m_val[2].put_InBufferCount(0);
 	m_val[2].put_Output(COleVariant(Array));
-	MESLOG("å¼€å§‹å†…æ ¡3");
+	MESLOG("¿ªÊ¼ÄÚĞ£3");
 	GetDlgItem(IDC_BTN_JZ3)->EnableWindow(FALSE);
 	SetTimer(TIME_JZ3, 500, NULL);
 

@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 #include "mscomm1.h"
 #include "..\DllMod\Singleton.h"
 struct CZ
@@ -12,22 +12,22 @@ struct CZ
 	float fVal;
 };
 
-// CDlgMes å¯¹è¯æ¡†
+// CDlgMes ¶Ô»°¿ò
 
 class CDlgMes : public CDialogEx
 {
 	DECLARE_DYNAMIC(CDlgMes)
 
 public:
-	CDlgMes(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
+	CDlgMes(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
 	virtual ~CDlgMes();
 
 
-// å¯¹è¯æ¡†æ•°æ®
+// ¶Ô»°¿òÊı¾İ
 	enum { IDD = IDD_DIALOG_MES };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 
 	DECLARE_MESSAGE_MAP()
 public:

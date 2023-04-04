@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 #include "MvCameraControl.h"
 #include "TCPSocket.h"
 #include "Log.h"
@@ -9,11 +9,11 @@
 #define ESP 0.00001
 
 //#include <vector>
-////åˆ©ç”¨vectoræ•°ç»„ç»“æ„æ„é€ ä¸€ç»´å­—ç¬¦ä¸²æ•°ç»„
+////ÀûÓÃvectorÊı×é½á¹¹¹¹ÔìÒ»Î¬×Ö·û´®Êı×é
 //typedef ::std::vector<CString> CStrs;
-////åˆ©ç”¨vectoræ•°ç»„ç»“æ„æ„é€ äºŒç»´å­—ç¬¦ä¸²æ•°ç»„
+////ÀûÓÃvectorÊı×é½á¹¹¹¹Ôì¶şÎ¬×Ö·û´®Êı×é
 //typedef ::std::vector<CStrs> CDStrs;
-////åˆ©ç”¨vectoræ•°ç»„ç»“æ„æ„é€ ä¸‰ç»´å­—ç¬¦ä¸²æ•°ç»„
+////ÀûÓÃvectorÊı×é½á¹¹¹¹ÔìÈıÎ¬×Ö·û´®Êı×é
 //typedef ::std::vector<CDStrs> CTStrs;
 
 #include "ListCtrlCl.h"
@@ -33,15 +33,15 @@ extern void DispMessage(HTuple hv_WindowHandle, HTuple hv_String, HTuple hv_Coor
 
 
 #define JDW_NULL             0
-#define JDW_I2O_FIRST   1   //ç”±å†…è€Œå¤–ï¼Œç¬¬ä¸€æ¡è¾¹ï¼Œå¯ä»¥ç”±åˆå®šä½åˆ¤æ–­åœ†å­”çš„é¢œè‰²ï¼Œæ˜¯ç™½è‰²è¿˜æ˜¯é»‘è‰²
-#define JDW_O2I_FIRST   2   //ç”±å¤–è€Œå†…ï¼Œç¬¬ä¸€æ¡è¾¹
-#define JDW_I2O_LAST     3   //ç”±å†…è€Œå¤–ï¼Œæœ€åä¸€æ¡è¾¹
-#define JDW_O2I_LAST     4   //ç”±å¤–è€Œå†…ï¼Œæœ€åä¸€æ¡è¾¹
-#define JDW_I2O_MAX      5    //ç”±å†…è€Œå¤–ï¼Œæœ€å¤§æ¢¯åº¦è¾¹
-#define JDW_O2I_MAX      6    //ç”±å¤–è€Œå†…ï¼Œæœ€å¤§æ¢¯åº¦è¾¹
-#define JDW_W_LNU         7    //ç™½è‰²é•¿æ¡è½®å»“
-#define JDW_B_LNU           8   //é»‘è‰²é•¿æ¡è½®å»“ï¼Œæ¶‰åŠåˆ°é•¿æ¡çš„å®½åº¦ï¼Œé•¿åº¦ï¼Œè§’åº¦
-#define JDW_TWO_LINE   9    //ä»»æ„ä¸¤æ¡ç›´çº¿äº¤ç‚¹
+#define JDW_I2O_FIRST   1   //ÓÉÄÚ¶øÍâ£¬µÚÒ»Ìõ±ß£¬¿ÉÒÔÓÉ³õ¶¨Î»ÅĞ¶ÏÔ²¿×µÄÑÕÉ«£¬ÊÇ°×É«»¹ÊÇºÚÉ«
+#define JDW_O2I_FIRST   2   //ÓÉÍâ¶øÄÚ£¬µÚÒ»Ìõ±ß
+#define JDW_I2O_LAST     3   //ÓÉÄÚ¶øÍâ£¬×îºóÒ»Ìõ±ß
+#define JDW_O2I_LAST     4   //ÓÉÍâ¶øÄÚ£¬×îºóÒ»Ìõ±ß
+#define JDW_I2O_MAX      5    //ÓÉÄÚ¶øÍâ£¬×î´óÌİ¶È±ß
+#define JDW_O2I_MAX      6    //ÓÉÍâ¶øÄÚ£¬×î´óÌİ¶È±ß
+#define JDW_W_LNU         7    //°×É«³¤ÌõÂÖÀª
+#define JDW_B_LNU           8   //ºÚÉ«³¤ÌõÂÖÀª£¬Éæ¼°µ½³¤ÌõµÄ¿í¶È£¬³¤¶È£¬½Ç¶È
+#define JDW_TWO_LINE   9    //ÈÎÒâÁ½ÌõÖ±Ïß½»µã
 #define JDW_CONS_C      12
 #define JDW_CONS_L       13
 #define JDW_CONS_U      14
@@ -105,8 +105,8 @@ extern void DispMessage(HTuple hv_WindowHandle, HTuple hv_String, HTuple hv_Coor
 #define ERR   -1
 
 #define  MAX_TM 4
-#define TMP_NCC        0                    //NCCæ¨¡æ¿
-#define TMP_SHM        1                    //Shapeæ¨¡æ¿åªæœ‰åŸç‚¹
+#define TMP_NCC        0                    //NCCÄ£°å
+#define TMP_SHM        1                    //ShapeÄ£°åÖ»ÓĞÔ­µã
 
 
 
@@ -118,8 +118,8 @@ extern void DispMessage(HTuple hv_WindowHandle, HTuple hv_String, HTuple hv_Coor
 #define JDWPR_MINR      5
 #define JDWPR_MAXR     6
 #define JDWPR_ANGST   7
-#define JDWPR_RANGE   8    //è§’åº¦èŒƒå›´
-#define JDWPR_RADIUS  9    //ç²¾å®šä½åŠå¾„
+#define JDWPR_RANGE   8    //½Ç¶È·¶Î§
+#define JDWPR_RADIUS  9    //¾«¶¨Î»°ë¾¶
 
 #define OUT_NULL 0
 #define OUT_VAL    1
@@ -170,7 +170,7 @@ private:
 };
 
 
-struct CListStyle               //åˆ—è¡¨ä¿¡æ¯
+struct CListStyle               //ÁĞ±íĞÅÏ¢
 {
 	void Set(const char* s, int nL)
 	{
@@ -194,7 +194,7 @@ struct CWatch
 	bool bHas,bOK;
 	CString strCode;
 	double fDia[6];
-	double fNum[6][2];      //æ¯ä¸ªå·¥ç«™çš„èºç‰™æ•°é‡
+	double fNum[6][2];      //Ã¿¸ö¹¤Õ¾µÄÂİÑÀÊıÁ¿
 };
 
 struct CSignal
@@ -212,13 +212,13 @@ struct CSignal
 		iStatus = SIG_NULL;
 		sRet.Empty();
 	}
-	CString sNick, sSig, sVal,sRet;         //ä¿¡å·åç§°,ä¿¡å·ç‰‡æ®µï¼Œä¿¡å·å€¼,
-	int iWAT,iType,iStatus;              //å¦‚æœæ˜¯è¾“å…¥ï¼Œç­‰å¾…ä¿¡å·æŸ¥è¯¢æ—¶é—´ï¼Œå¦‚æœæ˜¯æ˜¯è¾“å‡ºï¼Œå°±æ˜¯æ‰§è¡Œå®Œæˆåï¼Œç­‰å¾…æ—¶é—´,ä¿¡å·ç±»å‹
-	int iAddr,iRes[8];                        //ä¿¡å·åœ°å€,ä¿¡å·ç»“æœ
-	bool bRev;                                 //è¿™ä¸ªä¿¡å·è¦å–åï¼Œ== sVal å°±æ˜¯æ²¡ä¿¡å·ï¼Œ!= sVal å°±æ˜¯æœ‰ä¿¡å·
-	bool bNeg;                                //è¿™ä¸ªä¿¡å·æ˜¯å¦å±è”½
-	DWORD dwTime;                    // ä¿¡å·è§¦å‘æ—¶é—´
-	double fVal;                              //ä¿¡å·å€¼
+	CString sNick, sSig, sVal,sRet;         //ĞÅºÅÃû³Æ,ĞÅºÅÆ¬¶Î£¬ĞÅºÅÖµ,
+	int iWAT,iType,iStatus;              //Èç¹ûÊÇÊäÈë£¬µÈ´ıĞÅºÅ²éÑ¯Ê±¼ä£¬Èç¹ûÊÇÊÇÊä³ö£¬¾ÍÊÇÖ´ĞĞÍê³Éºó£¬µÈ´ıÊ±¼ä,ĞÅºÅÀàĞÍ
+	int iAddr,iRes[8];                        //ĞÅºÅµØÖ·,ĞÅºÅ½á¹û
+	bool bRev;                                 //Õâ¸öĞÅºÅÒªÈ¡·´£¬== sVal ¾ÍÊÇÃ»ĞÅºÅ£¬!= sVal ¾ÍÊÇÓĞĞÅºÅ
+	bool bNeg;                                //Õâ¸öĞÅºÅÊÇ·ñÆÁ±Î
+	DWORD dwTime;                    // ĞÅºÅ´¥·¢Ê±¼ä
+	double fVal;                              //ĞÅºÅÖµ
 };
 
 struct  CTMP
@@ -235,13 +235,13 @@ struct  CTMP
 		fScore = 0.7;
 		fRealRC[0] = fRealRC[1] = 0;
 		fRealRC[2] = 2700;
-		fRealRC[3] = 3800;      //é»˜è®¤1000ä¸‡åƒç´ ç›¸æœº
+		fRealRC[3] = 3800;      //Ä¬ÈÏ1000ÍòÏñËØÏà»ú
 		strNameTmp.Empty();
 		fR = 0;
 		iMod = -1;
 		nJDW = 0;
 	}
-	void ClearMod()                                          //æ¸…ç©ºæ¨¡æ¿
+	void ClearMod()                                          //Çå¿ÕÄ£°å
 	{
 		for (int i = 0; i < MAX_TM; i++)
 		{
@@ -258,19 +258,19 @@ struct  CTMP
 				{
 					CString str;
 					const char* pc = q.ErrorMessage().Text();
-					str.Format("æ¨¡æ¿é‡Šæ”¾å¼‚å¸¸ï¼š%s", pc);
+					str.Format("Ä£°åÊÍ·ÅÒì³££º%s", pc);
 					LogFile(str);
 				}
 			}
 			nM[i] = -1;
 		}
 	}
-	int iMod,nImgSize[2];                                            //çª—å£æ˜¾ç¤ºå›¾åƒçš„æœ€å¤§å°ºå¯¸
-	CString strNameTmp;                                          //æ¨¡æ¿åç§° å’Œ æ¨¡æ¿ç±»å‹
-	HTuple hvM[MAX_TM];                                        //æ ‡å‡†æ¨¡æ¿å’Œå¤‡ä»½æ¨¡æ¿
+	int iMod,nImgSize[2];                                            //´°¿ÚÏÔÊ¾Í¼ÏñµÄ×î´ó³ß´ç
+	CString strNameTmp;                                          //Ä£°åÃû³Æ ºÍ Ä£°åÀàĞÍ
+	HTuple hvM[MAX_TM];                                        //±ê×¼Ä£°åºÍ±¸·İÄ£°å
 	int nM[MAX_TM],nJDW;
-	double fRealRC[4], fPar[MAX_TM][5],fR;                        //æ¨¡æ¿æœç´¢åŒº,æ— ç¼©æ”¾,0~1æ¨¡æ¿åŸç‚¹ç›¸å¯¹NCCä¸­å¿ƒç‚¹çš„åå·®ï¼Œ2~3æ¨¡æ¿å›¾é•¿å®½,4äºŒå€¼åŒ–;(ç²¾å®šä½å­”çš„åŠå¾„),
-	double fCenDirLH[5], fScore, fJDWLH[2][5];     //fJDWLH æ˜¯ç²¾å®šä½çš„çº¿æå–åŒºåŸŸçš„é•¿å®½å’Œå®šä½æ¡†çš„è§’åº¦,æ¨¡æ¿çš„æ ‡å‡†æ–¹å‘è§’
+	double fRealRC[4], fPar[MAX_TM][5],fR;                        //Ä£°åËÑË÷Çø,ÎŞËõ·Å,0~1Ä£°åÔ­µãÏà¶ÔNCCÖĞĞÄµãµÄÆ«²î£¬2~3Ä£°åÍ¼³¤¿í,4¶şÖµ»¯;(¾«¶¨Î»¿×µÄ°ë¾¶),
+	double fCenDirLH[5], fScore, fJDWLH[2][5];     //fJDWLH ÊÇ¾«¶¨Î»µÄÏßÌáÈ¡ÇøÓòµÄ³¤¿íºÍ¶¨Î»¿òµÄ½Ç¶È,Ä£°åµÄ±ê×¼·½Ïò½Ç
 };
 
 struct CPos
@@ -301,11 +301,11 @@ struct CPos
 	double x, y, z, r;
 	double fVec, fAcc,fVal,fPos[3];
 	int XYZR[4];
-	CString strNick;                      //ç‚¹çš„åç§°
-	CString strMN;                        //è¯¥ç‚¹æ‰€å±çš„æ–™å· æˆ–è€…èŠ‚ç‚¹çš„å€¼
-	vector<CSignal> sgOut;         //å¤šä¸ªè¾“å‡ºä¿¡å·
-	int iPrNO,iVal;                           //å¦‚æœè¿™ä¸ªç‚¹æ˜¯äº§å“æ‹ç…§ç‚¹ä½ï¼Œé‚£ä¹ˆè¿™ä¸ªç‚¹æ˜¯å‡ å·ç‚¹0,
-	CTMP TM[2];                          //ä¸€ä¸ªå·¥ä½œèŠ‚ç‚¹æœ€å¤šä¸¤ç§ç±»å‹æ¨¡æ¿ï¼Œå®šä½ç‚¹å’Œæ–¹å‘ç‚¹
+	CString strNick;                      //µãµÄÃû³Æ
+	CString strMN;                        //¸ÃµãËùÊôµÄÁÏºÅ »òÕß½ÚµãµÄÖµ
+	vector<CSignal> sgOut;         //¶à¸öÊä³öĞÅºÅ
+	int iPrNO,iVal;                           //Èç¹ûÕâ¸öµãÊÇ²úÆ·ÅÄÕÕµãÎ»£¬ÄÇÃ´Õâ¸öµãÊÇ¼¸ºÅµã0,
+	CTMP TM[2];                          //Ò»¸ö¹¤×÷½Úµã×î¶àÁ½ÖÖÀàĞÍÄ£°å£¬¶¨Î»µãºÍ·½Ïòµã
 };
 
 struct CPTCALI
@@ -330,7 +330,7 @@ struct CWinText
 		strTxt.Empty();
 		strColo = "yellow";                     //'black', 'blue', 'yellow', 'red', 'green', 'cyan', 'magenta', 'forest green', 'lime green', 'coral', 'slate blue'
 	}
-	int nPosPer[2];                         //æ–‡å­—åœ¨çª—å£ä¸Šæ˜¾ç¤ºçš„ç™¾åˆ†æ¯”
+	int nPosPer[2];                         //ÎÄ×ÖÔÚ´°¿ÚÉÏÏÔÊ¾µÄ°Ù·Ö±È
 	int nFontSize;
 	CString strTxt,strColo;
 };
@@ -387,7 +387,7 @@ struct CHWin
 		SetWindowAttr("background_color", "gray");
 		WinTexts.clear();
 		OpenWindow(0, 0, rcWin.Width(), rcWin.Height(), (INT)pWnd->m_hWnd, "visible", "", &WndID);
-		SetDraw(WndID, "margin");                                                                                                                          //é»˜è®¤æ˜¯åªæ˜¾ç¤ºè¾¹ç¼˜
+		SetDraw(WndID, "margin");                                                                                                                          //Ä¬ÈÏÊÇÖ»ÏÔÊ¾±ßÔµ
 		SetColor(WndID, "green");
 	}
 	void InitWnd(CWnd *pWnd, double fW, double fH, CString strColor, int nLineW = 2,int nX = 0, int nY = 0)
@@ -397,7 +397,7 @@ struct CHWin
 			if (WndID != 0)
 				HalconCpp::CloseWindow(WndID);
 			SetWindowAttr("background_color", "gray");
-			pWnd->GetClientRect(&rcWin);                                         //ID1ä¸ºç¬¬ä¸€ä¸ªå›¾åƒæ§ä»¶çš„IDå·ï¼Œç¬¬äºŒä¸ªçª—å£ç±»ä¼¼å¤„ç†ã€‚  
+			pWnd->GetClientRect(&rcWin);                                         //ID1ÎªµÚÒ»¸öÍ¼Ïñ¿Ø¼şµÄIDºÅ£¬µÚ¶ş¸ö´°¿ÚÀàËÆ´¦Àí¡£  
 			HWND hImgWnd = pWnd->m_hWnd;
 			Hlong MainWndID = (Hlong)hImgWnd;
 			double fWCoe = fW / rcWin.Width();
@@ -417,11 +417,11 @@ struct CHWin
 			SetLineWidth(WndID, nLineW);
 			SetDraw(WndID, "margin");
 		}
-		catch (HalconCpp::HOperatorException &q)                                                     //é‡‡é›†çª—å£å¼‚å¸¸
+		catch (HalconCpp::HOperatorException &q)                                                     //²É¼¯´°¿ÚÒì³£
 		{
 			CString str;
 			const char* pc = q.ErrorMessage().Text();
-			str.Format("çª—å£è®¾å®šå¼‚å¸¸ï¼š%s", pc);
+			str.Format("´°¿ÚÉè¶¨Òì³££º%s", pc);
 			//LogFile(str);
 		}
 	}
@@ -517,7 +517,7 @@ struct CHWin
 		psRD.y = Row1;
 		psRD.x = Col1;
 		//int nPos[2] = { 10, 10 };
-		//LoadText(nPos, "åŸå§‹å›¾");
+		//LoadText(nPos, "Ô­Ê¼Í¼");
 		//int nPosTxt[2] = { 70, 10 };
 		//ShowImage(nPosTxt, "OK", 60, "green", false);
 		if (bShow)
@@ -537,10 +537,10 @@ struct CXMLImage
 	{
 		nOTP = OUT_NULL;
 	}
-	CString strType;             //èŠ‚ç‚¹å·¥ä½œå†…å®¹
-	CTMP TMs;                    //å›¾åƒæ¨¡æ¿åç§°
-	vector<CPos> psLeaf;   //å¶å­èŠ‚ç‚¹
-	int nOTP;                          //è¾“å‡ºç±»å‹
+	CString strType;             //½Úµã¹¤×÷ÄÚÈİ
+	CTMP TMs;                    //Í¼ÏñÄ£°åÃû³Æ
+	vector<CPos> psLeaf;   //Ò¶×Ó½Úµã
+	int nOTP;                          //Êä³öÀàĞÍ
 };
 
 class CSingleton
@@ -557,7 +557,7 @@ public:
 	}
 	~CSingleton(void);
 	static void CSingleton::DeleteInstance();
-	//static int GetLetterValue(char C)//å­—ç¬¦ä¸²è½¬åŒ–æˆå€¼
+	//static int GetLetterValue(char C)//×Ö·û´®×ª»¯³ÉÖµ
 	//{
 	//	if (C == 'A' || C == 'a')
 	//		return 10;
@@ -571,7 +571,7 @@ public:
 	//		return 14;
 	//	if (C == 'F' || C == 'f')
 	//		return 15;
-	//	int i = C - 48;//0çš„ASCIIç æ˜¯48
+	//	int i = C - 48;//0µÄASCIIÂëÊÇ48
 	//	if (i > 9 || i < 0)
 	//		return -1;
 	//	return i;
@@ -594,23 +594,23 @@ public:
 	//		if (strAddr.GetAt(i) == '.')
 	//			break;
 	//	}	
-	//	int iVal = atoi(strAddr.Left(i));                             //è·å¾—æ•´æ•°éƒ¨åˆ†çš„æ•°å­—
+	//	int iVal = atoi(strAddr.Left(i));                             //»ñµÃÕûÊı²¿·ÖµÄÊı×Ö
 	//	CString strOver;
-	//	strOver.Format(_T("%04x"),iVal);                     //è½¬åŒ–æˆ16è¿›åˆ¶çš„æ•°æ®   
+	//	strOver.Format(_T("%04x"),iVal);                     //×ª»¯³É16½øÖÆµÄÊı¾İ   
 	//	Addrs[0] = _tcstoul(strOver.Left(2),0,16);
 	//	Addrs[1] = _tcstoul(strOver.Mid(2,2),0,16);
 	//	Addrs[2] = 0;
 	//	if (i < strAddr.GetLength())
 	//	{
 	//		iVal = atoi(strAddr.Right(strAddr.GetLength() - i - 1));
-	//		Addrs[2] = iVal%256;//å¦‚æœå¤§äº256å°±æ˜¯é”™è¯¯çš„æ•°æ®,è¿™é‡Œå¯¹256å–ä½™å¥½äº†
+	//		Addrs[2] = iVal%256;//Èç¹û´óÓÚ256¾ÍÊÇ´íÎóµÄÊı¾İ,ÕâÀï¶Ô256È¡ÓàºÃÁË
 	//	}
 	//}
 	void CreateDir(CString strDir)
 	{
-		if( CreateDirectory(strDir, NULL) ) //åˆ¤æ–­æ˜¯å¦å­˜åœ¨ï¼Œå¦åˆ™åˆ›å»º
+		if( CreateDirectory(strDir, NULL) ) //ÅĞ¶ÏÊÇ·ñ´æÔÚ£¬·ñÔò´´½¨
 		{
-			SetFileAttributes(strDir,FILE_ATTRIBUTE_DIRECTORY); //éšè—(è®¾ç½®ä¸ºéšè—)
+			SetFileAttributes(strDir,FILE_ATTRIBUTE_DIRECTORY); //Òş²Ø(ÉèÖÃÎªÒş²Ø)
 		}
 	}
 	void CheckNumber(CString& str);
@@ -637,35 +637,35 @@ public:
 	bool GetFitLineVal(HTuple& WndID,HTuple& Ys,HTuple& Xs,
 		                            HTuple& hv_RowA,HTuple& hv_ColA,HTuple& hv_RowB,HTuple& hv_ColB,
 		                        double &fVal,double fMaxD = 12,bool bFilter = false,bool bShow = true);
-	//æ ¹æ®å¤–æ¥çŸ©å½¢è®¡ç®—æœ€é è¿‘æŒ‡å®šç‚¹çš„è§’ç‚¹,æœ€è¿œè·ç¦»300ä¸ªåƒç´ 
+	//¸ù¾İÍâ½Ó¾ØĞÎ¼ÆËã×î¿¿½üÖ¸¶¨µãµÄ½Çµã,×îÔ¶¾àÀë300¸öÏñËØ
 	bool GetRectCorner(HTuple& WndID,HObject& hoRect,double& fR,double& fC,double fDist = 300,bool bShow = true);
-	//ç²¾å®šä½åœ†å¿ƒç‚¹ï¼Œæ›´æ–°åœ†è½®å»“æ¨¡æ¿çš„ä¸­å¿ƒç‚¹åæ ‡ 
+	//¾«¶¨Î»Ô²ĞÄµã£¬¸üĞÂÔ²ÂÖÀªÄ£°åµÄÖĞĞÄµã×ø±ê 
 	bool GetCircleTmpXY(HTuple& WndID,HObject& hoPic, double fCen[2], double& fR, double fPar[9],int nJDW);
 	void UpdateMarginPar()
 	{
-		_iLen[0] = GetCfgInt("è¾¹ç¼˜ç‚¹", "L1", 30);
-		_iLen[1] = GetCfgInt("è¾¹ç¼˜ç‚¹", "L2", 90);
-		_iGray = GetCfgInt("è¾¹ç¼˜ç‚¹", "Gray", 30);
-		_iDev = GetCfgInt("è¾¹ç¼˜ç‚¹", "Dev", 35);
+		_iLen[0] = GetCfgInt("±ßÔµµã", "L1", 30);
+		_iLen[1] = GetCfgInt("±ßÔµµã", "L2", 90);
+		_iGray = GetCfgInt("±ßÔµµã", "Gray", 30);
+		_iDev = GetCfgInt("±ßÔµµã", "Dev", 35);
 	}
-	//æ ¹æ®è¾¹ç¼˜æ¢¯åº¦ï¼Œæ‰¾æ‰€æœ‰è¾¹ç¼˜ä¸­æ¢¯åº¦æœ€å¤§çš„ï¼Œèµ‹å€¼ç»™Xsï¼ŒYs
+	//¸ù¾İ±ßÔµÌİ¶È£¬ÕÒËùÓĞ±ßÔµÖĞÌİ¶È×î´óµÄ£¬¸³Öµ¸øXs£¬Ys
 	void GetMaxAmpPt(HTuple& hvAmplitude, HTuple& hvRowEdge, HTuple &hvColEdge, HTuple& hvXs, HTuple &hvYs, int& n, double fDir, HObject& hoImage);
 	int GetCfgInt(CString strSec, CString strKey, int nDef = 0)
 	{
 		int II = GetPrivateProfileInt(strSec, strKey, nDef, _strINI);
 		return II;
 	}
-	//æ ¹æ®ç²¾å®šä½ç±»å‹é‡æ–°è®¡ç®—å®šä½ç‚¹åæ ‡
+	//¸ù¾İ¾«¶¨Î»ÀàĞÍÖØĞÂ¼ÆËã¶¨Î»µã×ø±ê
 	bool GetJDWPos(HTuple& WndID, HObject& hoImage, HTuple& hvMat2D, double fPar[10], CTMP& tm, bool bShow = false);
-	//æ ¹æ®è¾¹ç•Œç‚¹é›†çš„å¹³å‡ç°åº¦å’Œæ–¹å·®æ’é™¤ä¸åˆé€‚çš„ç‚¹,fL[0] ä¸»æ–¹å‘é•¿åº¦ï¼ŒfL[1] å®½åº¦
+	//¸ù¾İ±ß½çµã¼¯µÄÆ½¾ù»Ò¶ÈºÍ·½²îÅÅ³ı²»ºÏÊÊµÄµã,fL[0] Ö÷·½Ïò³¤¶È£¬fL[1] ¿í¶È
 	bool FilterPts(HTuple& WndID, HObject& hoImage, HTuple& Ys, HTuple& Xs, double fDir, int iLen[2]);
-	//å½“å‰æ¨¡æ¿æœ‰æ²¡æœ‰è®¾ç½®æ¨¡æ¿æ–¹å‘,æˆ–è€…æ¨¡æ¿ä¿¡æ¯æ­£ç¡®å—ï¼Ÿ
+	//µ±Ç°Ä£°åÓĞÃ»ÓĞÉèÖÃÄ£°å·½Ïò,»òÕßÄ£°åĞÅÏ¢ÕıÈ·Âğ£¿
 	int GetTmpDirOrgJDW(CString strNCC, CStrs& Vs);
-	//åˆå§‹åŒ–åˆ—è¡¨ä¿¡æ¯
+	//³õÊ¼»¯ÁĞ±íĞÅÏ¢
 	void InitList(CListCtrlCl& m_list, vector<CListStyle>& Style);
-	//æŸ¥è¯¢ã€secã€‘å­—æ®µä¸‹æœ‰å¤šå°‘å†…å®¹ strsåˆå§‹åŒ–æ¸…ç©ºçš„ 
+	//²éÑ¯¡¾sec¡¿×Ö¶ÎÏÂÓĞ¶àÉÙÄÚÈİ strs³õÊ¼»¯Çå¿ÕµÄ 
 	void GetSecKeys(CString strSec, CStringArray& strs);
-	//ä¸“é—¨é’ˆå¯¹æ¨¡æ¿åœ†å¿ƒæå–
+	//×¨ÃÅÕë¶ÔÄ£°åÔ²ĞÄÌáÈ¡
 	bool GetCircleCen(HTuple& WndID, HObject& hoImage, double fCen[2], double fS = 7500, int nThres = 130, bool bShow = true);
 	bool NineDotCalib(CPos ImgPts[9], CPos AxisPts[9], HTuple& HomMat2D);
 	double ToDeg(double fPhi)
@@ -677,15 +677,15 @@ public:
 		return fDeg*PI / 180;
 	}
 	bool GetDirPoint(HTuple& WndID, HObject& hoImage, double fY, double fX, double fPhi, double fLen[2],double fVec[2]);
-	//ä¼ å…¥è¿›å»ç²—å®šä½ç‚¹ï¼Œè¿”å›ç²¾å®šä½ç‚¹ï¼ŒfPar[2],fPar[3] ä¼ å…¥èµ·å§‹æœç´¢è§’åº¦
+	//´«Èë½øÈ¥´Ö¶¨Î»µã£¬·µ»Ø¾«¶¨Î»µã£¬fPar[2],fPar[3] ´«ÈëÆğÊ¼ËÑË÷½Ç¶È
 	bool GetDirPoint(HTuple& WndID, HObject& hoImage, double& fY, double& fX, double fRC[2],double fPar[4],int nJDW = 0);
-	//å¾—åˆ°å’Œæ°´å¹³è½´å¤¹è§’,ä¼ å…¥çš„æ˜¯æœºæ¢°åæ ‡ï¼Œ
-	//bImage = true è¯´æ˜æœºæ¢°åæ ‡ç³»å¯ä»¥é€šè¿‡æ—‹è½¬å›¾åƒåæ ‡ç³»çš„å¾—åˆ°ä¸€è‡´æ–¹å‘ï¼Œ
-	//bImage = false è¯´æ˜ä¸èƒ½å¾—åˆ°ä¸€è‡´åæ ‡æ–¹å‘
+	//µÃµ½ºÍË®Æ½Öá¼Ğ½Ç,´«ÈëµÄÊÇ»úĞµ×ø±ê£¬
+	//bImage = true ËµÃ÷»úĞµ×ø±êÏµ¿ÉÒÔÍ¨¹ıĞı×ªÍ¼Ïñ×ø±êÏµµÄµÃµ½Ò»ÖÂ·½Ïò£¬
+	//bImage = false ËµÃ÷²»ÄÜµÃµ½Ò»ÖÂ×ø±ê·½Ïò
 	double GetHorzAngle(double fAxisPt[2], double fVecPt[2], bool bImage = false, bool bRad = true);
-	//æ ¹æ®èŠ‚ç‚¹æŸ¥è¯¢
+	//¸ù¾İ½Úµã²éÑ¯
 	bool GetLeafsValue(CTreeCtrl& tree,HTREEITEM hItem, int nLeaf, CStrs& sLeafs);
-	//åˆå§‹åŒ–å¶èŠ‚ç‚¹
+	//³õÊ¼»¯Ò¶½Úµã
 	bool LoadLeafs(int nID, int nStep, CString strFunc, int nSumLeaf, CTreeCtrl& tree, CStrs& sLeafs, HTREEITEM hItem);
 	CString GetHTupleString(HTuple& hvRes);
 	void GetAffineRect(double fRCVal[], CString strPosTYP, HTuple& hvRes, HTuple& hvTransX, HTuple& hvTransY);
@@ -695,9 +695,9 @@ public:
 	void SetupCallBack(unsigned char ** pData, MV_FRAME_OUT_INFO_EX* pFrameInfo, int II);
 	bool CamSnap(CHWin& HW, int nCam, int nTimes = 4);
 	void FindAllFile(CString path, CStrs& filenames);
-	//æ‹Ÿåˆåœ†çš„ç®—æ³•
+	//ÄâºÏÔ²µÄËã·¨
 	bool IsFitCircle(HTuple& hvRs, HTuple& hvCs, double XYR[3]);
-	//æŠŠæµ‹é‡è¾“å…¥å†™å…¥åˆ°CSVæ–‡æ¡£å†…
+	//°Ñ²âÁ¿ÊäÈëĞ´Èëµ½CSVÎÄµµÄÚ
 	void Write2CSV(int nCam,CStrs Vals);
 	void Write2CSV(CString strIP, CString strVAL1, CString strVAL2, CString strVAL3);
 	int ReadFromTCP(CString cStart, long lVal[4]);
@@ -718,23 +718,23 @@ protected:
 	static CSingleton* m_pInstance;
 public:	
 	double _fZoom;
-	HObject _hoImgOrg[80];                              //æ¯ä¸ªç›¸æœºçš„åŸå§‹å›¾åƒ
-	vector<CXMLImage> _XMLImg[80];                 //å›¾åƒç®—æ³•æµç¨‹,æ¯ä¸ªç›¸æœºæœ€å¤š10ç§å·¥ä½œå†…å®¹
+	HObject _hoImgOrg[80];                              //Ã¿¸öÏà»úµÄÔ­Ê¼Í¼Ïñ
+	vector<CXMLImage> _XMLImg[80];                 //Í¼ÏñËã·¨Á÷³Ì,Ã¿¸öÏà»ú×î¶à10ÖÖ¹¤×÷ÄÚÈİ
 	int _nIPs;
 	bool _bRun;
-	int _iLen[2];                                                  //è¾¹ç¼˜ç‚¹å¹³å‡ç°åº¦é•¿åº¦è®¡ç®—
-	int _iDev, _iGray;                                          //è¾¹ç¼˜ç‚¹æ–¹å·®è®¡ç®—,ç°åº¦å·®
+	int _iLen[2];                                                  //±ßÔµµãÆ½¾ù»Ò¶È³¤¶È¼ÆËã
+	int _iDev, _iGray;                                          //±ßÔµµã·½²î¼ÆËã,»Ò¶È²î
 	CString _strINI;
-	CString _strCalib;                                  //æ ‡å®šé…ç½®æ–‡ä»¶
-	vector<char> _chs;                               //æ”¶åˆ°çš„æ•°æ®
+	CString _strCalib;                                  //±ê¶¨ÅäÖÃÎÄ¼ş
+	vector<char> _chs;                               //ÊÕµ½µÄÊı¾İ
 	CString _strHostName,_strIP;
 	UINT _iSvrPort;
 	int _iAng;
 	CStrs _Info;
 	bool _bPLC;
-	int _nRun,_nCCD,_nTimes;                   //nTimesè¡¨ç¤ºä¸‹ç›¸æœºæ‹å‡ æ¬¡ï¼Œä¸»è¦é’ˆå¯¹2ä¸ªä¸‹CCDæ¨ªæ‹ç…§ï¼Œè¿˜æ˜¯ç«–æ‹ç…§
-	double _fPixDist[13];                              //åƒç´ è·ç¦»
-	double _fCalibPos[2],_fVImg[4][2];        //æ ‡å®šäº§å“çš„ä½ç½®,å•ä¸ªèƒ¶æ¡æ‹ç…§ç”¨äºè®¡ç®—è§’åº¦çš„è™šæ‹Ÿç‚¹,è™šæ‹Ÿç‚¹ ç´¢å¼•ä»1å¼€å§‹ï¼Œåˆ†åˆ«æ˜¯1ï¼Œ2ï¼Œ3
+	int _nRun,_nCCD,_nTimes;                   //nTimes±íÊ¾ÏÂÏà»úÅÄ¼¸´Î£¬Ö÷ÒªÕë¶Ô2¸öÏÂCCDºáÅÄÕÕ£¬»¹ÊÇÊúÅÄÕÕ
+	double _fPixDist[13];                              //ÏñËØ¾àÀë
+	double _fCalibPos[2],_fVImg[4][2];        //±ê¶¨²úÆ·µÄÎ»ÖÃ,µ¥¸ö½ºÌõÅÄÕÕÓÃÓÚ¼ÆËã½Ç¶ÈµÄĞéÄâµã,ĞéÄâµã Ë÷Òı´Ó1¿ªÊ¼£¬·Ö±ğÊÇ1£¬2£¬3
 	double _fImgPr[6][2];                         
 	CString _strPro;                  
 	HTuple _MX[4];
@@ -747,19 +747,19 @@ public:
 	void* _hCam[CAM_NUM];
 	int _iCam[CAM_NUM];
 	CWnd* _pMain,*_pLog,*_pCamCfg,*_pJob;
-	int _nWnd;                                                //== 0 ä¸»ç•Œé¢ï¼Œ==1 å•ç›¸æœºç•Œé¢
-	CSortStringArray _strsDia;                                //å­”å¾„æ•°ç»„
+	int _nWnd;                                                //== 0 Ö÷½çÃæ£¬==1 µ¥Ïà»ú½çÃæ
+	CSortStringArray _strsDia;                                //¿×¾¶Êı×é
 	CCriticalSection _csSvr, _csInfo, _csCam[CAM_NUM], _csPLC, _csClient[8], _csIP, _csTV;
 	CHSCommPort _Lasr,_PLC;
-	double _fFCSnap[2][4];                                   //ä¸¤ä¸ªæ‹ç…§ç‚¹æœºæ¢°åæ ‡ï¼Œæ¯ä¸ªåæ ‡å››ä¸ªå‚æ•°
+	double _fFCSnap[2][4];                                   //Á½¸öÅÄÕÕµã»úĞµ×ø±ê£¬Ã¿¸ö×ø±êËÄ¸ö²ÎÊı
 	HObject _hoImg[CAM_NUM];
 	int _iReal[CAM_NUM];
 	int _iSnap[CAM_NUM];
-	int _nCamThread;                                        //å¯åŠ¨çš„ç›¸æœºæ•°é‡
-	CString _strSnd[3];                                 //æ¯ä¸ªç›¸æœºçš„æ¯ä¸€ä¸ªXMLæœ‰ä¸€ä¸ªç»“æœ
-	BOOL _bNewIP[9];                                        //æ¯ä¸€ä¸ªè”ç½‘çš„IPåœ°å€å°±ä½ä¿¡å·
-	CPos _RotAxs[5],_PosST[5][2],_PosBZ[3];                   //æ ‡å®šå‡ºæ¥çš„è½¬è½´,å’Œæ ‡å‡†ä½ç½®
-	CPTCALI _psCali[2];                                     //æ ‡å®šç‚¹ä½ç½®
+	int _nCamThread;                                        //Æô¶¯µÄÏà»úÊıÁ¿
+	CString _strSnd[3];                                 //Ã¿¸öÏà»úµÄÃ¿Ò»¸öXMLÓĞÒ»¸ö½á¹û
+	BOOL _bNewIP[9];                                        //Ã¿Ò»¸öÁªÍøµÄIPµØÖ·¾ÍÎ»ĞÅºÅ
+	CPos _RotAxs[5],_PosST[5][2],_PosBZ[3];                   //±ê¶¨³öÀ´µÄ×ªÖá,ºÍ±ê×¼Î»ÖÃ
+	CPTCALI _psCali[2];                                     //±ê¶¨µãÎ»ÖÃ
 	bool _bRes;
 	CString strLiaohao;
 };
