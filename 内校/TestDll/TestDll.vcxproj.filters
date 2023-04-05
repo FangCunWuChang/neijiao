@@ -19,6 +19,12 @@
     <Filter Include="头文件\json">
       <UniqueIdentifier>{3a282d77-74f4-4947-a9e0-00ed17474191}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\xml">
+      <UniqueIdentifier>{4718cdbb-8aa9-421e-8873-bc787a3a454c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\xml">
+      <UniqueIdentifier>{dacb1899-d64a-4210-942c-70b525868b51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -138,6 +144,12 @@
     <ClInclude Include="Define.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\tinyxml\tinystr.h">
+      <Filter>头文件\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tinyxml\tinyxml.h">
+      <Filter>头文件\xml</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestDll.cpp">
@@ -205,6 +217,18 @@
     </ClCompile>
     <ClCompile Include="WininetHttp.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tinyxml\tinystr.cpp">
+      <Filter>源文件\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tinyxml\tinyxml.cpp">
+      <Filter>源文件\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tinyxml\tinyxmlerror.cpp">
+      <Filter>源文件\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tinyxml\tinyxmlparser.cpp">
+      <Filter>源文件\xml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

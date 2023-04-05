@@ -17,6 +17,7 @@
 
 #include "WininetHttp.h"
 #include <json/json.h>
+#include "../tinyxml/tinyxml.h"
 
 #include <fstream>
 #pragma comment(lib, "Wininet.lib")
@@ -306,6 +307,48 @@ BEGIN_EVENTSINK_MAP(CDlgMes, CDialogEx)
 	ON_EVENT(CDlgMes, IDC_MSCOMM3, 1, CDlgMes::OnCommMscomm3, VTS_NONE)
 END_EVENTSINK_MAP()
 
+std::tuple<int, std::string, std::string> parseSOAPResult(const std::string& soapResult)
+{
+	TiXmlDocument doc;
+	doc.Parse(soapResult.c_str());
+	auto codeNode = doc.FirstChild("result");
+	auto dataNode = doc.FirstChild("datas");
+	auto msgNode = doc.FirstChild("msgCode");
+
+	int code = (codeNode && codeNode->ToElement()) ? stoi(codeNode->ToElement()->GetText()) : 0;
+	std::string data = (dataNode && dataNode->ToElement()) ? dataNode->ToElement()->GetText() : "";
+	std::string msg = (msgNode && msgNode->ToElement()) ? msgNode->ToElement()->GetText() : "";
+
+	return std::make_tuple(code, msg, data);
+}
+
+CString createSOAPData(
+	CString account,
+	CString password,
+	CString opttype,
+	CString data)
+{
+	CString result;
+	result.Format(
+		"<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \
+xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \
+xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\
+<soap:Body>\
+<UniRequest xmlns=\"http://tempuri.org/\">\
+<rb>\
+<account>%s</account>\
+<optype>%s</optype>\
+<param>%s</param>\
+<password>%s</password>\
+<sericeName>GET_PROCESS_STATUS</sericeName>\
+</rb>\
+</UniRequest>\
+</soap:Body>\
+</soap:Envelope>", account.GetBuffer(), opttype.GetBuffer(), data.GetBuffer(), password.GetBuffer());
+	return result;
+}
+
 bool CDlgMes::Check_Json1(std::string& str)
 {
 	CSingleton* pSng = CSingleton::GetInstance();
@@ -388,23 +431,11 @@ bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString 
 	CSingleton* pSng = CSingleton::GetInstance();
 	CWininetHttp whttp = CWininetHttp();
 	string url = "http://192.168.180.131:8091/JavaInterfaces/UniServices.asmx";
-	CString strMXL;
-	strMXL.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \
-xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \
-xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\
-<soap:Body>\
-<UniRequest xmlns=\"http://tempuri.org/\">\
-<rb>\
-<account>SaoMaChuQi</account>\
-<optype>0</optype>\
-<param>{ \"moid\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"testStation\":\"%s\"}</param>\
-<password>114514</password>\
-<sericeName>GET_PROCESS_STATUS</sericeName>\
-</rb>\
-</UniRequest>\
-</soap:Body>\
-</soap:Envelope>", strmoid, strpartID, strppid, strtestStation);
+	CString jsonData;
+	jsonData.Format(
+		"{ \"moid\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"testStation\":\"%s\"}",
+		strmoid, strpartID, strppid, strtestStation);
+	CString strMXL = createSOAPData("SaoMaChuQi", "114514", "0", jsonData);
 	string xml_string;
 	xml_string = strMXL.GetBuffer();
 	strMXL.ReleaseBuffer();
@@ -428,7 +459,8 @@ xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\
 	ofs.open(strName);
 	ofs << strxmlRtn;
 	ofs.close();
-	bool bRet = Check_Json1(strxmlRtn);
+	auto xmlRes = parseSOAPResult(strxmlRtn);
+	bool bRet = Check_Json1(std::get<2>(xmlRes));
 	return bRet;
 }
 
@@ -441,23 +473,11 @@ bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CStri
 	CString strTime = pSng->Str2Cstr(GetTimeMillisecondsStr());
 	CWininetHttp whttp = CWininetHttp();
 	string url = "http://192.168.180.131:8091/JavaInterfaces/UniServices.asmx";
-	CString strMXL;
-	strMXL.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \
-xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \
-xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\
-<soap:Body>\
-<UniRequest xmlns=\"http://tempuri.org/\">\
-<rb>\
-<account>SaoMaChuQi</account>\
-<optype>0</optype>\
-<param>{ \"token\":\"%s\", \"deptID\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"mo_id\":\"%s\", \"lineID\":\"%s\", \"test_Station\":\"%s\", \"testTime\":\"%s\", \"testResult\":\"%s\", \"machineSN\":\"%s\", \"testchannelID\":\"%s\", \"measurementData\":{\"empty\":\"%s\", \"filling\":\"%s\", \"degassing\":\"%s\", \"fill_empty\":\"%s\", \"fill_degass\":\"%s\", \"degass_empty\":\"%s\", \"degass_empty_p1\":\"%s\", \"degass_empty_l1\":\"%s\"}</param>\
-<password>114514</password>\
-<sericeName>PUT_TESTDATA_INFO</sericeName>\
-</rb>\
-</UniRequest>\
-</soap:Body>\
-</soap:Envelope>", strtoken, strdeptID, strpartID, strppid, strmoid, strlineID, strtestStation, strTime, strtestResult, strmachineSN, strtestchannelID, strempty, strfilling, strdegassing, strfill_empty, strill_degass, strdegass_empty, strempty_p1, strempty_l1);
+	CString jsonData;
+	jsonData.Format(
+		"{\"token\":\"%s\", \"deptID\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"mo_id\":\"%s\", \"lineID\":\"%s\", \"test_Station\":\"%s\", \"testTime\":\"%s\", \"testResult\":\"%s\", \"machineSN\":\"%s\", \"testchannelID\":\"%s\", \"measurementData\":{\"empty\":\"%s\", \"filling\":\"%s\", \"degassing\":\"%s\", \"fill_empty\":\"%s\", \"fill_degass\":\"%s\", \"degass_empty\":\"%s\", \"degass_empty_p1\":\"%s\", \"degass_empty_l1\":\"%s\"}",
+		strtoken, strdeptID, strpartID, strppid, strmoid, strlineID, strtestStation, strTime, strtestResult, strmachineSN, strtestchannelID, strempty, strfilling, strdegassing, strfill_empty, strill_degass, strdegass_empty, strempty_p1, strempty_l1);
+	CString strMXL = createSOAPData("SaoMaChuQi", "114514", "0", jsonData);
 	string xml_string;
 	xml_string = strMXL.GetBuffer();
 	strMXL.ReleaseBuffer();
@@ -481,7 +501,8 @@ xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\
 	ofs.open(strName);
 	ofs << strxmlRtn;
 	ofs.close();
-	bool bRet = Check_Json2(strxmlRtn);
+	auto xmlRes = parseSOAPResult(strxmlRtn);
+	bool bRet = Check_Json2(std::get<2>(xmlRes));
 	return bRet;
 }
 
