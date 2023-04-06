@@ -21,6 +21,7 @@
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -72,6 +73,7 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\TestDll.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -287,26 +289,26 @@ END
 
 IDD_DIALOG_MESSZ DIALOGEX 0, 0, 310, 176
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Dialog"
+CAPTION "MES设置"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "保存",IDOK,253,155,50,14
-    LTEXT           "strdeptID",IDC_STATIC,28,21,58,15
+    LTEXT           "部门",IDC_STATIC,28,21,58,15
     EDITTEXT        IDC_EDIT1,82,18,58,20,ES_AUTOHSCROLL
-    LTEXT           "partID",IDC_STATIC,28,49,58,15
+    LTEXT           "料号",IDC_STATIC,28,49,58,15
     EDITTEXT        IDC_EDIT2,82,46,58,20,ES_AUTOHSCROLL
-    LTEXT           "mo_id",IDC_STATIC,28,74,58,15
+    LTEXT           "工单",IDC_STATIC,28,74,58,15
     EDITTEXT        IDC_EDIT3,82,71,58,20,ES_AUTOHSCROLL
-    LTEXT           "lineID",IDC_STATIC,28,98,58,15
+    LTEXT           "线别",IDC_STATIC,28,98,58,15
     EDITTEXT        IDC_EDIT4,82,95,58,20,ES_AUTOHSCROLL
-    LTEXT           "test_Station",IDC_STATIC,28,120,58,15
+    LTEXT           "站位代码",IDC_STATIC,28,120,58,15
     EDITTEXT        IDC_EDIT5,82,118,58,20,ES_AUTOHSCROLL
-    LTEXT           "testResult",IDC_STATIC,167,27,58,15
-    EDITTEXT        IDC_EDIT6,231,24,58,20,ES_AUTOHSCROLL
-    LTEXT           "machineSN",IDC_STATIC,167,52,58,15
-    EDITTEXT        IDC_EDIT7,231,49,58,20,ES_AUTOHSCROLL
-    LTEXT           "testchannelID",IDC_STATIC,167,75,58,15
-    EDITTEXT        IDC_EDIT8,231,72,58,20,ES_AUTOHSCROLL
+    LTEXT           "测试结果",IDC_STATIC,166,21,58,15
+    EDITTEXT        IDC_EDIT6,229,18,58,20,ES_AUTOHSCROLL
+    LTEXT           "设备条码",IDC_STATIC,167,49,58,15
+    EDITTEXT        IDC_EDIT7,229,46,58,20,ES_AUTOHSCROLL
+    LTEXT           "测试通道",IDC_STATIC,167,74,58,15
+    EDITTEXT        IDC_EDIT8,229,71,58,20,ES_AUTOHSCROLL
 END
 
 
@@ -439,6 +441,9 @@ BEGIN
         RIGHTMARGIN, 303
         TOPMARGIN, 7
         BOTTOMMARGIN, 169
+        HORZGUIDE, 18
+        HORZGUIDE, 46
+        HORZGUIDE, 71
     END
 END
 #endif    // APSTUDIO_INVOKED

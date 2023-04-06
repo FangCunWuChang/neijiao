@@ -14,8 +14,18 @@ std::string Bali::address;
 uint16_t Bali::port = 1111;
 std::string Bali::logPath;
 
-void Bali::config(const std::string& address, uint16_t port, const std::string& logPath)
+void Bali::config(const std::string& address, uint16_t port, const std::string& logPath, bool changeEndian)
 {
+	//·­×ª×Ö½ÚÐò
+	if (changeEndian)
+	{
+		uint8_t* ptrPort = reinterpret_cast<uint8_t*>(&port);
+
+		ptrPort[0] ^= ptrPort[1];
+		ptrPort[1] ^= ptrPort[0];
+		ptrPort[0] ^= ptrPort[1];
+	}
+
 	Bali::address = address;
 	Bali::port = port;
 	Bali::logPath = logPath;
