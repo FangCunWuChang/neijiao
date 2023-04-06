@@ -308,6 +308,7 @@ BEGIN_EVENTSINK_MAP(CDlgMes, CDialogEx)
 END_EVENTSINK_MAP()
 
 #define XMLFIND(n, s) ((n) ? (((n)->ToElement()) ? (n)->ToElement()->FirstChild(s) : nullptr ) : nullptr)
+#define XMLTOTEXT(n) ((n) && (n)->ToElement()) ? ((n)->ToElement()->GetText() ? (n)->ToElement()->GetText() : "") : "";
 
 std::tuple<int, std::string, std::string> parseSOAPResult(const std::string& soapResult)
 {
@@ -323,8 +324,8 @@ std::tuple<int, std::string, std::string> parseSOAPResult(const std::string& soa
 	auto msgNode = XMLFIND(uniRequestResultNode, "msgCode");
 
 	int code = (codeNode && codeNode->ToElement()) ? stoi(codeNode->ToElement()->GetText()) : 0;
-	std::string data = (dataNode && dataNode->ToElement()) ? dataNode->ToElement()->GetText() : "";
-	std::string msg = (msgNode && msgNode->ToElement()) ? msgNode->ToElement()->GetText() : "";
+	std::string data = XMLTOTEXT(dataNode);
+	std::string msg = XMLTOTEXT(msgNode);
 
 	return std::make_tuple(code, msg, data);
 }
@@ -333,7 +334,8 @@ CString createSOAPData(
 	CString account,
 	CString password,
 	CString opttype,
-	CString data)
+	CString data,
+	CString sericeName)
 {
 	CString result;
 	result.Format(
@@ -348,11 +350,11 @@ xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\
 <optype>%s</optype>\
 <param>%s</param>\
 <password>%s</password>\
-<sericeName>GET_PROCESS_STATUS</sericeName>\
+<sericeName>%s</sericeName>\
 </rb>\
 </UniRequest>\
 </soap:Body>\
-</soap:Envelope>", account.GetBuffer(), opttype.GetBuffer(), data.GetBuffer(), password.GetBuffer());
+</soap:Envelope>", account.GetBuffer(), opttype.GetBuffer(), data.GetBuffer(), password.GetBuffer(), sericeName.GetBuffer());
 	return result;
 }
 
@@ -406,9 +408,9 @@ bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString 
 	string url = "http://192.168.180.131:8091/JavaInterfaces/UniServices.asmx";
 	CString jsonData;
 	jsonData.Format(
-		"{ \"moid\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"testStation\":\"%s\"}",
+		"{\"moid\":\"%s\",\"partID\":\"%s\",\"ppid\":\"%s\",\"testStation\":\"%s\"}",
 		strmoid, strpartID, strppid, strtestStation);
-	CString strMXL = createSOAPData("ZhuShuiChuQi", "114514", "0", jsonData);
+	CString strMXL = createSOAPData("user", "123456", "0", jsonData, "GET_PROCESS_STATUS");
 	string xml_string;
 	xml_string = strMXL.GetBuffer();
 	strMXL.ReleaseBuffer();
@@ -449,9 +451,9 @@ bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CStri
 	string url = "http://192.168.180.131:8091/JavaInterfaces/UniServices.asmx";
 	CString jsonData;
 	jsonData.Format(
-		"{\"token\":\"%s\", \"deptID\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"mo_id\":\"%s\", \"lineID\":\"%s\", \"test_Station\":\"%s\", \"testTime\":\"%s\", \"testResult\":\"%s\", \"machineSN\":\"%s\", \"testchannelID\":\"%s\", \"measurementData\":{\"empty\":\"%s\", \"filling\":\"%s\", \"degassing\":\"%s\", \"fill_empty\":\"%s\", \"fill_degass\":\"%s\", \"degass_empty\":\"%s\", \"degass_empty_p1\":\"%s\", \"degass_empty_l1\":\"%s\"}}",
-		strtoken, strdeptID, strpartID, strppid, strmoid, strlineID, strtestStation, strTime, strtestResult, strmachineSN, strtestchannelID, strempty, strfilling, strdegassing, strfill_empty, strill_degass, strdegass_empty, strempty_p1, strempty_l1);
-	CString strMXL = createSOAPData("ZhuShuiChuQi", "114514", "0", jsonData);
+		"{\"token\":\"%s\",\"deptID\":\"%s\",\"partID\":\"%s\",\"ppid\":\"%s\",\"mo_id\":\"%s\",\"lineID\":\"%s\",\"test_Station\":\"%s\",\"testTime\":\"%s\",\"testResult\":\"%s\",\"machineSN\":\"%s\",\"testChannelID\":\"%s\",\"measurementData\":{\"empty\":\"%s\",\"filling\":\"%s\",\"degassing\":\"%s\",\"fill_empty\":\"%s\",\"fill_degass\":\"%s\",\"degass_empty\":\"%s\"}}",
+		strtoken, strdeptID, strpartID, strppid, strmoid, strlineID, strtestStation, strTime, strtestResult, strmachineSN, strtestchannelID, strempty, strfilling, strdegassing, strfill_empty, strill_degass, strdegass_empty);
+	CString strMXL = createSOAPData("admin", "123", "0", jsonData, "PUT_TESTDATA_INFO");
 	string xml_string;
 	xml_string = strMXL.GetBuffer();
 	strMXL.ReleaseBuffer();

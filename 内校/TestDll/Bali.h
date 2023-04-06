@@ -25,8 +25,8 @@ private:
 	static void saveLog(const std::string& path, const std::string& message);
 
 	static void createPath(const std::string& path);
-	static std::string getData();
-	static std::string getDataTime();
+	static std::string getDate();
+	static std::string getDateTime();
 
 	static std::string address;
 	static uint16_t port;

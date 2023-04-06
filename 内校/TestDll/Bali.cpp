@@ -30,7 +30,7 @@ void Bali::config(const std::string& address, uint16_t port, const std::string& 
 	Bali::port = port;
 	Bali::logPath = logPath;
 
-	Bali::createPath(address);
+	Bali::createPath(logPath);
 }
 
 bool Bali::send(
@@ -67,8 +67,8 @@ std::string Bali::createMessage(
 		+ sn + "@attr@fillEmpty@" + std::to_string(fillEmpty) + "\n"
 		+ sn + "@attr@fillDegrass@" + std::to_string(fillDegrass) + "\n"
 		+ sn + "@attr@degrassEmpty@" + std::to_string(degrassEmpty) + "\n"
-		+ sn + "@attr@time@" + Bali::getDataTime() + "\n"
-		+ sn + "@submit\n"
+		+ sn + "@attr@time@" + Bali::getDateTime() + "\n"
+		+ sn + "@submit@1.0\n"
 		+ "}\n";
 }
 
@@ -129,7 +129,7 @@ bool Bali::sendMessage(const std::string& address, uint16_t port, const std::str
 void Bali::saveLog(const std::string& path, const std::string& message)
 {
 	std::ofstream ofs;
-	ofs.open(path + Bali::getData() + ".log");
+	ofs.open(path + Bali::getDateTime() + ".log");
 	ofs << message;
 	ofs.close();
 }
@@ -162,14 +162,14 @@ void Bali::createPath(const std::string& path)
 	::_mkdir(tmpDirPath.c_str());
 }
 
-std::string Bali::getData()
+std::string Bali::getDate()
 {
 	CTime StartTime = CTime::GetCurrentTime();
 	CString strStartTime = StartTime.Format("%Y-%m-%d");
 	return strStartTime.GetBuffer();
 }
 
-std::string Bali::getDataTime()
+std::string Bali::getDateTime()
 {
 	CTime StartTime = CTime::GetCurrentTime();
 	CString strStartTime = StartTime.Format("%Y-%m-%d %H_%M_%S");
