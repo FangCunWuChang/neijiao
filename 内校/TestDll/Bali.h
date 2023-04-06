@@ -7,7 +7,7 @@ class Bali final
 	Bali() = delete;
 
 public:
-	static void config(const std::string& address, uint16_t port, const std::string& logPath, bool changeEndian = true);
+	static void config(const std::string& address, uint16_t port, const std::string& logPath, bool changeEndian = false);
 	static bool send(
 		const std::string& sn,
 		const std::string& fixture_id,
@@ -15,6 +15,7 @@ public:
 		double value1, double value2, double value3,
 		double fillEmpty, double fillDegrass, double degrassEmpty
 	);
+	static void release();
 
 private:
 	static std::string createMessage(

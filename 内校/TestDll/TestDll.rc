@@ -17,7 +17,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(简体，中国) resources
+// ??(??,??) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
@@ -73,7 +73,6 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\TestDll.ico"
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -186,16 +185,16 @@ END
 
 IDD_DIALOG_MES DIALOGEX 0, 0, 352, 221
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "注水称重"
-FONT 10, "Microsoft YaHei", 700, 0, 0x0
+CAPTION "注水除气"
+FONT 18, "微软雅黑", 400, 0, 0x86
 BEGIN
     PUSHBUTTON      "退出",IDOK,291,31,48,14,WS_GROUP
     LTEXT           "空管条码",IDC_STATIC_IN1,15,12,110,12,WS_BORDER
     LTEXT           "除气条码",IDC_STATIC_IN3,15,70,110,12,WS_BORDER
     PUSHBUTTON      "启动",IDC_BTN_RUN,291,12,48,14,WS_GROUP
-    CONTROL         "",IDC_MSCOMM2,"{648A5600-2C6E-101B-82B6-000000000014}",WS_TABSTOP,410,367,17,16
-    CONTROL         "",IDC_MSCOMM3,"{648A5600-2C6E-101B-82B6-000000000014}",WS_TABSTOP,420,392,17,16
-    CONTROL         "",IDC_MSCOMM1,"{648A5600-2C6E-101B-82B6-000000000014}",WS_TABSTOP,415,327,17,16
+    CONTROL         "",IDC_MSCOMM2,"{648A5600-2C6E-101B-82B6-000000000014}",WS_TABSTOP,234,225,11,10
+    CONTROL         "",IDC_MSCOMM3,"{648A5600-2C6E-101B-82B6-000000000014}",WS_TABSTOP,240,240,11,10
+    CONTROL         "",IDC_MSCOMM1,"{648A5600-2C6E-101B-82B6-000000000014}",WS_TABSTOP,237,201,11,10
     LTEXT           "注水条码",IDC_STATIC_IN2,15,41,110,12,WS_BORDER
     GROUPBOX        "空管重量",IDC_STATIC,140,0,75,30
     LTEXT           "空管重量",IDC_STATIC_IN4,151,12,57,12,WS_BORDER
@@ -237,7 +236,7 @@ BEGIN
     LTEXT           "OK",IDC_STATIC_IN16,141,104,24,12,WS_BORDER
     LTEXT           "NG",IDC_STATIC_IN17,141,117,24,12,WS_BORDER
     LTEXT           "良率",IDC_STATIC_IN18,141,130,24,12,WS_BORDER
-    GROUPBOX        "称重",IDC_STATIC,180,92,35,55
+    GROUPBOX        "除气",IDC_STATIC,180,92,35,55
     LTEXT           "OK",IDC_STATIC_IN19,185,104,24,12,WS_BORDER
     LTEXT           "NG",IDC_STATIC_IN20,185,117,24,12,WS_BORDER
     LTEXT           "良率",IDC_STATIC_IN21,185,130,24,12,WS_BORDER
@@ -548,7 +547,7 @@ BEGIN
     IDS_ABOUTBOX            "关于 TestDll(&A)..."
 END
 
-#endif    // 中文(简体，中国) resources
+#endif    // ??(??,??) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

@@ -26,40 +26,36 @@
 #pragma comment(lib, "StandardModbusApi.lib")
 using namespace std;
 
-CDlgMes* mesDlg = nullptr;
+CWnd* mesDlg = nullptr;
 
 /** Use Log Output Widget */
-void MESPRINT(CString forStr, ...)
+void MESPRINT(const char* forStr, ...)
 {
 	va_list args;
 
-	CString str;
+	char buff[0xFFFF];
 	va_start(args, forStr);
-	str.Format(forStr.GetBuffer(), args);
+	vsprintf_s(buff, forStr, args);
 	va_end(args);
 
 	CTime time = CTime::GetCurrentTime();
-	CString strDate;
+	CString str, strDate;
 	strDate = time.Format("%Y-%m-%d %H:%M:%S");
-	str.Format(_T("[%s] %s"), strDate, str);
+	str.Format(_T("[%s] %s"), strDate, buff);
 
-	CEdit* logEditor = (CEdit*)GetDlgItem((HWND)::mesDlg, IDC_LOG);
-	if (logEditor)
-	{
-		CString currStr;
-		//logEditor->SetReadOnly(FALSE);
-		logEditor->GetWindowText(currStr);
-		logEditor->SetWindowText(currStr + "\r\n" + str);
-		//logEditor->SetReadOnly(TRUE);
-	}	
+	static CString currStr;
+	currStr = str + "\r\n" + currStr;
+
+	SetDlgItemText(::mesDlg ? ::mesDlg->m_hWnd : NULL, IDC_LOG, currStr);
 }
 
 /** Wrap Current Log Output */
 #define MESLOG(_forStr, ...) \
 	do \
 	{ \
-		CImgDLL::WriteLog((char*)(CString(_forStr).GetBuffer()), __VA_ARGS__); \
-		MESPRINT(_forStr, __VA_ARGS__); \
+		CString forStr(_forStr); \
+		CImgDLL::WriteLog((char*)(forStr.GetBuffer()), __VA_ARGS__); \
+		MESPRINT((char*)(forStr.GetBuffer()), __VA_ARGS__); \
 		\
 	} \
 	while (false)
@@ -83,7 +79,6 @@ IMPLEMENT_DYNAMIC(CDlgMes, CDialogEx)
 CDlgMes::CDlgMes(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CDlgMes::IDD, pParent)
 {
-	::mesDlg = this;
 	Bali::config("169.254.1.10", 1111, "D:\\DATA\\BALI\\");
 
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
@@ -162,6 +157,8 @@ bool CDlgMes::InitialCom(CMscomm1 &Com, int iNO, int nBaud, int nLen)
 BOOL CDlgMes::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
+	::mesDlg = this;
+
 	CSingleton* pSng = CSingleton::GetInstance();
 	if (CImgDLL::Init() == FALSE)
 	{
@@ -310,27 +307,26 @@ BEGIN_EVENTSINK_MAP(CDlgMes, CDialogEx)
 	ON_EVENT(CDlgMes, IDC_MSCOMM3, 1, CDlgMes::OnCommMscomm3, VTS_NONE)
 END_EVENTSINK_MAP()
 
+#define XMLFIND(n, s) ((n) ? (((n)->ToElement()) ? (n)->ToElement()->FirstChild(s) : nullptr ) : nullptr)
+
 std::tuple<int, std::string, std::string> parseSOAPResult(const std::string& soapResult)
 {
 	TiXmlDocument doc;
 	doc.Parse(soapResult.c_str());
-	auto codeNode = doc.FirstChild("result");
-	auto dataNode = doc.FirstChild("datas");
-	auto msgNode = doc.FirstChild("msgCode");
+	auto envelopNode = doc.FirstChild("soap:Envelope");
+	auto bodyNode = XMLFIND(envelopNode, "soap:Body");
+	auto uniRequestResponseNode = XMLFIND(bodyNode, "UniRequestResponse");
+	auto uniRequestResultNode = XMLFIND(uniRequestResponseNode, "UniRequestResult");
+
+	auto codeNode = XMLFIND(uniRequestResultNode, "result");
+	auto dataNode = XMLFIND(uniRequestResultNode, "datas");
+	auto msgNode = XMLFIND(uniRequestResultNode, "msgCode");
 
 	int code = (codeNode && codeNode->ToElement()) ? stoi(codeNode->ToElement()->GetText()) : 0;
 	std::string data = (dataNode && dataNode->ToElement()) ? dataNode->ToElement()->GetText() : "";
 	std::string msg = (msgNode && msgNode->ToElement()) ? msgNode->ToElement()->GetText() : "";
 
 	return std::make_tuple(code, msg, data);
-}
-
-std::tuple<int, std::string> parseSOAPJsonResult(const std::string& soapResult)
-{
-	int code = stoi(soapResult.substr(0, 3));
-	std::string data = soapResult.substr(3, soapResult.size() - 3);
-
-	return std::make_tuple(code, data);
 }
 
 CString createSOAPData(
@@ -360,51 +356,17 @@ xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\
 	return result;
 }
 
-bool CDlgMes::Check_Json1(std::string& str)
+bool CDlgMes::Check_Json(std::string& str)
 {
 	CSingleton* pSng = CSingleton::GetInstance();
 	Json::Reader reader;
 	Json::Value root;
 	if (reader.parse(str, root))
 	{
-		int result = root["result"].asInt();
-		if (result == 100)
-		{
-			string strtoken = root["token"].asString();
-			MESLOG("100: 工序校验通过");
-			MESLOG("token = " + pSng->Str2Cstr(strtoken));
-			strMEStoken = pSng->Str2Cstr(strtoken);
-			return true;
-		}
-		else
-		{
-			MESLOG("MES错误码: " + pSng->Str2Cstr(std::to_string(result)));
-		}
-	}
-	else
-	{
-		MESLOG("MES返回数据解析错误: " + pSng->Str2Cstr(str));
-	}
-	return false;
-}
-
-bool CDlgMes::Check_Json2(std::string& str)
-{
-	CSingleton* pSng = CSingleton::GetInstance();
-	Json::Reader reader;
-	Json::Value root;
-	if (reader.parse(str, root))
-	{
-		int result = root["result"].asInt();
-		if (result == 102)
-		{
-			MESLOG("102: 测试PASS");
-			return true;
-		}
-		else
-		{
-			MESLOG("MES错误码: " + pSng->Str2Cstr(std::to_string(result)));
-		}
+		string strtoken = root["Token"].asString();
+		MESLOG("Token = " + pSng->Str2Cstr(strtoken));
+		strMEStoken = pSng->Str2Cstr(strtoken);
+		return true;
 	}
 	else
 	{
@@ -470,10 +432,9 @@ bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString 
 	ofs.open(strName);
 	ofs << strxmlRtn;
 	ofs.close();
-	//auto xmlRes = parseSOAPResult(strxmlRtn);
-	//bool bRet = Check_Json1(std::get<2>(xmlRes));
-	auto xmlRes = parseSOAPJsonResult(strxmlRtn);
-	bool bRet = (std::get<0>(xmlRes) == 100) && Check_Json1(std::get<1>(xmlRes));
+	auto xmlRes = parseSOAPResult(strxmlRtn);
+	MESLOG("%d: %s", std::get<0>(xmlRes), std::get<1>(xmlRes));
+	bool bRet = Check_Json(std::get<2>(xmlRes));
 	return bRet;
 }
 
@@ -514,10 +475,9 @@ bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CStri
 	ofs.open(strName);
 	ofs << strxmlRtn;
 	ofs.close();
-	//auto xmlRes = parseSOAPResult(strxmlRtn);
-	//bool bRet = Check_Json2(std::get<2>(xmlRes));
-	auto xmlRes = parseSOAPJsonResult(strxmlRtn);
-	bool bRet = (std::get<0>(xmlRes) == 102) && Check_Json2(std::get<1>(xmlRes));
+	auto xmlRes = parseSOAPResult(strxmlRtn);
+	MESLOG("%d: %s", std::get<0>(xmlRes), std::get<1>(xmlRes));
+	bool bRet = (std::get<0>(xmlRes) == 102 || std::get<0>(xmlRes) == 100);
 	return bRet;
 }
 
@@ -606,11 +566,6 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				pSng->_csTV.Unlock();
 				MESLOG("工站1增加一个未用码");
 				CString sql, strNum;
-				pSng->_csInfo.Lock();
-				sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
-				pSng->_DB.ExecuteQueryValue(sql, strNum);
-				pSng->_csInfo.Unlock();
-				//if (atoi(strNum) > 0)
 				bool bMESOK = MES1(strmoid, strpartID, strppid, strtestStation);
 				if (bMESOK == false)
 				{
@@ -619,43 +574,39 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				}
 				else
 				{
+					nOK += 1;
+					CString strData;
+					strData.Format("LOF");
+					int nLen = strData.GetLength();
+					m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
+					strData.ReleaseBuffer();
+					m_nIP[0] = 1;
+					SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
+					CZ a;
+					a.strCode.Format("%s", pSng->_strCliRobot[0]);
+					pSng->_csTV.Lock();
+					TV.push_back(a);
+					pSng->_csTV.Unlock();
+					CString sql, strNum;
+					pSng->_csInfo.Lock();
+					sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
+					pSng->_DB.ExecuteQueryValue(sql, strNum);
+					pSng->_csInfo.Unlock();
 					if (atoi(strNum) > 0)
 					{
-						//MESLOG("已有数据！！！！！");
-						nOK += 1;
-						CString strData;
-						strData.Format("LOF");
-						int nLen = strData.GetLength();
-						m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
-						strData.ReleaseBuffer();
-						m_nIP[0] = 1;
-						SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
-						CZ a;
-						a.strCode.Format("%s", pSng->_strCliRobot[0]);
-						pSng->_csTV.Lock();
-						TV.push_back(a);
-						pSng->_csTV.Unlock();
-						CString sql, strNum;
+						MESLOG("已有数据！！！！！");
 						pSng->_csInfo.Lock();
-						sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
-						pSng->_DB.ExecuteQueryValue(sql, strNum);
-						pSng->_csInfo.Unlock();
-						if (atoi(strNum) > 0)
-						{
-							MESLOG("已有数据！！！！！");
-							pSng->_csInfo.Lock();
-							sql.Format("Delete WH where IP = '%s' ", pSng->_strCliRobot[0]);
-							pSng->_DB.Execute(sql);
-							pSng->_csInfo.Unlock();
-						}
-						pSng->_csInfo.Lock();
-						//sql.Format("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
-						sql.Format("insert into WH values ('%s','0.00','0.00','0.00','%s')", pSng->_strCliRobot[0], strMEStoken);
-						strMEStoken = "";
+						sql.Format("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
 						pSng->_DB.Execute(sql);
 						pSng->_csInfo.Unlock();
-						pSng->_strCliRobot[0].Empty();
 					}
+					pSng->_csInfo.Lock();
+					//sql.Format("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
+					sql.Format("Insert into WH values ('%s','0.00','0.00','0.00','%s')", pSng->_strCliRobot[0], strMEStoken);
+					strMEStoken = "";
+					pSng->_DB.Execute(sql);
+					pSng->_csInfo.Unlock();
+					pSng->_strCliRobot[0].Empty();
 				}
 				/*pSng->_csInfo.Lock();
 				sql.Format("insert into WH values ('%s','0.00','0.00','0.00')", pSng->_strCliRobot[0]);

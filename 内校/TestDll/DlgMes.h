@@ -41,8 +41,7 @@ public:
 	bool bVal[3],bZERO[3],bWZERO[3];
 	CTCPSocket* m_pServer[3];
 	DWORD dwIP[3], dwVal[3],dwZero[3];
-	bool Check_Json1(std::string& str);
-	bool Check_Json2(std::string& str);
+	bool Check_Json(std::string& str);
 	string GetTimeMillisecondsStr();
 	template<typename T> string ValueToStr(T value)
 	{

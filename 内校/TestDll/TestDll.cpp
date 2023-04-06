@@ -10,6 +10,7 @@
 #include "DlgCam4.h"
 #include "DlgBK.h"
 #include "DlgMes.h"
+#include "Bali.h"
 
 #define UNIQUE_APP "MES"
 
@@ -170,6 +171,8 @@ BOOL CTestDllApp::InitInstance()
 	CloseHandle(hOne);
 
 	CSingleton::DeleteInstance();
+
+	Bali::release();
 
 	// 由于对话框已关闭，所以将返回 FALSE 以便退出应用程序，
 	//  而不是启动应用程序的消息泵。

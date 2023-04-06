@@ -49,6 +49,11 @@ bool Bali::send(
 	return Bali::sendMessage(Bali::address, Bali::port, mes);
 }
 
+void Bali::release()
+{
+	::WSACleanup();
+}
+
 std::string Bali::createMessage(
 	const std::string& sn,
 	const std::string& fixture_id,
@@ -83,8 +88,6 @@ bool Bali::sendMessage(const std::string& address, uint16_t port, const std::str
 	if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 2)
 	{
 		//printf("得到的版本号不正确,请求版本失败\n");
-		//7 清除协议版本
-		::WSACleanup();
 		return false;
 	}
 	//2 创建tcp socket
@@ -92,8 +95,6 @@ bool Bali::sendMessage(const std::string& address, uint16_t port, const std::str
 	if (SOCKET_ERROR == clientSocket)//如果返回值为-1
 	{
 		//printf("创建tcp套接字失败:%d\n", GetLastError());
-		//7 清除协议版本
-		::WSACleanup();
 		return false;
 	}
 	//3 配置服务器协议地址族 （配置控制信息）
@@ -109,8 +110,6 @@ bool Bali::sendMessage(const std::string& address, uint16_t port, const std::str
 		//printf("连接服务器失败\n");
 		//6 关闭socket
 		::closesocket(clientSocket);
-		//7 清除协议版本
-		::WSACleanup();
 		return false;
 	}
 
@@ -122,15 +121,11 @@ bool Bali::sendMessage(const std::string& address, uint16_t port, const std::str
 
 		//6 关闭socket
 		::closesocket(clientSocket);
-		//7 清除协议版本
-		::WSACleanup();
 		return false;
 	}
 
 	//6 关闭socket
 	::closesocket(clientSocket);
-	//7 清除协议版本
-	::WSACleanup();
 
 	return true;
 }
