@@ -150,6 +150,9 @@
     <ClInclude Include="..\tinyxml\tinyxml.h">
       <Filter>头文件\xml</Filter>
     </ClInclude>
+    <ClInclude Include="Bali.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestDll.cpp">
@@ -230,6 +233,9 @@
     <ClCompile Include="..\tinyxml\tinyxmlparser.cpp">
       <Filter>源文件\xml</Filter>
     </ClCompile>
+    <ClCompile Include="Bali.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TestDll.rc">
@@ -237,11 +243,11 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\TestDll.rc2">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="..\includejson\lib_json\json_valueiterator.inl">
       <Filter>源文件\json</Filter>
+    </None>
+    <None Include="res\TestDll.rc2">
+      <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

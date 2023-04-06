@@ -13,7 +13,7 @@
 #include "MESKEY.h"
 #include "VAL.h"
 #include "Define.h"
-
+#include "Bali.h"
 
 #include "WininetHttp.h"
 #include <json/json.h>
@@ -47,8 +47,10 @@ void MESPRINT(CString forStr, ...)
 	if (logEditor)
 	{
 		CString currStr;
+		//logEditor->SetReadOnly(FALSE);
 		logEditor->GetWindowText(currStr);
 		logEditor->SetWindowText(currStr + "\r\n" + str);
+		//logEditor->SetReadOnly(TRUE);
 	}	
 }
 
@@ -82,6 +84,7 @@ CDlgMes::CDlgMes(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CDlgMes::IDD, pParent)
 {
 	::mesDlg = this;
+	Bali::config("169.254.1.10", 1111, "D:\\DATA\\BALI\\");
 
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_pServer[0] = new CTCPSocket(TCP_SOCKET_CLIENT);
@@ -322,6 +325,14 @@ std::tuple<int, std::string, std::string> parseSOAPResult(const std::string& soa
 	return std::make_tuple(code, msg, data);
 }
 
+std::tuple<int, std::string> parseSOAPJsonResult(const std::string& soapResult)
+{
+	int code = stoi(soapResult.substr(0, 3));
+	std::string data = soapResult.substr(3, soapResult.size() - 3);
+
+	return std::make_tuple(code, data);
+}
+
 CString createSOAPData(
 	CString account,
 	CString password,
@@ -459,8 +470,10 @@ bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString 
 	ofs.open(strName);
 	ofs << strxmlRtn;
 	ofs.close();
-	auto xmlRes = parseSOAPResult(strxmlRtn);
-	bool bRet = Check_Json1(std::get<2>(xmlRes));
+	//auto xmlRes = parseSOAPResult(strxmlRtn);
+	//bool bRet = Check_Json1(std::get<2>(xmlRes));
+	auto xmlRes = parseSOAPJsonResult(strxmlRtn);
+	bool bRet = (std::get<0>(xmlRes) == 100) && Check_Json1(std::get<1>(xmlRes));
 	return bRet;
 }
 
@@ -501,8 +514,10 @@ bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CStri
 	ofs.open(strName);
 	ofs << strxmlRtn;
 	ofs.close();
-	auto xmlRes = parseSOAPResult(strxmlRtn);
-	bool bRet = Check_Json2(std::get<2>(xmlRes));
+	//auto xmlRes = parseSOAPResult(strxmlRtn);
+	//bool bRet = Check_Json2(std::get<2>(xmlRes));
+	auto xmlRes = parseSOAPJsonResult(strxmlRtn);
+	bool bRet = (std::get<0>(xmlRes) == 102) && Check_Json2(std::get<1>(xmlRes));
 	return bRet;
 }
 
@@ -855,6 +870,15 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 			else
 			{
 				MESLOG("上传失败！！！");
+			}
+			if (Bali::send(m_strEX.GetBuffer(), strpartID.GetBuffer(), "",
+				fVal[0], fVal[1], fVal[2], fCha[0], fCha[1], fCha[2]))
+			{
+				MESLOG("Bali发送成功！！！");
+			}
+			else
+			{
+				MESLOG("Bali发送失败！！！");
 			}
 		}
 	}
@@ -2314,7 +2338,6 @@ void CDlgMes::OnBnClickedBtnJz3()
 	MESLOG("开始内校3");
 	GetDlgItem(IDC_BTN_JZ3)->EnableWindow(FALSE);
 	SetTimer(TIME_JZ3, 500, NULL);
-
 }
 
 void CDlgMes::OnBnClickedBtnMes()
