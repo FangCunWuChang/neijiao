@@ -35,14 +35,12 @@ void Bali::config(const std::string& address, uint16_t port, const std::string& 
 
 bool Bali::send(
 	const std::string& sn,
-	const std::string& fixture_id,
-	const std::string& head_id,
 	double value1, double value2, double value3,
 	double fillEmpty, double fillDegrass, double degrassEmpty
 )
 {
 	auto mes = Bali::createMessage(
-		sn, fixture_id, head_id,
+		sn,
 		value1, value2, value3,
 		fillEmpty, fillDegrass, degrassEmpty);
 	Bali::saveLog(Bali::logPath, mes);
@@ -56,8 +54,6 @@ void Bali::release()
 
 std::string Bali::createMessage(
 	const std::string& sn,
-	const std::string& fixture_id,
-	const std::string& head_id,
 	double value1, double value2, double value3,
 	double fillEmpty, double fillDegrass, double degrassEmpty
 )
@@ -65,13 +61,13 @@ std::string Bali::createMessage(
 	return
 		"{\n"
 		+ sn + "@start\n"
-		+ sn + "@dut_pos@" + fixture_id + "@" + head_id + "\n"
-		+ sn + "@pdata@value1@" + std::to_string(value1) + "\n"
-		+ sn + "@pdata@value2@" + std::to_string(value2) + "\n"
-		+ sn + "@pdata@value3@" + std::to_string(value3) + "\n"
-		+ sn + "@pdata@fillEmpty@" + std::to_string(fillEmpty) + "\n"
-		+ sn + "@pdata@fillDegrass@" + std::to_string(fillDegrass) + "\n"
-		+ sn + "@pdata@degrassEmpty@" + std::to_string(degrassEmpty) + "\n"
+		+ sn + "@attr@value1@" + std::to_string(value1) + "\n"
+		+ sn + "@attr@value2@" + std::to_string(value2) + "\n"
+		+ sn + "@attr@value3@" + std::to_string(value3) + "\n"
+		+ sn + "@attr@fillEmpty@" + std::to_string(fillEmpty) + "\n"
+		+ sn + "@attr@fillDegrass@" + std::to_string(fillDegrass) + "\n"
+		+ sn + "@attr@degrassEmpty@" + std::to_string(degrassEmpty) + "\n"
+		+ sn + "@attr@time@" + Bali::getDataTime() + "\n"
 		+ sn + "@submit\n"
 		+ "}\n";
 }
@@ -170,5 +166,12 @@ std::string Bali::getData()
 {
 	CTime StartTime = CTime::GetCurrentTime();
 	CString strStartTime = StartTime.Format("%Y-%m-%d");
+	return strStartTime.GetBuffer();
+}
+
+std::string Bali::getDataTime()
+{
+	CTime StartTime = CTime::GetCurrentTime();
+	CString strStartTime = StartTime.Format("%Y-%m-%d %H_%M_%S");
 	return strStartTime.GetBuffer();
 }

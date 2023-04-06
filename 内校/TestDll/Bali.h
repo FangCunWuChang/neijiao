@@ -10,8 +10,6 @@ public:
 	static void config(const std::string& address, uint16_t port, const std::string& logPath, bool changeEndian = false);
 	static bool send(
 		const std::string& sn,
-		const std::string& fixture_id,
-		const std::string& head_id,
 		double value1, double value2, double value3,
 		double fillEmpty, double fillDegrass, double degrassEmpty
 	);
@@ -20,8 +18,6 @@ public:
 private:
 	static std::string createMessage(
 		const std::string& sn,
-		const std::string& fixture_id,
-		const std::string& head_id,
 		double value1, double value2, double value3,
 		double fillEmpty, double fillDegrass, double degrassEmpty
 	);
@@ -30,6 +26,7 @@ private:
 
 	static void createPath(const std::string& path);
 	static std::string getData();
+	static std::string getDataTime();
 
 	static std::string address;
 	static uint16_t port;

@@ -408,7 +408,7 @@ bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString 
 	jsonData.Format(
 		"{ \"moid\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"testStation\":\"%s\"}",
 		strmoid, strpartID, strppid, strtestStation);
-	CString strMXL = createSOAPData("SaoMaChuQi", "114514", "0", jsonData);
+	CString strMXL = createSOAPData("ZhuShuiChuQi", "114514", "0", jsonData);
 	string xml_string;
 	xml_string = strMXL.GetBuffer();
 	strMXL.ReleaseBuffer();
@@ -433,7 +433,7 @@ bool CDlgMes::MES1(CString strmoid, CString strpartID, CString strppid, CString 
 	ofs << strxmlRtn;
 	ofs.close();
 	auto xmlRes = parseSOAPResult(strxmlRtn);
-	MESLOG("%d: %s", std::get<0>(xmlRes), std::get<1>(xmlRes));
+	MESLOG("工站一MES返回: %d", std::get<0>(xmlRes));
 	bool bRet = Check_Json(std::get<2>(xmlRes));
 	return bRet;
 }
@@ -449,9 +449,9 @@ bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CStri
 	string url = "http://192.168.180.131:8091/JavaInterfaces/UniServices.asmx";
 	CString jsonData;
 	jsonData.Format(
-		"{\"token\":\"%s\", \"deptID\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"mo_id\":\"%s\", \"lineID\":\"%s\", \"test_Station\":\"%s\", \"testTime\":\"%s\", \"testResult\":\"%s\", \"machineSN\":\"%s\", \"testchannelID\":\"%s\", \"measurementData\":{\"empty\":\"%s\", \"filling\":\"%s\", \"degassing\":\"%s\", \"fill_empty\":\"%s\", \"fill_degass\":\"%s\", \"degass_empty\":\"%s\", \"degass_empty_p1\":\"%s\", \"degass_empty_l1\":\"%s\"}",
+		"{\"token\":\"%s\", \"deptID\":\"%s\", \"partID\":\"%s\", \"ppid\":\"%s\", \"mo_id\":\"%s\", \"lineID\":\"%s\", \"test_Station\":\"%s\", \"testTime\":\"%s\", \"testResult\":\"%s\", \"machineSN\":\"%s\", \"testchannelID\":\"%s\", \"measurementData\":{\"empty\":\"%s\", \"filling\":\"%s\", \"degassing\":\"%s\", \"fill_empty\":\"%s\", \"fill_degass\":\"%s\", \"degass_empty\":\"%s\", \"degass_empty_p1\":\"%s\", \"degass_empty_l1\":\"%s\"}}",
 		strtoken, strdeptID, strpartID, strppid, strmoid, strlineID, strtestStation, strTime, strtestResult, strmachineSN, strtestchannelID, strempty, strfilling, strdegassing, strfill_empty, strill_degass, strdegass_empty, strempty_p1, strempty_l1);
-	CString strMXL = createSOAPData("SaoMaChuQi", "114514", "0", jsonData);
+	CString strMXL = createSOAPData("ZhuShuiChuQi", "114514", "0", jsonData);
 	string xml_string;
 	xml_string = strMXL.GetBuffer();
 	strMXL.ReleaseBuffer();
@@ -476,7 +476,7 @@ bool CDlgMes::MES2(CString strtoken, CString strdeptID, CString strpartID, CStri
 	ofs << strxmlRtn;
 	ofs.close();
 	auto xmlRes = parseSOAPResult(strxmlRtn);
-	MESLOG("%d: %s", std::get<0>(xmlRes), std::get<1>(xmlRes));
+	MESLOG("工站三MES返回: %d", std::get<0>(xmlRes));
 	bool bRet = (std::get<0>(xmlRes) == 102 || std::get<0>(xmlRes) == 100);
 	return bRet;
 }
@@ -816,13 +816,13 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				strtestchannelID, strVal1, strVal2, strVal3, strfill_empty, strfill_degass, strdegass_empty, strdegass_empty_p1, strdegass_empty_l1);
 			if (bMESOK == true)
 			{
-				MESLOG("上传成功！！！");
+				MESLOG("过站数据上传成功！！！");
 			}
 			else
 			{
-				MESLOG("上传失败！！！");
+				MESLOG("过站数据上传失败！！！");
 			}
-			if (Bali::send(m_strEX.GetBuffer(), strpartID.GetBuffer(), "",
+			if (Bali::send(m_strEX.GetBuffer(),
 				fVal[0], fVal[1], fVal[2], fCha[0], fCha[1], fCha[2]))
 			{
 				MESLOG("Bali发送成功！！！");
