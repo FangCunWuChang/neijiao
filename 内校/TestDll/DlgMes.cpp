@@ -48,7 +48,7 @@ void MESPRINT(const char* forStr, ...)
 	str.Format(_T("[%s] %s"), strDate, buff);
 
 	{
-		std::lock_guard<std::mutex> outputLock(logOutputMutex);
+		//std::lock_guard<std::mutex> outputLock(logOutputMutex);
 		logOutputStr = str + "\r\n" + logOutputStr;
 		SetDlgItemText(::mesDlg ? ::mesDlg->m_hWnd : NULL, IDC_LOG, logOutputStr);
 	}
@@ -2320,7 +2320,7 @@ void CDlgMes::OnBnClickedClearlog()
 	auto* logEditor = (CEdit*)GetDlgItem(IDC_LOG);
 	if (logEditor)
 	{
-		std::lock_guard<std::mutex> outputLock(logOutputMutex);
+		//std::lock_guard<std::mutex> outputLock(logOutputMutex);
 		logOutputStr = "";
 		logEditor->SetWindowText(logOutputStr);
 	}
