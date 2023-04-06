@@ -20,6 +20,7 @@
 #include "../tinyxml/tinyxml.h"
 
 #include <fstream>
+#include <mutex>
 #pragma comment(lib, "Wininet.lib")
 #include <tchar.h>
 #include "Hc_Modbus_Api.h"
@@ -27,6 +28,9 @@
 using namespace std;
 
 CWnd* mesDlg = nullptr;
+
+static CString logOutputStr;
+std::mutex logOutputMutex;
 
 /** Use Log Output Widget */
 void MESPRINT(const char* forStr, ...)
@@ -43,10 +47,11 @@ void MESPRINT(const char* forStr, ...)
 	strDate = time.Format("%Y-%m-%d %H:%M:%S");
 	str.Format(_T("[%s] %s"), strDate, buff);
 
-	static CString currStr;
-	currStr = str + "\r\n" + currStr;
-
-	SetDlgItemText(::mesDlg ? ::mesDlg->m_hWnd : NULL, IDC_LOG, currStr);
+	{
+		std::unique_lock<std::mutex> outputLock(logOutputMutex);
+		logOutputStr = str + "\r\n" + logOutputStr;
+		SetDlgItemText(::mesDlg ? ::mesDlg->m_hWnd : NULL, IDC_LOG, logOutputStr);
+	}
 }
 
 /** Wrap Current Log Output */
@@ -56,6 +61,16 @@ void MESPRINT(const char* forStr, ...)
 		CString forStr(_forStr); \
 		CImgDLL::WriteLog((char*)(forStr.GetBuffer()), __VA_ARGS__); \
 		MESPRINT((char*)(forStr.GetBuffer()), __VA_ARGS__); \
+		\
+	} \
+	while (false)
+
+#define SQLDO(_forStr, ...) \
+	do \
+	{ \
+		CString forStr(_forStr); \
+		sql.Format((char*)(forStr.GetBuffer()), __VA_ARGS__); \
+		MESLOG((char*)(forStr.GetBuffer()), __VA_ARGS__); \
 		\
 	} \
 	while (false)
@@ -545,7 +560,6 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 		{
 			if (pSng->_strCliRobot[0].GetLength() > 3)
 			{
-				nOK += 1;
 				MESLOG("工站1扫码成功：" + pSng->_strCliRobot[0]);
 				CString strData;
 				strData.Format("LOF");
@@ -554,19 +568,17 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				m_pServer[0]->SendClient(strData.GetBuffer(0), nLen);
 				strData.ReleaseBuffer();
 				pSng->_csClient[0].Unlock();
-				m_nIP[0] = 1;
 				CString strmoid = pSng->GetCfgString("MES", "mo_id", MO_ID);
 				CString strpartID = pSng->GetCfgString("MES", "partID", PARTID);
 				CString strppid = pSng->_strCliRobot[0];
 				CString strtestStation = pSng->GetCfgString("MES", "test_Station", TEST_STATION);
 				KillTimer(TIME_IP1);
 				SetDlgItemText(IDC_STATIC_IN1, pSng->_strCliRobot[0]);
-				CZ a;
-				a.strCode.Format("%s",pSng->_strCliRobot[0]);
-				pSng->_csTV.Lock();
-				TV.push_back(a);
-				pSng->_csTV.Unlock();
-				MESLOG("工站1增加一个未用码");
+				//CZ a;
+				//a.strCode.Format("%s",pSng->_strCliRobot[0]);
+				//pSng->_csTV.Lock();
+				//TV.push_back(a);
+				//pSng->_csTV.Unlock();
 				CString sql, strNum;
 				bool bMESOK = MES1(strmoid, strpartID, strppid, strtestStation);
 				if (bMESOK == false)
@@ -591,27 +603,28 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 					pSng->_csTV.Unlock();
 					CString sql, strNum;
 					pSng->_csInfo.Lock();
-					sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
+					MESLOG("工站1增加一个未用码");
+					SQLDO("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[0]);
 					pSng->_DB.ExecuteQueryValue(sql, strNum);
 					pSng->_csInfo.Unlock();
 					if (atoi(strNum) > 0)
 					{
 						MESLOG("已有数据！！！！！");
 						pSng->_csInfo.Lock();
-						sql.Format("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
+						SQLDO("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
 						pSng->_DB.Execute(sql);
 						pSng->_csInfo.Unlock();
 					}
 					pSng->_csInfo.Lock();
-					//sql.Format("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
-					sql.Format("Insert into WH values ('%s','0.00','0.00','0.00','%s')", pSng->_strCliRobot[0], strMEStoken);
+					//SQLDO("Delete from WH where IP = '%s' ", pSng->_strCliRobot[0]);
+					SQLDO("Insert into WH values ('%s','0.00','0.00','0.00','%s')", pSng->_strCliRobot[0], strMEStoken);
 					strMEStoken = "";
 					pSng->_DB.Execute(sql);
 					pSng->_csInfo.Unlock();
 					pSng->_strCliRobot[0].Empty();
 				}
 				/*pSng->_csInfo.Lock();
-				sql.Format("insert into WH values ('%s','0.00','0.00','0.00')", pSng->_strCliRobot[0]);
+				SQLDO("insert into WH values ('%s','0.00','0.00','0.00')", pSng->_strCliRobot[0]);
 				pSng->_DB.Execute(sql);
 				pSng->_csInfo.Unlock();
 				pSng->_strCliRobot[0].Empty();*/
@@ -670,7 +683,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				pSng->_csTV.Unlock();
 				CString sql, strNum;
 				pSng->_csInfo.Lock();
-				sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[1]);
+				SQLDO("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[1]);
 				pSng->_DB.ExecuteQueryValue(sql, strNum);
 				pSng->_csInfo.Unlock();
 				if (atoi(strNum) < 1)
@@ -734,7 +747,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 				pSng->_csTV.Unlock();
 				CString sql, strNum;
 				pSng->_csInfo.Lock();
-				sql.Format("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[2]);
+				SQLDO("Select count(*) from WH where IP = '%s'", pSng->_strCliRobot[2]);
 				pSng->_DB.ExecuteQueryValue(sql, strNum);
 				pSng->_csInfo.Unlock();
 				if (atoi(strNum) < 1)
@@ -774,7 +787,7 @@ void CDlgMes::OnTimer(UINT_PTR nIDEvent)
 		KillTimer(TIME_MES);
 		CString sql;
 		pSng->_csInfo.Lock();
-		sql.Format("Select * from WH where  IP = '%s' ", m_strEX);
+		SQLDO("Select * from WH where  IP = '%s' ", m_strEX);
 		CDStrs strs;
 		pSng->_DB.ExecuteQuery(sql, strs);
 		pSng->_csInfo.Unlock();
@@ -1010,7 +1023,7 @@ void CDlgMes::OnCommMscomm1()
 		CString sql, strNum;
 		TV[0].fVal = fA;
 		pSng->_csInfo.Lock();
-		sql.Format("Select count(*) from WH where IP = '%s'", TV[0].strCode);
+		SQLDO("Select count(*) from WH where IP = '%s'", TV[0].strCode);
 		pSng->_DB.ExecuteQueryValue(sql, strNum);
 		pSng->_csInfo.Unlock();
 		if (atoi(strNum) < 1)
@@ -1018,7 +1031,7 @@ void CDlgMes::OnCommMscomm1()
 			MESLOG("无条码数据！！！！！");
 		}
 		pSng->_csInfo.Lock();
-		sql.Format("Update WH set VAL1 = %.3f where IP = '%s'", fA, TV[0].strCode);
+		SQLDO("Update WH set VAL1 = %.3f where IP = '%s'", fA, TV[0].strCode);
 		pSng->_DB.Execute(sql);
 		pSng->_csInfo.Unlock();
 		pSng->_csTV.Lock();
@@ -1163,7 +1176,7 @@ void CDlgMes::OnCommMscomm2()
 			CString sql, strNum;
 			TV1[0].fVal = fA;
 			pSng->_csInfo.Lock();
-			sql.Format("Select count(*) from WH where IP = '%s'", TV1[0].strCode);
+			SQLDO("Select count(*) from WH where IP = '%s'", TV1[0].strCode);
 			pSng->_DB.ExecuteQueryValue(sql, strNum);
 			pSng->_csInfo.Unlock();
 			if (atoi(strNum) < 1)
@@ -1171,11 +1184,11 @@ void CDlgMes::OnCommMscomm2()
 				MESLOG("无条码2数据！！！！！");
 			}
 			pSng->_csInfo.Lock();
-			sql.Format("Update WH set VAL2 = %.3f where IP = '%s'", fA, TV1[0].strCode);
+			SQLDO("Update WH set VAL2 = %.3f where IP = '%s'", fA, TV1[0].strCode);
 			pSng->_DB.Execute(sql);
 			pSng->_csInfo.Unlock();
 			pSng->_csInfo.Lock();
-			sql.Format("Select * from WH where  IP = '%s' ", TV1[0].strCode);
+			SQLDO("Select * from WH where  IP = '%s' ", TV1[0].strCode);
 			CDStrs strs;
 			pSng->_DB.ExecuteQuery(sql, strs);
 			pSng->_csInfo.Unlock();
@@ -1353,7 +1366,7 @@ void CDlgMes::OnCommMscomm3()
 			CString sql, strNum;
 			TV2[0].fVal = fA;
 			pSng->_csInfo.Lock();
-			sql.Format("Select count(*) from WH where IP = '%s'", TV2[0].strCode);
+			SQLDO("Select count(*) from WH where IP = '%s'", TV2[0].strCode);
 			pSng->_DB.ExecuteQueryValue(sql, strNum);
 			pSng->_csInfo.Unlock();
 			if (atoi(strNum) < 1)
@@ -1361,13 +1374,13 @@ void CDlgMes::OnCommMscomm3()
 				MESLOG("无条码3数据！！！！！");
 			}
 			pSng->_csInfo.Lock();
-			sql.Format("Update WH set VAL3 = %.3f where IP = '%s'", fA, TV2[0].strCode);
+			SQLDO("Update WH set VAL3 = %.3f where IP = '%s'", fA, TV2[0].strCode);
 			m_strEX = TV2[0].strCode;
 			SetTimer(TIME_MES, 100, NULL);
 			pSng->_DB.Execute(sql);
 			pSng->_csInfo.Unlock();
 			pSng->_csInfo.Lock();
-			sql.Format("Select * from WH where  IP = '%s' ", TV2[0].strCode);
+			SQLDO("Select * from WH where  IP = '%s' ", TV2[0].strCode);
 			CDStrs strs;
 			pSng->_DB.ExecuteQuery(sql, strs);
 			pSng->_csInfo.Unlock();
@@ -2307,6 +2320,8 @@ void CDlgMes::OnBnClickedClearlog()
 	auto* logEditor = (CEdit*)GetDlgItem(IDC_LOG);
 	if (logEditor)
 	{
-		logEditor->Clear();
+		std::unique_lock<std::mutex> outputLock(logOutputMutex);
+		logOutputStr = "";
+		logEditor->SetWindowText(logOutputStr);
 	}
 }
